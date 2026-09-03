@@ -1,0 +1,1104 @@
+/* ============================================================
+   _l6 — třetí vlna
+   VÝROK (index, předěl)  ·  O MNĚ přestavěná na sazbu
+   ============================================================ */
+
+/* ============================================================
+   1 · VÝROK — věta, kterou projde vlna          (index.html)
+
+   Předěl mezi rejstříkem obtíží a kolem sezení byl dřív nadpis
+   ve dvou řádcích u levého okraje. Fungoval, ale nebyl to
+   okamžik — byl to mezinadpis.
+
+   Teď je to jediná věta přes celou šířku stránky. Nestojí
+   v mřížce dvanácti sloupců; stojí sama uprostřed, protože je
+   to jediná věc, kterou má člověk z předělu odnést.
+
+   POHYB (rodina VLNA, viz DESIGN.md 6):
+   slova se nerozsvěcují najednou. Jak sekce projíždí výřezem,
+   prochází větou vlna — přesně ta vlna, která o kus výš běží
+   postavou a o kus níž strunou. Na čele vlny má slovo barvu
+   přílivu, za ním doznívá do inkoustu.
+
+   A pak to podstatné: PRVNÍ VĚTA ZTMAVNE ZPÁTKY.
+   „Nejde o to vydržet víc.“ se rozsvítí a zase povolí,
+   „přestat držet“ zůstane svítit. Věta udělá to, co říká.
+   Bez skriptu a při omezeném pohybu je celý výrok normálně
+   vysázený a plně čitelný — pohyb je bonus, ne nosič.
+   ============================================================ */
+
+/* Předěl už nemá tvrdou hranu. Plocha se do mělčiny přelije —
+   je to vodoryska, ne linka. Odstín zůstal (--surface-2),
+   změnil se jen způsob, jakým se na něj přechází.             */
+.band {
+  position: relative;
+  isolation: isolate;
+  background: var(--surface-2);
+  border-top: 0;
+  border-bottom: 0;
+  /* Odkud a kam se plocha přelévá. Sekce nad předělem nemusí
+     být vždy základní — na stránce O mně nad ním leží písek. */
+  --band-top: var(--bg);
+  --band-bot: var(--bg);
+}
+.band::before,
+.band::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: clamp(48px, 7vh, 96px);
+  z-index: -1;
+  pointer-events: none;
+}
+.band::before { top: 0;    background: linear-gradient(to bottom, var(--band-top), transparent); }
+.band::after  { bottom: 0; background: linear-gradient(to top,    var(--band-bot), transparent); }
+
+.band--after-sand { --band-top: var(--sand); }
+.band--before-sand { --band-bot: var(--sand); }
+
+/* ---------- sazba výroku ------------------------------------
+   JEDEN ŠIROKÝ ODSTAVEC, JEDNO PÍSMO.
+
+   Dřív tu stál úzký výrok (17ch, 5,9 rem) a pod ním čtyři
+   odstavce ve čtyřech stupních — decrescendo. Bylo to hezky
+   myšlené, ale znamenalo to šest různých typografických hlasů
+   na jedné obrazovce a sekci vysokou jako dvě: předěl, který
+   se sám stal kapitolou.
+
+   Teď je to jeden odstavec sázený Newsreaderem od prvního
+   po poslední písmeno. ŠÍŘKA DĚLÁ GRANDEZZU: řádek má kolem
+   pětačtyřiceti znaků, tedy skoro dvojnásobek proti předchozí
+   verzi, a pět takových řádků stojí uprostřed stránky jako
+   deska. Hierarchii nese POSTUP VLNY, ne velikost písma.      */
+.band--say { overflow-x: clip; }
+.say-wrap {
+  position: relative;
+  isolation: isolate;
+  margin-top: clamp(10px, 1.6vh, 22px);
+  text-align: center;
+}
+/* Světelné pole pod výrokem. Táž mělčina jako v hero sekci,
+   jen bez plátna — a dýchá týmž rytmem (--bw píše say.js).
+   Bez skriptu je --bw nula a pole je klidné; nikdy nezmizí,
+   protože sekce na něm stojí opticky, ne jen dějově.         */
+.say-wrap::before {
+  content: "";
+  position: absolute;
+  /* Vodorovně nepřetéká: světelné pole širší než wrap by na
+     úzkém okně vyrobilo vodorovný posuvník. Sekce ho navíc
+     ořezává (.band--say), takže i kdyby ho někdo rozšířil,
+     stránka se nerozjede.                                    */
+  inset: -24% 0 -30%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(58% 46% at 50% 42%,
+    color-mix(in oklab, var(--tide-soft) 58%, transparent), transparent 72%);
+  opacity: calc(.34 + .34 * var(--bw, 0));
+  transform: scale(calc(1 + .035 * var(--bw, 0)));
+  transition: opacity 400ms linear;
+}
+@supports not (color: color-mix(in oklab, white, black)) {
+  .say-wrap::before { background: radial-gradient(58% 46% at 50% 42%, var(--tide-soft), transparent 72%); opacity: .22; }
+}
+
+/* HLADINA. Plátno, na kterém dělají povolená slova kruhy —
+   viz js/modules/say.js. Vzniká ve skriptu, takže bez JS
+   a při omezeném pohybu v DOM vůbec není.
+
+   Leží pod sazbou a nad světelným polem: pořadí dělá pořadí
+   v DOM, protože obojí má z-index −1 a .say-wrap je
+   samostatný stacking context (isolation: isolate).          */
+.say__water {
+  position: absolute;
+  inset: -14% 0 -20%;
+  z-index: -1;
+  display: block;
+  pointer-events: none;
+  opacity: calc(.72 + .28 * var(--bw, 0));
+  /* Kruh, který doroste k okraji plátna, se USEKNE — a useknutý
+     kruh není vlna na vodě, je to ovál. Maska ho rozpustí dřív,
+     než na hranu dojde, takže hladina nemá viditelné meze.
+     Levnější než počítat dosah každého kruhu ve skriptu.      */
+  -webkit-mask-image: radial-gradient(74% 64% at 50% 44%, #000 40%, transparent 84%);
+          mask-image: radial-gradient(74% 64% at 50% 44%, #000 40%, transparent 84%);
+}
+
+/* VÝROK.
+
+   Šířka místo stupně. 21em při Newsreaderu vychází na 44–46
+   znaků na řádek — míra, která se ještě čte plynule a už
+   vypadá jako deska, ne jako sloupec. Text-wrap: balance
+   řádky srovná do stejné délky, takže blok má rovný okraj
+   i bez ručních zlomů.                                       */
+.say {
+  margin: 0 auto;
+  max-width: 21em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.42rem, 3.05vw, 3.05rem);
+  line-height: 1.18;
+  letter-spacing: -.014em;
+  /* Rozšíření mezery z base.css platí pro sans, kde je potřeba.
+     Tady ne: Newsreader má mezeru 0,227 em a ve třech rem by se
+     z 0,028 em stalo skoro tři pixely navíc mezi každými dvěma
+     slovy. Výrok má být sevřený, ne rozprostřený.             */
+  word-spacing: normal;
+  color: var(--ink);
+  text-wrap: balance;
+  hyphens: none;
+  /* Dech sdílený s hero sekcí. 0,4 % — vidět to není, cítit ano. */
+  transform: scale(calc(1 + .004 * var(--bw, 0)));
+}
+
+/* DVĚ ÚROVNĚ, DVĚ ROLE.
+
+   Vlna běží po PÍSMENECH (.say__c) — čelo přejíždí sazbu
+   spojitě, slovo se rozsvěcuje zleva doprava tak, jak se čte.
+
+   Povolení naopak drží SLOVO (.say__w) — měkne a naklání se
+   celé, protože rameno taky nepouští po písmenech. Filtr tak
+   navíc běží na čtrnácti prvcích místo na všech čtyřiceti.
+
+     --lit  0 → 1   vlna k písmenu dorazila
+     --hot  0 → 1   čelo vlny, barva přílivu
+     --rel  0 → 1   písmeno sedá níž
+     --wrel 0 → 1   slovo povolilo (měkne, naklání se)
+     --wlit 0 → 1   vlna dorazila ke slovu (svit klíčových slov)
+
+   Nic z toho nemění layout — jsou to transformy a filtr, tedy
+   práce pro grafickou kartu, ne pro layout engine.           */
+.say__c {
+  display: inline-block;
+  color: var(--ink);
+  /* DVĚ ČÍSLA, KTERÁ ROZHODUJÍ O ČITELNOSTI.
+
+     Písmeno, ke kterému vlna ještě nedošla, drží 72 % krytí —
+     na mělčině to je 7,4:1, tedy AAA i pro drobnou sazbu, natož
+     pro pětačtyřicetibodovou. Bylo tu 26 %, což je 1,8:1: text,
+     který se nedá přečíst, dokud k němu člověk nedoscrolluje.
+     Napětí ve větě nesou posun, měřítko a barva čela vlny —
+     ne mizení.
+
+     A puštěné písmeno ubere jen 12 %. Puštění nese ROZOSTŘENÍ
+     A POSUN, ne vyblednutí — sazba má zůstat černá i potom,
+     co se přestane držet.                                    */
+  opacity: calc(.72 + .28 * var(--lit, 1) - .10 * var(--rel, 0));
+  transform:
+    translateY(calc((1 - var(--lit, 1)) * -.030em + var(--rel, 0) * .062em))
+    scale(calc(.984 + .016 * var(--lit, 1) + .010 * var(--rel, 0)));
+  will-change: opacity, transform;
+}
+/* Čelo vlny má barvu přílivu. color-mix umí každý dnešní
+   prohlížeč; kdo ne, dostane plný inkoust — a to je v pořádku,
+   protože barva tu nenese informaci, jen děj.                */
+@supports (color: color-mix(in oklab, white, black)) {
+  .say__c { color: color-mix(in oklab, var(--tide) calc(var(--hot, 0) * 100%), var(--ink)); }
+}
+
+.say__w { display: inline-block; }
+
+/* Filtr jen tam, kde je co filtrovat. Kdyby tenhle předpis
+   seděl na .say__w, dostala by i klíčová slova blur(0px) —
+   a to je pořád filtr, tedy vrstva navíc v kompozitoru.
+   Třídu nasazuje say.js jen slovům, která povolují.          */
+.say__w--let {
+  filter: blur(calc(var(--wrel, 0) * .8px));
+  transform: rotate(calc(var(--wrel, 0) * var(--tilt, .4deg)));
+  transform-origin: 50% 88%;
+  will-change: filter, transform;
+}
+/* Náklon se střídá. Stejný úhel u všech slov by vypadal jako
+   překlopená řádka, ne jako čtrnáct věcí, které pustily samy
+   za sebe.                                                   */
+.say__w--let:nth-of-type(3n)   { --tilt: -.52deg; }
+.say__w--let:nth-of-type(3n+1) { --tilt:  .46deg; }
+.say__w--let:nth-of-type(3n+2) { --tilt: -.34deg; }
+
+/* Dvě slova, na kterých věta stojí. Kurzíva plus příliv —
+   a hlavně: jako jediná po průchodu vlny nezhasnou.          */
+.say__w--key {
+  position: relative;
+  isolation: isolate;
+}
+.say__w--key .em { font-style: italic; }
+/* Svit pod klíčovými slovy. Nadechuje se sdíleným rytmem webu
+   a rozsvítí se teprve tehdy, když k slovu dojde vlna —
+   jinak by prozradil pointu dřív, než se k ní věta dostane.  */
+.say__w--key::before {
+  content: "";
+  position: absolute;
+  inset: -.30em -.20em -.18em;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(58% 62% at 50% 55%,
+    color-mix(in oklab, var(--tide-soft) 80%, transparent), transparent 72%);
+  opacity: calc(var(--wlit, 0) * (.40 + .34 * var(--bw, 0)));
+  pointer-events: none;
+}
+@supports not (color: color-mix(in oklab, white, black)) {
+  .say__w--key::before { background: radial-gradient(58% 62% at 50% 55%, var(--tide-soft), transparent 72%); }
+}
+/* Vlasové podtržení pod klíčovými slovy. Nakreslí se ze středu
+   ven ve chvíli, kdy k nim dojde vlna: pointa se NEROZSVÍTÍ,
+   ona se PODTRHNE — gesto, které dělá člověk tužkou.         */
+.say__w--key::after {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  bottom: -.03em;
+  height: .042em;
+  border-radius: 999px;
+  background: var(--tide);
+  opacity: calc(var(--wlit, 0) * .58);
+  transform: scaleX(var(--wlit, 0));
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* ---------- patka -------------------------------------------
+   Tlačítko stojí tam, kde sazba doměla. Nemusí křičet,
+   protože sekce nad ním už dovyprávěla.                      */
+.creed__foot {
+  margin-top: clamp(30px, 4.4vh, 62px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-6);
+  text-align: center;
+}
+
+/* ---------- poslední zbytky cizího hlasu --------------------
+   Sekce má být sázená JEDNÍM písmem. Porušoval to štítek
+   nahoře (mono) a popisky obou akcí (grotesk).
+
+   Všechno je scopované na .band--say. Globální .eyebrow ani
+   .btn se nemění; jinde na webu mají zůstat, jak jsou —
+   jednotné písmo je vlastnost TÉHLE sekce, ne celého webu.   */
+.band--say .eyebrow {
+  font-family: var(--font-display);
+  font-size: .84rem;
+  letter-spacing: .19em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Serif potřebuje o stupeň víc, aby v tlačítku držel váhu
+   proti grotesku, který tam stál dřív. Tloušťku zvýšit nejde
+   a nemá: Newsreader je na webu instancovaný na jediný řez
+   (400) a base.css má font-synthesis-weight: none, takže by
+   z „500“ stejně vypadlo 400 — jen bez varování. Váhu tedy
+   dělá STUPEŇ a prostrkání, ne tučnost.                      */
+.band--say .btn,
+.band--say .link-arrow {
+  font-family: var(--font-display);
+  font-size: 1.16rem;
+  letter-spacing: -.002em;
+}
+
+@media (max-width: 860px) {
+  .say { max-width: 24em; font-size: clamp(1.42rem, 4.4vw, 2.1rem); }
+}
+@media (max-width: 620px) {
+  .say {
+    max-width: 26em;
+    font-size: clamp(1.3rem, 5.6vw, 1.86rem);
+    line-height: 1.24;
+    letter-spacing: -.008em;
+  }
+}
+
+/* Omezený pohyb: nic nedrží, nic nepouští, všechno je vidět.
+   say.js se v tomhle režimu ukončí dřív, než cokoli rozdělí
+   na písmena — .say__c v DOM ani nevznikne a plátno hladiny
+   taky ne. Předpisy níž jsou pojistka pro případ, že by se
+   režim přepnul až za běhu.                                  */
+@media (prefers-reduced-motion: reduce) {
+  .say { transform: none; }
+  .say__c,
+  .say__w,
+  .say__w--let { opacity: 1; transform: none; filter: none; }
+  .say__w--key::before { opacity: .3; }
+  .say__w--key::after { opacity: .5; transform: none; }
+  .say-wrap::before { transform: none; }
+  .say__water { display: none; }
+}
+/* ============================================================
+   2 · O MNĚ — z rozsypaného čaje zpátky do sazby
+
+   Co bylo špatně: stránka měla sedm sekcí a v šesti z nich
+   běžela jiná hračka — dva kardiografy, most, který se
+   dokresluje, spojené nádoby, do kterých se klepe, osa
+   s odpočítáváním let, dvě desky s certifikáty. Každá věc
+   byla sama o sobě obhajitelná. Dohromady to bylo šest
+   různých návodů k obsluze na jedné stránce o jednom člověku.
+
+   Co je teď: STRÁNKA JAKO SAZBA. Jeden rytmus, který se
+   opakuje — text vlevo / fotka vpravo, fotka vlevo / text
+   vpravo. Text nikde nestojí vycentrovaný na střed; vždycky
+   má svůj sloupec a vedle sebe obraz nebo ticho.
+
+   Text zůstal do posledního slova. Zmizely jen mechanismy,
+   které ho přebíjely, a zdvojení (výcviky byly na stránce
+   dvakrát — jednou jako osa, podruhé jako dvě desky).
+   ============================================================ */
+
+/* ---------- rozpětí: text a obraz vedle sebe ---------------
+   Jediná mřížka pro celou stránku. Liché rozpětí má obraz
+   vlevo, sudé vpravo — a nic jiného se nemění. To je ten
+   „klidný“ pocit: oko po druhém rozpětí ví, kam se dívat. */
+.spread {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 72px);
+  align-items: center;
+}
+.spread__media { grid-column: 1 / 6; }
+.spread__text  { grid-column: 7 / -1; }
+.spread--flip .spread__media { grid-column: 8 / -1; grid-row: 1; }
+.spread--flip .spread__text  { grid-column: 1 / 7;  grid-row: 1; }
+
+.spread__text > .eyebrow { margin-bottom: var(--s-4); }
+.spread__text h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.4vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: var(--tr-h2);
+}
+.spread__text p { color: var(--ink-2); max-width: 42ch; }
+.spread__text > p:first-of-type { margin-top: var(--s-5); }
+
+@media (max-width: 900px) {
+  .spread { grid-template-columns: 1fr; gap: var(--s-6); }
+  .spread__media,
+  .spread__text,
+  .spread--flip .spread__media,
+  .spread--flip .spread__text { grid-column: 1; }
+  .spread__media { grid-row: 1; }
+  .spread__text  { grid-row: 2; }
+  .spread__text p { max-width: var(--measure); }
+}
+
+/* Citace uvnitř rozpětí. Není to panel ani rám — jen odsazení
+   a vlasová linka, aby se hlas oddělil od popisu.            */
+.me-say {
+  margin: var(--s-6) 0 0;
+  padding-left: clamp(16px, 1.6vw, 26px);
+  border-left: 2px solid var(--tide);
+}
+.me-say p {
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  line-height: 1.34;
+  color: var(--ink);
+}
+
+/* ---------- široký pás fotografie -------------------------- */
+.plate {
+  margin: 0;
+}
+.plate .photo { width: 100%; }
+.plate__cap {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+  margin-top: var(--s-3);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-meta);
+}
+
+/* ---------- definice terapie: jedna věta na mělčině --------
+   Bývalý „most“. Oblouk zůstal, ale už se nedokresluje —
+   je to vlasová kresba nad větou, ne animace. Věta sama je
+   dost velká na to, aby ji nikdo nepřehlédl.                */
+.claim {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: end;
+}
+.claim__arc {
+  grid-column: 1 / -1;
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  overflow: visible;
+  color: var(--tide);
+  margin-bottom: clamp(18px, 2.6vh, 34px);
+}
+.claim__line {
+  grid-column: 1 / 10;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.1vw, 2.9rem);
+  line-height: 1.16;
+  letter-spacing: -.018em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.claim__note {
+  grid-column: 10 / -1;
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--ink-2);
+}
+.claim__lab {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  fill: var(--ink-meta);
+}
+.claim__foot {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+  margin-top: clamp(28px, 4vh, 48px);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+}
+.claim__foot p { margin: 0; max-width: 46ch; color: var(--ink-2); font-size: var(--fs-small); }
+
+@media (max-width: 900px) {
+  .claim__line, .claim__note { grid-column: 1 / -1; }
+  .claim__note { margin-top: var(--s-5); }
+}
+
+/* ---------- mechanismus: co tělo drží → jak se to projeví --
+   Zůstaly dva sloupce a šipka mezi nimi. Zmizelo jen to, že
+   se to hýbalo. Je to tabulka, ne diagram.                  */
+.mech--calm {
+  margin-top: clamp(36px, 5vh, 64px);
+  padding-top: clamp(24px, 3.4vh, 40px);
+  border-top: 1px solid var(--line-strong);
+}
+
+/* ---------- výcviky jako sazba, ne jako osa ----------------
+   Dřív tu byla měřicí osa s odpočítáváním let A POD NÍ dvě
+   desky, které tytéž dva výcviky vypsaly znovu. Čtenář to
+   četl dvakrát a podruhé se ptal, jestli jsou to jiné.
+   Teď je to jedna tabulka: doba · název · popis · certifikát.
+   Nic se neztratilo, jen se to přestalo opakovat.           */
+.cv {
+  margin-top: clamp(36px, 5vh, 64px);
+  border-top: 1px solid var(--line-strong);
+}
+.cv__row {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(16px, 2.4vw, 48px);
+  align-items: start;
+  padding: clamp(22px, 3.2vh, 38px) 0;
+  border-bottom: 1px solid var(--line);
+}
+.cv__when {
+  margin: 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-meta);
+  padding-top: .35em;
+}
+.cv__what { margin: 0; }
+.cv__name {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.7vw, 1.55rem);
+  line-height: 1.18;
+  letter-spacing: var(--tr-h3);
+  color: var(--ink);
+  text-wrap: balance;
+}
+.cv__where {
+  margin: var(--s-2) 0 0;
+  font-size: var(--fs-label);
+  letter-spacing: .06em;
+  color: var(--ink-meta);
+}
+.cv__text {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  max-width: 44ch;
+}
+.cv__doc { margin: var(--s-4) 0 0; }
+.cv__sum {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s-3);
+  margin: var(--s-5) 0 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--tide);
+}
+@media (max-width: 820px) {
+  .cv__row { grid-template-columns: 1fr; gap: var(--s-4); }
+  .cv__when { padding-top: 0; }
+  .cv__text { max-width: var(--measure); }
+  .cv__sum { justify-content: flex-start; }
+}
+
+/* ---------- uzávěr dvou zázemí ------------------------------
+   Bylo vycentrované doprostřed. Vycentrovaná věta pod dvěma
+   sloupci vypadá jako titulek pod obrázkem — teď stojí vlevo
+   a poznámka proti ní vpravo, takže mezi nimi je vztah.     */
+.pair__close {
+  justify-items: stretch;
+  text-align: left;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: baseline;
+}
+.pair__claim { grid-column: 1 / 8; max-width: 34ch; }
+.pair__note  { grid-column: 8 / -1; text-align: right; }
+@media (max-width: 820px) {
+  .pair__close { grid-template-columns: 1fr; }
+  .pair__claim, .pair__note { grid-column: 1; text-align: left; }
+}
+
+/* ---------- klidná mělčina „bezpečný prostor“ --------------- */
+.rest {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: end;
+}
+.rest__line {
+  grid-column: 1 / 10;
+  margin: 0;
+  font-size: clamp(1.75rem, 3.6vw, 3.4rem);
+  line-height: 1.12;
+  letter-spacing: var(--tr-h2);
+  text-wrap: balance;
+}
+.rest__meta {
+  grid-column: 10 / -1;
+  margin: 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-meta);
+  text-align: right;
+}
+@media (max-width: 900px) {
+  .rest__line, .rest__meta { grid-column: 1 / -1; text-align: left; }
+  .rest__meta { margin-top: var(--s-5); }
+}
+
+/* ============================================================
+   3 · O MNĚ — SAZBA ČLÁNKU                       (o-mne.html)
+
+   Co bylo špatně: stránka byla poctivá, ale ROZTAŽENÁ. Sedm
+   sekcí, každá s vlastním odsazením přes celý výřez, mezi nimi
+   nakreslený most, diagram v rámečku a dvě desky vedle sebe.
+   Obsahu bylo na deset obrazovek, scrollu na dvacet.
+
+   Teď je to ČLÁNEK. Ne modul, ne dashboard — sazba:
+
+     · jeden sloupec textu na optimální míru (62–68 znaků)
+     · kapitolové hlavičky s číslicí a serifovým nadpisem
+     · iniciála na začátku každé kapitoly
+     · vsuvky na pravém okraji (to, co bývalo v rámečku)
+     · obrazy jako PŘEDĚLY, ne jako výplň
+     · svislý rytmus zhruba o třetinu hustší než dřív
+
+   Pohyb tu skoro není. Odkrývá se jen kapitolová hlavička
+   a obraz — tedy to, co má rytmus čtení dělit, ne to, co se
+   má číst. Kdo se rozhoduje o důvěře, nemá si hrát; má číst.
+   ============================================================ */
+
+/* Kapitola není sekce. Má menší odsazení a nemá vlastní plochu
+   — čtenář má cítit, že je pořád v jednom textu.              */
+.section--read {
+  padding-block: clamp(40px, 5.2vh, 76px);
+}
+.section--read + .section--read { padding-top: 0; }
+
+/* ---------- mřížka článku -----------------------------------
+   Text stojí ve sloupcích 1–8, vsuvky a boční obrazy v 9–12.
+   Není to symetrie: čtený sloupec má být tam, kam padne oko
+   po nadpisu, tedy vlevo, a okraj je pro to, co se čte druhé. */
+.ed {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: 0;
+}
+.ed > * { grid-column: 1 / 9; }
+.ed--wide > * { grid-column: 1 / -1; }
+
+/* ---------- kapitolová hlavička ----------------------------- */
+.ed__chap {
+  margin-bottom: clamp(22px, 3vh, 38px);
+  padding-top: clamp(18px, 2.4vh, 28px);
+  border-top: 1px solid var(--line-strong);
+}
+.ed__no {
+  margin: 0 0 var(--s-3);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--tide);
+}
+.ed__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.05rem, 4.1vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -.018em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.ed__title .em { font-style: italic; }
+.ed__dek {
+  margin: var(--s-4) 0 0;
+  max-width: 44ch;
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+
+/* ---------- text -------------------------------------------- */
+.ed p {
+  margin: 0 0 var(--s-5);
+  max-width: var(--measure);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+.ed p:last-child { margin-bottom: 0; }
+.ed .em { font-family: var(--font-italic); font-style: italic; color: var(--ink); }
+
+/* OTVÍRACÍ ODSTAVEC S INICIÁLOU.
+   Iniciála není ozdoba — je to jediné místo, které říká „tady
+   se začíná číst“. Výška je přesně tři řádky: `line-height: .84`
+   na velikosti 3,1 em vychází na 2,6 em, což je při prokladu
+   1,62 rovných tři řádky sazby. Kdyby to nesedělo, byl by
+   pod ní odsazený čtvrtý řádek a to je vidět na první pohled. */
+.ed__lead {
+  font-size: clamp(1.15rem, 1.4vw, 1.32rem);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.ed__lead::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.1em;
+  line-height: .84;
+  padding: .06em .10em 0 0;
+  color: var(--tide);
+}
+
+.ed__sub {
+  margin: clamp(26px, 3.4vh, 40px) 0 var(--s-4);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.3rem, 1.9vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -.012em;
+  color: var(--ink);
+}
+/* Poslední věta kapitoly. O stupeň větší a v plném inkoustu —
+   je to shrnutí, ne další odstavec.                          */
+.ed__closer {
+  margin-top: clamp(24px, 3vh, 36px);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem) !important;
+  line-height: 1.4;
+  color: var(--ink) !important;
+  max-width: 40ch !important;
+}
+.ed__more { margin-top: var(--s-5); }
+
+/* ---------- vsuvka na okraji --------------------------------
+   To, co bývalo v rámečku uprostřed textu. Na okraji nepřeruší
+   čtení a přitom je pořád po ruce — přesně to je marginálie.  */
+.ed__note {
+  grid-column: 10 / -1;
+  grid-row: span 3;
+  align-self: start;
+  margin-top: .35em;
+  padding-left: var(--s-4);
+  border-left: 1px solid var(--line-strong);
+}
+.ed__note p {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+.ed__note-k {
+  margin: 0 0 var(--s-3) !important;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-meta);
+}
+.ed__note-num {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--tide);
+}
+.ed__note-arrow { display: block; margin: var(--s-3) 0; color: var(--tide); }
+
+/* ---------- obrazy ------------------------------------------
+   Obraz je PŘEDĚL, ne výplň: stojí mezi kapitolami, přes celou
+   šířku sazby, a nese popisek na dvou koncích jako v knize.   */
+.ed__fig { margin: 0; padding-block: clamp(16px, 2.2vh, 32px); }
+.ed__cap {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin: var(--s-4) 0 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-meta);
+}
+.ed__duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2.2vw, 32px);
+}
+.ed__duo .ed__cap { justify-content: flex-start; }
+
+/* Boční obraz stojí v okrajovém sloupci vedle textu. Kvůli
+   němu se sloupec textu nezužuje — obraz je ve vedlejší koleji. */
+.ed__fig--side {
+  grid-column: 10 / -1;
+  grid-row: span 4;
+  align-self: start;
+  padding-block: 0;
+  margin-top: .35em;
+}
+.ed__fig--side .ed__cap { justify-content: flex-start; }
+
+/* ---------- výrok ------------------------------------------- */
+.ed__pull {
+  margin: 0 auto;
+  text-align: center;
+  padding-block: clamp(20px, 3vh, 40px);
+}
+/* Míra patří k PÍSMU, ne k obálce: jednotka `ch` se počítá
+   z velikosti prvku, na kterém stojí. Na obálce (1 rem) z toho
+   vyšlo 176 px a věta se rozsypala na sedm řádků. Na odstavci,
+   kde je 3,6 rem, dá týž zápis 630 px a věta stojí na třech. */
+.ed__pull p {
+  margin: 0 auto;
+  max-width: 17ch;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.85rem, 4.4vw, 3.6rem);
+  line-height: 1.1;
+  letter-spacing: -.018em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.ed__pull .em { font-style: italic; }
+.ed__pull footer {
+  margin-top: var(--s-5);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-meta);
+}
+
+/* ---------- sklopení ---------------------------------------- */
+@media (max-width: 900px) {
+  .ed { grid-template-columns: 1fr; }
+  .ed > *, .ed--wide > * { grid-column: 1; }
+  /* Vsuvka i boční obraz se vrátí do proudu textu — na úzkém
+     displeji žádný okraj není, a tak se z marginálie stane
+     mezistupeň mezi odstavci.                                */
+  .ed__note {
+    grid-row: auto;
+    margin: var(--s-5) 0 var(--s-6);
+    padding: var(--s-4) 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line-strong);
+  }
+  .ed__fig--side { grid-row: auto; margin: var(--s-5) 0 var(--s-6); max-width: 300px; }
+  .ed__duo { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   CERTIFIKÁTY — doklad se ukazuje, ne popisuje
+
+   Dřív na obou místech stálo „DOPLNIT: certifikát v PDF“.
+   Doklad přitom bývá to poslední, co u terapeuta rozhoduje —
+   a jediné, co se nedá napsat o sobě.
+
+   Karta má dvě poloviny: NÁHLED skutečného papíru a to, co se
+   z papíru špatně čte (kdo vydal, k čemu opravňuje, jaký
+   rozsah, číslo). Papír dělá důvěru, sazba dělá srozumitelnost;
+   ani jedno samo o sobě nestačí.
+
+   Náhled je TLAČÍTKO, ne obrázek. Kdo na něj sáhne, dostane
+   plnou velikost — a proto po něm musí být vidět, že se na něj
+   sáhnout dá: rám se nadzvedne, papír se o kousek přiblíží
+   a v rohu naskočí lupa.
+   ============================================================ */
+.certs {
+  display: grid;
+  gap: clamp(24px, 3vw, 40px);
+  grid-template-columns: 1fr;
+  margin-top: clamp(28px, 4vh, 48px);
+}
+@media (min-width: 860px) { .certs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.cert {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--dur-ui) var(--ease-out),
+              box-shadow var(--dur-ui) var(--ease-out),
+              transform var(--dur-ui) var(--ease-out);
+}
+.cert:has(.cert__shot:hover),
+.cert:has(.cert__shot:focus-visible) {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-float);
+  transform: translateY(-3px);
+}
+
+/* ---------- náhled -------------------------------------------
+   Papír leží na pískové ploše, ne na bílé: bílý scan na bílém
+   podkladu nemá kde začít a vypadá jako díra v kartě.        */
+.cert__shot {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: clamp(18px, 2.4vw, 30px);
+  background: var(--sand);
+  border: 0;
+  border-bottom: 1px solid var(--line-sand);
+  cursor: zoom-in;
+  overflow: hidden;
+}
+.cert__shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+  object-position: top center;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px -18px rgba(40, 34, 26, .55),
+              0 1px 0 rgba(40, 34, 26, .10);
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+.cert__shot:hover img,
+.cert__shot:focus-visible img { transform: scale(1.018); }
+.cert__shot:focus-visible { outline: var(--focus-ring); outline-offset: -3px; }
+
+/* Lupa v rohu. V klidu je pryč; na dotykovém displeji, kde
+   hover neexistuje, je vidět pořád — jinak by tam pro půlku
+   návštěvníků nebyla vůbec.                                   */
+.cert__zoom {
+  position: absolute;
+  right: clamp(12px, 1.6vw, 20px);
+  bottom: clamp(12px, 1.6vw, 20px);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 7px var(--s-4);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--ink-2);
+  font-size: .8rem;
+  letter-spacing: .02em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--dur-ui) var(--ease-out),
+              transform var(--dur-ui) var(--ease-out);
+}
+.cert__shot:hover .cert__zoom,
+.cert__shot:focus-visible .cert__zoom { opacity: 1; transform: none; }
+@media (hover: none) {
+  .cert__zoom { opacity: 1; transform: none; }
+}
+
+/* ---------- popis -------------------------------------------- */
+.cert__body {
+  padding: clamp(20px, 2.6vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  flex: 1;
+}
+.cert__issuer {
+  margin: 0;
+  font-size: .74rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--tide);
+}
+.cert__name {
+  margin: 0;
+  font-size: clamp(1.24rem, 1.8vw, 1.52rem);
+  line-height: 1.22;
+  letter-spacing: var(--tr-h3);
+  color: var(--ink);
+}
+.cert__lede { margin: 0; color: var(--ink-2); }
+
+/* Fakta jako dvojice, ne jako odstavec: klíč drobně nahoře,
+   hodnota pod ním. Čte se to očima, ne po větách.            */
+.cert__facts {
+  margin: var(--s-3) 0 0;
+  display: grid;
+  gap: var(--s-4);
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-4);
+}
+.cert__facts dt {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-meta);
+  margin-bottom: 3px;
+}
+.cert__facts dd { margin: 0; color: var(--ink-2); font-size: .98rem; line-height: 1.5; }
+
+/* Akreditace jsou na diplomu vytištěné jako řada log. Tady
+   z nich jsou štítky — logo bez licence nekopírujeme.        */
+.cert__accred {
+  list-style: none;
+  margin: auto 0 0;
+  padding: var(--s-4) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+.cert__accred li {
+  padding: 5px var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  color: var(--ink-meta);
+  background: var(--bg);
+}
+
+.certs__note { margin-top: clamp(24px, 3vh, 36px); }
+
+/* Odkaz z tabulky výcviků dolů na doklad. */
+.cv__link {
+  color: var(--tide);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, var(--tide) 42%, transparent);
+}
+.cv__link:hover { text-decoration-color: var(--tide); }
+
+/* ============================================================
+   LUPA NA DOKLAD
+
+   Je v DOM od začátku (jen `hidden`), takže se nic nevytváří za
+   běhu a zavření nemá co uklízet. Plný obrázek si skript dosadí
+   až při otevření — dva scany se kvůli „možná“ netahají.
+   ============================================================ */
+.certbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 56px);
+}
+.certbox[hidden] { display: none; }
+.certbox__scrim {
+  position: absolute;
+  inset: 0;
+  /* Tmavá clona, ne závoj. Průsvitná clona nechá pod papírem
+     prosvítat celou stránku a doklad se v tom ztratí — přesně
+     to, co má lupa vyloučit. Rozostření pozadí je navíc
+     jediné místo webu, kde si ho lze dovolit: je pod ním
+     obraz, ne sazba.                                        */
+  background: rgba(6, 11, 9, .88);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 240ms var(--ease-out);
+}
+.certbox[data-open] .certbox__scrim { opacity: 1; }
+
+.certbox__frame {
+  position: relative;
+  margin: 0;
+  max-width: min(1040px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  opacity: 0;
+  transform: scale(.975) translateY(8px);
+  transition: opacity 260ms var(--ease-out), transform 260ms var(--ease-out);
+}
+.certbox[data-open] .certbox__frame { opacity: 1; transform: none; }
+.certbox__frame img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - clamp(96px, 16vw, 180px));
+  width: auto;
+  height: auto;
+  margin-inline: auto;
+  border-radius: 3px;
+  background: var(--surface);
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .7);
+}
+.certbox__cap {
+  margin: 0;
+  text-align: center;
+  font-size: .74rem;
+  letter-spacing: .1em;
+  color: var(--surface);
+  opacity: .82;
+}
+/* Křížek stojí v ROHU OKNA, ne nad rámem. Nad rámem se při
+   vysokém obrázku dostal mimo obrazovku a lupa se dala zavřít
+   jen klávesou.                                              */
+.certbox__x {
+  position: fixed;
+  top: clamp(14px, 2.4vw, 28px);
+  right: clamp(14px, 2.4vw, 28px);
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: 1px solid rgba(255, 255, 255, .34);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--surface);
+}
+.certbox__x:hover { background: rgba(255, 255, 255, .12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cert, .cert__shot img, .cert__zoom,
+  .certbox__scrim, .certbox__frame { transition: none; }
+  .cert:has(.cert__shot:hover) { transform: none; }
+}

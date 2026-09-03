@@ -1,0 +1,213 @@
+/* ============================================================
+   tokens.css — jediný zdroj pravdy
+   Barvy · typografie · prostor · pohyb
+   Když chcete změnit vzhled webu, měňte tady. Nikde jinde.
+   ============================================================ */
+
+:root {
+  /* ---------- POVRCHY ---------------------------------------
+     Světlé, se zeleno-šedým (ne žlutým) spodkem.               */
+  --bg:          #F2F3EF;   /* porcelán — základní plocha webu   */
+  --surface:     #FFFFFF;   /* panely, které mají „dýchnout“     */
+  --surface-2:   #E9ECE5;   /* klidová mělčina, sekční předěly   */
+  --sand:        #EDE7DC;   /* teplý protipól — POUZE tam,
+                               kde je na webu člověk (Katka)     */
+  /* KŮŽE SILUETY. Mapa těla je jediné místo webu, kde o sobě
+     mluví návštěvník — a byla přitom nejstudenější plochou,
+     jakou web má: bílá siluetа na šedozelené desce s ocelově
+     modrou kresbou. Dva teplé odstíny z ní dělají člověka,
+     ne sádrový odlitek. Používá je jen ona.                  */
+  --skin-hi:     #FAF3EA;   /* teplé světlo shora               */
+  --skin-lo:     #E9D8C6;   /* teplý stín zespodu               */
+
+  /* ---------- INKOUST ---------------------------------------
+     ČERNÁ SAZBA. Web měl dřív čtyři stupně šedi a text v nich
+     doslova blednul: dlouhé odstavce běžely na #3C4944, popisky
+     na #5F6A64. Na porcelánovém podkladu to vypadalo jemně,
+     četlo se to ale jako vybledlý tisk — a hlavně to dělalo
+     hierarchii BARVOU, což je nejslabší způsob, jak ji dělat.
+
+     Teď je hierarchie VELIKOSTÍ, ŘEZEM A PROSTOREM a všechen
+     text je černý. Ne #000: pořád má zelenošedý spodek, aby
+     seděl k porcelánu a nepálil do očí — ale je to černá,
+     ne šedá. Rozdíl mezi stupni je do sedmi procent světlosti,
+     tedy na hraně rozeznatelnosti; nadpisy jsou nejtmavší,
+     drobná sazba o vlásek světlejší, aby při malém stupni
+     nekaňkovala.                                              */
+  --ink:         #070D0B;   /* nadpisy — 18,9:1 na --bg          */
+  --ink-2:       #101815;   /* dlouhé odstavce         17,2 AAA  */
+  --ink-3:       #1B2521;   /* popisky s informací     15,1 AAA  */
+                            /* Bylo #5F6A64 (5,05:1). Trojka je
+                               po webu nejrozšířenější „drobný“
+                               token — popisky, číslovky, patičky.
+                               Ztmavením se z něj stal plnohodnotný
+                               text, ne poznámka pod čarou.       */
+  --ink-4:       #8B958D;   /* POUZE dekorace, nikdy text        */
+                            /* Kontrast na --bg je 2,41:1. To je
+                               pro tečku nebo linku v pořádku,
+                               pro PÍSMENO ne — a přesně tam se
+                               token dostal: číslovky 01/02/03,
+                               odečty na kolech, popisky pod
+                               grafy. Všechna taková místa mají
+                               teď --ink-meta, tenhle token
+                               zůstává jen kresbě.               */
+  --ink-meta:    #202A26;   /* drobné popisky a číslovky.
+                               --bg 14,3 · --surface 15,9 ·
+                               --surface-2 13,4 · --sand 13,0 —
+                               AAA i pro nejmenší řez na webu.   */
+  --line:        #DCDFD7;   /* optický předěl                    */
+  --line-strong: #C6CBBF;   /* rám panelu                        */
+  --line-ui:     #7E877A;   /* hranice ovládacího prvku  3,34 ✓  */
+  --line-sand:   #DFD7C8;   /* hrana pískové plochy — teplý
+                               protipól k --line. Byl to jediný
+                               napevno zapsaný odstín v layout.css. */
+
+  /* ---------- AKCE ------------------------------------------ */
+  --tide:        #0E6B54;   /* CTA, aktivní stavy, linka dechu   */
+  --tide-deep:   #0A5442;   /* hover                             */
+  --tide-soft:   #CFE6DA;   /* výplně, podklad chipů             */
+  --tide-warm:   #1E7A5B;   /* o ~12 % teplejší příliv — světlo,
+                               které v hero scéně nese kurzor.
+                               Na --bg 4,7:1, tedy AA i jako text. */
+
+  /* ---------- TŘI ČÁSTI SEZENÍ ------------------------------
+     Tonální postup jedné barvy, ne tři náhodné odstíny:
+     střední tón (příchod) → nejhlubší (práce na lehátku) →
+     nejsvětlejší (návrat). Barva tak nese děj, ne jen rozlišení.
+     Používají se výhradně jako plocha a značka, nikdy jako text. */
+  --seg-1:       #6FA48C;
+  --seg-2:       #0E6B54;
+  --seg-3:       #A9C7B6;
+
+  /* ---------- BAREVNÝ KLÍČ SEDMI TÉMAT ----------------------
+     Všech sedm prochází AA jako text na --bg i na --surface.   */
+  --t-migrena:   #2F6E8F;
+  --t-stres:     #9A5B2E;
+  --t-menopauza: #7A4B6E;
+  --t-poporodu:  #4E6E42;
+  --t-zada:      #1E6455;
+  --t-uzkost:    #4E5490;
+  --t-dalsi:     #5E6A64;
+
+  /* Aktuální téma — přepisuje ho JS podle sekce ve výřezu.
+     Sem sahá linka dechu, chipy i aktivní stavy.               */
+  --theme:       var(--tide);
+  --theme-soft:  var(--tide-soft);
+
+  /* ---------- PÍSMO -----------------------------------------
+     INSTRUMENT SANS na místě Switzeru.
+
+     Switzer je poctivý, ale neutrální grotesk — písmo, které
+     nic nezkazí a nic neřekne. Vedle Newsreaderu v nadpisech
+     z toho byla dvojice, kde jeden hlas mluví a druhý mlčí.
+
+     Instrument Sans (Instrument, OFL) mlčí míň. Je o vlásek
+     užší, má vyšší, kolmější tvary a pár detailů, po kterých
+     drobná sazba pozná, že ji někdo kreslil: dvoupatrové „a“
+     s ostrým vykrojením, „g“ s otevřeným ocasem, „t“ se šikmým
+     seříznutím, „y“ s rovnou diagonálou. Při 0,78 rem
+     (popisky, číslovky) je z toho rozdíl mezi rozhraním
+     a sazbou.
+
+     Variabilní, jedna osa (400–700), 38 kB, subset na 299
+     znaků české sazby. Licence leží vedle souboru.
+
+     Šířkovou osu jsme zafixovali na 100 — kondenzovaný řez by
+     v odstavcích jen ubral vzduch, který sekce potřebují.      */
+  --font-sans: "Instrument Sans", -apple-system,
+               BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+  /* Nadpisy. Serif nese hlas značky, sans zůstává na text —
+     dělba, kterou čtenář nemusí umět pojmenovat, ale pozná ji. */
+  --font-display: "Newsreader", "Sentient", Georgia,
+                  "Times New Roman", Times, serif;
+  --font-italic: "Newsreader", "Sentient", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular,
+               "SF Mono", Menlo, Consolas, monospace;
+
+  /* Škála — fluidní */
+  --fs-h1:    clamp(2.75rem, 6.2vw, 6.6rem);
+  --fs-h2:    clamp(2.2rem, 5vw, 4.4rem);
+  --fs-h3:    clamp(1.45rem, 2.4vw, 2.1rem);
+  --fs-h4:    clamp(1.15rem, 1.4vw, 1.35rem);
+  /* Instrument Sans má x-výšku 0,510 em, Switzer měl 0,531 —
+     tedy o 4 % nižší střední výšku. Při stejném stupni by
+     sazba opticky ZDROBNĚLA, i když je číslo v CSS totožné.
+     Celá sansová větev škály jde proto o 4 % nahoru; opticky
+     je to táž velikost jako předtím, změřená na x-výšce, ne
+     na kuželce. Nadpisové stupně (h1–h4) se nemění, ty běží
+     na Newsreaderu.                                           */
+  --fs-lede:  clamp(1.2rem, 1.56vw, 1.56rem);
+  --fs-body:  clamp(1.105rem, .36vw + 1.04rem, 1.2rem);
+  --fs-small: .99rem;
+  --fs-label: .78rem;
+
+  /* Serif má delší dotažnice než grotesk — řádky potřebují
+     o kousek víc vzduchu, jinak se horní dotažnice zaseknou
+     do háčků řádku nad sebou. Změřeno na Newsreaderu: nejvyšší
+     bod řádku je dotažnice „k“ (+0,727 em), nejnižší ocas „y“
+     (−0,249 em). Dva řádky se tedy dotknou při prokladu 0,976 em
+     — pod jedničku se s háčky jít nedá.                        */
+  --lh-h1: 1;  --lh-h2: 1.06;  --lh-h3: 1.2;
+  --lh-lede: 1.5; --lh-body: 1.62; --lh-small: 1.55;
+
+  /* A naopak: serif se nesmí stahovat jako grotesk. Původní
+     −.03em bylo pro Switzer; na Newsreaderu by se slévaly
+     serify sousedních písmen.                                 */
+  --tr-h1: -.018em; --tr-h2: -.015em; --tr-h3: -.01em;
+  --tr-label: .13em;
+
+  --measure: 65ch;      /* 62–68 znaků */
+  --measure-lede: 46ch;
+
+  /* ---------- PROSTOR (8pt) --------------------------------- */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 24px;  --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+  --s-9: 96px;  --s-10: 128px;
+
+  --gutter:  clamp(16px, 2.2vw, 32px);
+  --edge:    clamp(20px, 5vw, 80px);
+  --maxw:    1360px;
+  --section: clamp(88px, 12vh, 180px);
+
+  /* Šířka pruhu, ve kterém běží linka dechu (levý okraj) */
+  --rail: clamp(28px, 4vw, 56px);
+
+  /* ---------- TVAROSLOVÍ ------------------------------------ */
+  --radius: 4px;
+  --radius-pill: 999px;
+  --shadow-float: 0 24px 60px -32px rgba(16, 28, 24, .18);
+  --focus-ring: 2px solid var(--tide);
+  --focus-offset: 3px;
+
+  /* ---------- POHYB ----------------------------------------- */
+  --breath: 11s;              /* sdílený rytmus organismu       */
+  --breath-slow: 6.667s;      /* primární respirace ≈ 9 cyklů/min
+                                 — jediný rytmus na webu, který je
+                                 doložený číslem v textu.        */
+  --dur-micro: 180ms;         /* hover, focus                   */
+  --dur-ui: 320ms;            /* přepnutí panelu                */
+  --dur-reveal: 700ms;        /* náběh obsahu                   */
+  --dur-scene: 1400ms;        /* velké scény, dokreslení        */
+  --dur-tide: 420ms;          /* rodina PŘÍLIV — zaplavení      */
+  --dur-long: 900ms;          /* osa, přílet do kapitoly, odpočet */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-out: cubic-bezier(.7, 0, .2, 1);
+  --stagger: 60ms;
+  --stagger-draw: 40ms;       /* rodina KRESBA                  */
+
+  /* Násobič, kterým se dá celý pohyb vypnout naráz. */
+  --motion: 1;
+
+  /* Zdroj filmového zrna (statický SVG šum) */
+  --grain-src: url("../assets/grain.svg");
+
+  --z-grain: 90;
+  --z-rail: 40;
+  --z-nav: 100;
+  --z-menu: 110;
+  --z-bottombar: 105;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion: 0; }
+}

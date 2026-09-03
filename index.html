@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="cs" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kraniosakrální terapie Brno — Kateřina Jüttnerová</title>
+<meta name="description" content="Jemná kraniosakrální terapie a Somatic Experiencing. Zdravotní sestra s pětiletým výcvikem. 75 minut, 1 500 Kč, zůstáváte oblečení. Brno a okolí.">
+<link rel="canonical" href="https://www.example.cz/">
+<meta name="theme-color" content="#F2F3EF">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Kraniosakrální terapie — Kateřina Jüttnerová">
+<meta property="og:description" content="Jemná podpora nervového systému. 75 minut, v oblečení, bez spěchu. Zdravotnické zázemí a pět let výcviků.">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:url" content="https://www.example.cz/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="preload" href="fonts/instrumentsans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Postava v hero sekci stojí v prvním pohledu, takže se její
+     dva skripty stahují už při parsování hlavičky — spustí je
+     core.js hned (window.KJ_EAGER), ne až s ostatními moduly. -->
+<link rel="preload" href="js/webgl/anatomy-mesh.js" as="script">
+<link rel="preload" href="js/webgl/anatomy-3d.js" as="script">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/modules.css">
+<link rel="stylesheet" href="css/_l1.css">
+<link rel="stylesheet" href="css/_l2.css">
+<link rel="stylesheet" href="css/_l3.css">
+<link rel="stylesheet" href="css/_l4.css">
+<link rel="stylesheet" href="css/_l5.css">
+<link rel="stylesheet" href="css/_l6.css">
+
+<script>/* Skrytí pro animaci nasazujeme jen tam, kde je čím animovat.
+   Když uživatel nechce pohyb, obsah se nikdy neskryje.
+   Pojistka: kdyby se core.js nenačetl nebo cokoli spadlo,
+   po 2 s masku strhneme natvrdo. Web bez efektu je pořád web,
+   web bez textu není nic. core.js pojistku převezme. */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  document.documentElement.classList.add("js-anim");
+  window.__kjRevealGuard=setTimeout(function(){document.documentElement.classList.remove("js-anim")},2000);
+}</script>
+
+<script>/* HERO: ŽÁDNÁ ZÁLOŽNÍ KRESBA V PRVNÍ VTEŘINĚ.
+   V plátně hero sekce leží dvě verze postavy: prostorová (WebGL)
+   a plochá kreslená (assets/nerve-figure.svg) pro prohlížeče
+   bez WebGL a pro režim „omezit pohyb“. Kreslená je v HTML
+   proto, aby stránka nikdy nebyla prázdná — jenže se tím taky
+   stihla ukázat dřív, než se scéna rozběhla, a návštěvník
+   viděl na první vteřinu jiný, jednodušší model.
+
+   Když je WebGL k dispozici a uživatel pohyb chce, kresbu
+   od začátku SCHOVÁME. Ukáže se jen tehdy, když se 3D scéna
+   nepodaří — buď proto, že se přihlásí sama (giveUp), nebo
+   proto, že do šesti vteřin nenaskočila. Šest vteřin je
+   schválně hodně: lepší chvíli prázdné světelné pole než
+   dva různé modely za sebou. */
+(function(){
+  var d=document.documentElement;
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if(!window.WebGLRenderingContext) return;
+  d.classList.add("nerve-boot");
+  window.__kjNerveGuard=setTimeout(function(){
+    d.classList.remove("nerve-boot");
+  },6000);
+})();</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "Kateřina Jüttnerová — kraniosakrální terapie",
+  "description": "Biodynamická kraniosakrální terapie a Somatic Experiencing.",
+  "telephone": "+420776021297",
+  "email": "katkajuttnerova@seznam.cz",
+  "priceRange": "1500–6500 Kč",
+  "areaServed": { "@type": "City", "name": "Brno" },
+  "founder": {
+    "@type": "Person",
+    "name": "Kateřina Jüttnerová",
+    "jobTitle": "Kraniosakrální terapeutka, zdravotní sestra"
+  },
+  "makesOffer": [
+    { "@type": "Offer", "name": "Jedno ošetření (75 minut)", "price": "1500", "priceCurrency": "CZK" },
+    { "@type": "Offer", "name": "Balíček 3 ošetření", "price": "4000", "priceCurrency": "CZK" },
+    { "@type": "Offer", "name": "Balíček 5 ošetření", "price": "6500", "priceCurrency": "CZK" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<div class="grain" aria-hidden="true"></div>
+<canvas class="breathline" data-breathline aria-hidden="true"></canvas>
+
+<header class="nav" data-nav>
+  <div class="wrap nav__inner">
+    <a class="nav__brand" href="index.html">Katka Jüttnerová</a>
+    <nav class="nav__links" aria-label="Hlavní navigace">
+      <a class="nav__link" href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+      <a class="nav__link" href="s-cim-pomaham.html">S&nbsp;čím pomáhám</a>
+      <a class="nav__link" href="o-mne.html">O&nbsp;mně</a>
+      <a class="nav__link" href="prubeh-a-cenik.html">Průběh a&nbsp;ceník</a>
+    </nav>
+    <a class="nav__tel" href="tel:+420776021297">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h2.2l1 2.6L4.8 6.4a8 8 0 0 0 4.8 4.8l1.3-1.4 2.6 1V13a1 1 0 0 1-1.1 1A11 11 0 0 1 2 3.6 1 1 0 0 1 3 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      <span class="mono mono--plain">+420&nbsp;776&nbsp;021&nbsp;297</span>
+    </a>
+    <a class="btn btn--primary btn--sm nav__cta" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+    <button class="nav__burger" data-burger aria-expanded="false" aria-controls="menu" aria-label="Otevřít menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="8" width="18" height="1.5" fill="currentColor"/>
+        <rect x="3" y="15" width="18" height="1.5" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-menu aria-hidden="true">
+  <div class="wrap">
+    <nav class="menu__list" aria-label="Hlavní navigace, mobilní">
+      <a class="menu__link" href="index.html" aria-current="page">Úvod</a>
+      <a class="menu__link" href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+      <a class="menu__link" href="s-cim-pomaham.html">S&nbsp;čím pomáhám</a>
+      <a class="menu__link" href="o-mne.html">O&nbsp;mně</a>
+      <a class="menu__link" href="prubeh-a-cenik.html">Průběh a&nbsp;ceník</a>
+    </nav>
+    <div class="menu__meta">
+      <a class="mono mono--plain" href="tel:+420776021297">+420&nbsp;776&nbsp;021&nbsp;297</a>
+      <a class="mono mono--plain" href="mailto:katkajuttnerova@seznam.cz">katkajuttnerova@seznam.cz</a>
+    </div>
+  </div>
+</div>
+
+<main id="obsah">
+
+  <!-- ══ 01 HERO ═══════════════════════════════════════════════
+       Emoce: „Tohle je jiné.“  Práce: zaujmout, pojmenovat, CTA -->
+  <section class="hero" data-theme-zone="tide">
+    <div class="wrap wrap--rail hero__grid">
+      <div class="hero__text">
+        <p class="hero__sig" data-reveal>
+          <span class="hero__sig-name">Kateřina Jüttnerová</span>
+          <span class="hero__sig-sep" aria-hidden="true"></span>
+          <span class="hero__sig-role">Kraniosakrální terapie</span>
+        </p>
+        <!-- Tři řádky, tři odsazení. Není to ozdoba: věta se
+             odsazením nadechuje jako mluvené slovo a poslední
+             řádek se vrací až za levý okraj prvního, takže
+             „k rovnováze“ stojí nejdál vlevo — tam, kam se
+             oko po pádu věty vrací.                            -->
+        <h1 class="hero__title" data-reveal>
+          <span class="line-mask hero__ln hero__ln--1"><span>Tělo ví</span></span>
+          <span class="line-mask hero__ln hero__ln--2"><span>kudy zpět</span></span>
+          <span class="line-mask hero__ln hero__ln--3"><span>k <em class="em">rovnováze</em></span></span>
+        </h1>
+        <p class="lede hero__lede" data-reveal data-reveal-delay="120">
+          Hluboká změna nepotřebuje tlak, ale čas, klid a&nbsp;bezpečný prostor.
+          Dovolte své hlavě vydechnout a&nbsp;tělu se nadechnout.
+        </p>
+        <div class="actions hero__actions" data-reveal data-reveal-delay="200">
+          <a class="btn btn--primary btn--lg" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+          <a class="hero__phone" href="tel:+420776021297">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h2.2l1 2.6L4.8 6.4a8 8 0 0 0 4.8 4.8l1.3-1.4 2.6 1V13a1 1 0 0 1-1.1 1A11 11 0 0 1 2 3.6 1 1 0 0 1 3 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            +420&nbsp;776&nbsp;021&nbsp;297
+          </a>
+        </div>
+        <ul class="facts small" data-reveal data-reveal-delay="280">
+          <li><span class="num">75&nbsp;min</span></li>
+          <li>zůstáváte oblečení</li>
+          <li>Brno</li>
+        </ul>
+      </div>
+
+      <div class="hero__scene">
+        <div class="nerve" data-nerve data-mode="static">
+          <canvas aria-hidden="true"></canvas>
+          <!-- Haló kolem kříže. Kreslí ho stylopis, ne plátno:
+               prstenec se má rozpínat i za hranu scény a v CSS
+               to nic nestojí. Polohu mu každý snímek dopočítá
+               anatomy-3d.js z promítnutého středu kříže. -->
+          <span class="nerve__halo" data-nerve-halo aria-hidden="true"></span>
+          <img class="nerve__svg" src="assets/nerve-figure.svg" width="520" height="908" decoding="async"
+               alt="Schéma nervové soustavy: mícha v durálním tubu, tvrdá plena, hlavové nervy včetně bloudivého, sympatický kmen s ganglii, pleteň pažní a křížová, cauda equina a kost křížová.">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 02 POZNÁVÁTE SE? ═══════════════════════════════════════
+       Emoce: „To jsem přesně já.“  Práce: zrcadlo, identifikace -->
+  <!-- Plocha zůstává základní. Mělčinu (--surface-2) nese až
+       sekce pod ní: dva stejné pruhy pod sebou by splynuly
+       v jeden a předěl by zmizel. -->
+  <section class="section" aria-labelledby="poznavate">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Poznáváte se?</p>
+          <h2 id="poznavate" data-reveal>
+            <span class="line-mask"><span>Konkrétní obtíže,</span></span>
+            <span class="line-mask"><span>ne obecné fráze.</span></span>
+          </h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="hint" data-reveal><span class="hint__dot" aria-hidden="true"></span> Najeďte na řádek nebo na něj klepněte</p>
+        </div>
+      </div>
+
+      <div class="hindex" data-help-index>
+        <span class="hindex__rail" aria-hidden="true"><span class="hindex__dot"></span></span>
+        <canvas class="hindex__sig" data-help-sig aria-hidden="true"></canvas>
+
+        <a class="hrow" href="s-cim-pomaham.html#oblast-01" data-help-row="migrena" style="--row: var(--t-migrena)" data-reveal>
+          <span class="hrow__no"><span class="hrow__roll"><span>01</span><span aria-hidden="true">01</span></span></span>
+          <span class="hrow__body">
+            <span class="hrow__title">Migréna a&nbsp;bolesti hlavy</span>
+            <ul class="hrow__signs"><li>tlak za okem</li><li>ztuhlá šíje</li><li>světloplachost</li></ul>
+            <span class="hrow__desc"><span>Uvolnění napětí v&nbsp;oblasti šíje, čelistí a&nbsp;lebky — a&nbsp;obnova plynulého proudění.</span></span>
+          </span>
+          <svg class="hrow__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="hrow" href="s-cim-pomaham.html#oblast-02" data-help-row="stres" style="--row: var(--t-stres)" data-reveal>
+          <span class="hrow__no"><span class="hrow__roll"><span>02</span><span aria-hidden="true">02</span></span></span>
+          <span class="hrow__body">
+            <span class="hrow__title">Stres a&nbsp;burnout</span>
+            <ul class="hrow__signs"><li>mělký dech</li><li>neklidný spánek</li><li>prázdná nádrž</li></ul>
+            <span class="hrow__desc"><span>Dokončení zadržených stresových reakcí, návrat do režimu klidu a&nbsp;trávení.</span></span>
+          </span>
+          <svg class="hrow__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="hrow" href="s-cim-pomaham.html#oblast-03" data-help-row="menopauza" style="--row: var(--t-menopauza)" data-reveal>
+          <span class="hrow__no"><span class="hrow__roll"><span>03</span><span aria-hidden="true">03</span></span></span>
+          <span class="hrow__body">
+            <span class="hrow__title">Menopauza a&nbsp;spánek</span>
+            <ul class="hrow__signs"><li>návaly</li><li>noční pocení</li><li>mozková mlha</li></ul>
+            <span class="hrow__desc"><span>Podpora v&nbsp;období hormonálních změn — spánek, návaly, vnitřní rovnováha.</span></span>
+          </span>
+          <svg class="hrow__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="hrow" href="s-cim-pomaham.html#oblast-04" data-help-row="poporodu" style="--row: var(--t-poporodu)" data-reveal>
+          <span class="hrow__no"><span class="hrow__roll"><span>04</span><span aria-hidden="true">04</span></span></span>
+          <span class="hrow__body">
+            <span class="hrow__title">Po porodu — maminky i&nbsp;miminka</span>
+            <ul class="hrow__signs"><li>bolavá pánev</li><li>potíže s&nbsp;kojením</li><li>kolika u&nbsp;miminka</li></ul>
+            <span class="hrow__desc"><span>Jemná regenerace pánve a&nbsp;celého těla — pro maminky i&nbsp;novorozence.</span></span>
+          </span>
+          <svg class="hrow__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="hrow" href="s-cim-pomaham.html#oblast-05" data-help-row="zada" style="--row: var(--t-zada)" data-reveal>
+          <span class="hrow__no"><span class="hrow__roll"><span>05</span><span aria-hidden="true">05</span></span></span>
+          <span class="hrow__body">
+            <span class="hrow__title">Chronické bolesti zad</span>
+            <ul class="hrow__signs"><li>ztuhlý kříž</li><li>vystřelující bolest</li><li>slepené fascie</li></ul>
+            <span class="hrow__desc"><span>Rozpuštění usazeného napětí ve fasciích podél celé páteře.</span></span>
+          </span>
+          <svg class="hrow__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="hrow" href="s-cim-pomaham.html#oblast-06" data-help-row="uzkost" style="--row: var(--t-uzkost)" data-reveal>
+          <span class="hrow__no"><span class="hrow__roll"><span>06</span><span aria-hidden="true">06</span></span></span>
+          <span class="hrow__body">
+            <span class="hrow__title">Úzkost a&nbsp;Somatic Experiencing</span>
+            <ul class="hrow__signs"><li>sevřený hrudník</li><li>napjaté břicho</li><li>stálá pohotovost</li></ul>
+            <span class="hrow__desc"><span>Propojení kraniosakrální terapie s&nbsp;prací na nervovém systému a&nbsp;traumatu.</span></span>
+          </span>
+          <svg class="hrow__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="hrow" href="s-cim-pomaham.html#oblast-07" data-help-row="dalsi" style="--row: var(--t-dalsi)" data-reveal>
+          <span class="hrow__no"><span class="hrow__roll"><span>07</span><span aria-hidden="true">07</span></span></span>
+          <span class="hrow__body">
+            <span class="hrow__title">Další individuální potíže</span>
+            <ul class="hrow__signs"><li>nejasné potíže</li><li>nikam to nezapadá</li><li>nejistota, kde začít</li></ul>
+            <span class="hrow__desc"><span>Když se to nedá zařadit — projdeme to spolu a&nbsp;najdeme, kde začít.</span></span>
+          </span>
+          <svg class="hrow__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+      </div>
+
+      <div class="actions" style="margin-top: var(--s-7)" data-reveal>
+        <a class="btn btn--ghost btn--on-surface" href="s-cim-pomaham.html"><span>Chci to probrat</span>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <p class="small" style="color: var(--ink-2); margin: 0">Nebo si nejdřív projděte, co terapie je.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 03 PŘEDĚL: DRŽENÍ A PUŠTĚNÍ ══════════════════════
+       Emoce: „To je přesně můj život — a tohle chci.“
+
+       Jediná přechodová sekce úvodní stránky: mělká voda
+       (--surface-2) mezi rejstříkem obtíží nad ní a kolem sezení
+       pod ní. Nádech mezi dvěma ovládacími panely.
+
+       JEDNO PÍSMO, JEDEN ODSTAVEC. Dřív tu stál úzký výrok ve třech
+       řádcích a pod ním čtyři odstavce, každý v jiném stupni —
+       šest typografických hlasů na jedné obrazovce a sekce vysoká
+       jako dvě. Teď je to JEDEN široký odstavec sázený Newsreaderem
+       od prvního po poslední písmeno: nic nešeptá, nic nekřičí,
+       a sekce se vejde do jednoho pohledu.
+
+       CO DĚLÁ SAZBA. Věta drží a pak povolí — doslova.
+       Slova jsou před příchodem vlny sevřená (stažená, povytažená
+       nahoru), vlna je po písmenech rozsvítí — a slova první věty
+       pak jedno po druhém sednou níž, rozevřou se a změknou
+       do neostra. Svítit zůstane „přestat držet“ a všechno,
+       co po něm následuje. Každé puštěné slovo udělá pod sazbou
+       kruh na vodě — viz js/modules/say.js. -->
+  <section class="section band band--say" aria-labelledby="posun">
+    <div class="wrap wrap--rail">
+      <div class="creed__top">
+        <p class="eyebrow" data-reveal>Držení a&nbsp;puštění</p>
+      </div>
+    </div>
+
+    <!-- VÝROK PŘES CELOU ŠÍŘKU.
+         Nestojí v mřížce dvanácti sloupců a nemá odsazení o pruh
+         linky dechu: je to jediná věc, kterou má člověk z předělu
+         odnést, a stojí tedy sama uprostřed stránky.
+
+         Každé slovo je vlastní prvek, protože jím prochází vlna.
+         Bez skriptu je to normálně vysázený odstavec a nikdo
+         nepozná rozdíl. -->
+    <div class="wrap say-wrap">
+      <h2 class="say" id="posun" data-say>
+        <span class="say__w">Roky</span>
+        <span class="say__w">jste</span>
+        <span class="say__w">to</span>
+        <span class="say__w">zvládali.</span>
+        <span class="say__w">Nejde</span>
+        <span class="say__w">o&nbsp;to</span>
+        <span class="say__w">vydržet</span>
+        <span class="say__w">víc</span>
+        <span class="say__w">ani</span>
+        <span class="say__w">být</span>
+        <span class="say__w">silnější</span>
+        <span class="say__w">—</span>
+        <span class="say__w">jde</span>
+        <span class="say__w">o&nbsp;to</span>
+        <span class="say__w say__w--key"><em class="em">přestat</em></span>
+        <span class="say__w say__w--key"><em class="em">držet</em>.</span>
+        <span class="say__w">Tělo</span>
+        <span class="say__w">nedrží</span>
+        <span class="say__w">napětí</span>
+        <span class="say__w">ze&nbsp;vzdoru.</span>
+        <span class="say__w">Drží</span>
+        <span class="say__w">ho</span>
+        <span class="say__w">proto,</span>
+        <span class="say__w">že</span>
+        <span class="say__w">to</span>
+        <span class="say__w">kdysi</span>
+        <span class="say__w">dávalo</span>
+        <span class="say__w">smysl.</span>
+        <span class="say__w">Nebezpečí</span>
+        <span class="say__w">dávno</span>
+        <span class="say__w">pominulo.</span>
+        <span class="say__w">Ramenům</span>
+        <span class="say__w">to</span>
+        <span class="say__w">nikdo</span>
+        <span class="say__w">neřekl.</span>
+      </h2>
+
+      <!-- Patka. Poslední věta výroku už nic nežádá, takže tlačítko
+           nemusí křičet — stojí prostě tam, kde sazba doměla. -->
+      <div class="creed__foot">
+        <div class="actions" data-reveal>
+          <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+          <a class="link-arrow" href="kraniosakralni-terapie.html">Jak to funguje
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 05 CO VÁS ČEKÁ ═════════════════════════════════════════
+       Emoce: „Nemám se čeho bát.“  Práce: odbourat strach z neznáma
+
+       Dřív tu stál ciferník: kolo, po kterém jezdil ukazatel,
+       tlačítko „Přehrát sezení“ a posuvník na sedmdesát pět
+       minut. Byly s tím dva problémy.
+
+       Za prvé se rozjížděl SÁM. Kdo přišel na sekci, viděl
+       pohyb, který si nevyžádal, a než stačil přečíst první
+       odstavec, text se pod rukama přepnul. Automat, který
+       předběhne čtenáře, není ukázka — je to rušení.
+
+       Za druhé se dal chytit KDEKOLI. Sedmdesát pět poloh na
+       kruhu vypadá jako přesnost, ale odpovědi jsou tři.
+       Kdo hledá, co ho čeká, potřebuje tři odpovědi, ne
+       sedmdesát pět mezistavů.
+
+       Teď je to totéž kolo jako v kapitole Průběh — týž
+       renderer, tři výseče, tři panely. Nic se nehýbe samo,
+       vybírá se kliknutím do výseče, do řádku legendy, šipkami
+       pod kolem nebo klávesnicí. Kolem se dá otáčet tažením,
+       ale vybrat jde jen jedna ze tří částí. -->
+  <section class="section" aria-labelledby="cekavas">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Průběh sezení</p>
+          <h2 id="cekavas" data-reveal>
+            <span class="line-mask"><span>Co se se mnou</span></span>
+            <span class="line-mask"><span>bude dít?</span></span>
+          </h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="hint" data-reveal><span class="hint__dot" aria-hidden="true"></span> Vyberte část kola — nebo jím otočte tažením</p>
+        </div>
+      </div>
+
+      <div class="wheel" data-wheel data-reveal>
+
+        <!-- ---------- prostorový graf ---------- -->
+        <div class="wheel__stage">
+          <div class="wheel__disc" data-wheel-disc>
+            <canvas data-wheel-canvas aria-hidden="true"></canvas>
+            <div class="wheel__core" aria-hidden="true">
+              <span class="wheel__core-num" data-wheel-num>50</span>
+              <span class="wheel__core-unit mono">minut</span>
+              <span class="wheel__core-span mono" data-wheel-span>15 → 65</span>
+            </div>
+          </div>
+
+          <!-- Ovládání POD kolem. Šipky a odečet „02 / 03“ jsou
+               tu proto, aby bylo na první pohled vidět, že se
+               přepíná — a kolik částí vůbec je. Bez nich vypadá
+               kolo jako obrázek. -->
+          <div class="wheel__nav">
+            <button class="wheel__btn" type="button" data-wheel-step="-1" aria-label="Předchozí část sezení">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 10H4m4-4-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p class="wheel__count mono" data-wheel-count aria-hidden="true"><span>02</span> / 03</p>
+            <button class="wheel__btn" type="button" data-wheel-step="1" aria-label="Další část sezení">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <p class="wheel__scale mono" aria-hidden="true">
+            <span>0</span><span class="wheel__scale-line"></span><span>75 min</span>
+          </p>
+        </div>
+
+        <!-- ---------- ovládání a text ---------- -->
+        <div class="wheel__panel">
+
+          <div class="wheel__legend" role="tablist" aria-label="Části sezení">
+            <button class="wseg" type="button" role="tab" id="ktab-1"
+                    aria-controls="kpan-1" aria-selected="false" tabindex="-1"
+                    data-wheel-tab="0" style="--seg: var(--seg-1)">
+              <span class="wseg__mark" aria-hidden="true"></span>
+              <span class="wseg__name">Úvodní rozhovor</span>
+              <span class="wseg__min mono">15&nbsp;min</span>
+              <span class="wseg__meter" aria-hidden="true"><i style="--w: 20%"></i></span>
+            </button>
+            <button class="wseg" type="button" role="tab" id="ktab-2"
+                    aria-controls="kpan-2" aria-selected="true"
+                    data-wheel-tab="1" style="--seg: var(--seg-2)">
+              <span class="wseg__mark" aria-hidden="true"></span>
+              <span class="wseg__name">Ošetření na&nbsp;lehátku</span>
+              <span class="wseg__min mono">50&nbsp;min</span>
+              <span class="wseg__meter" aria-hidden="true"><i style="--w: 66.7%"></i></span>
+            </button>
+            <button class="wseg" type="button" role="tab" id="ktab-3"
+                    aria-controls="kpan-3" aria-selected="false" tabindex="-1"
+                    data-wheel-tab="2" style="--seg: var(--seg-3)">
+              <span class="wseg__mark" aria-hidden="true"></span>
+              <span class="wseg__name">Doznění a&nbsp;rozloučení</span>
+              <span class="wseg__min mono">10&nbsp;min</span>
+              <span class="wseg__meter" aria-hidden="true"><i style="--w: 13.3%"></i></span>
+            </button>
+          </div>
+
+          <!-- ---------- část 1 ---------- -->
+          <div class="wpan" id="kpan-1" role="tabpanel" aria-labelledby="ktab-1"
+               data-wheel-panel="0" style="--seg: var(--seg-1)">
+            <p class="wpan__range mono">0&nbsp;→&nbsp;15 min · pětina sezení</p>
+            <h3 class="wpan__title">Úvodní rozhovor</h3>
+            <p class="wpan__lede">Sedneme si. Beze spěchu si řekneme, s&nbsp;čím přicházíte
+              a&nbsp;co budu dělat. Nic se nesvléká a&nbsp;nevyplňují se žádné formuláře.</p>
+
+            <dl class="wcols">
+              <div class="wcol">
+                <dt>Co dělám já</dt>
+                <dd>Ptám se, s&nbsp;čím přicházíte a&nbsp;co se dělo od&nbsp;minula. Vysvětlím, čeho se dotknu.</dd>
+              </div>
+              <div class="wcol">
+                <dt>Co děláte vy</dt>
+                <dd>Řeknete, co vás trápí — klidně i&nbsp;to, co zní hloupě. Můžete říct, kam se dotýkat nechcete.</dd>
+              </div>
+              <div class="wcol">
+                <dt>Co může dělat tělo</dt>
+                <dd>Ještě je v&nbsp;pohotovosti. To je v&nbsp;pořádku — teprve se rozhoduje, jestli je tu bezpečno.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- ---------- část 2 ---------- -->
+          <div class="wpan" id="kpan-2" role="tabpanel" aria-labelledby="ktab-2"
+               data-wheel-panel="1" style="--seg: var(--seg-2)">
+            <p class="wpan__range mono">15&nbsp;→&nbsp;65 min · dvě třetiny sezení</p>
+            <h3 class="wpan__title">Ošetření na&nbsp;lehátku</h3>
+            <p class="wpan__lede">Ležíte oblečení a&nbsp;přikrytí. Ruce spočinou a&nbsp;čekají —
+              nejčastěji na&nbsp;kosti křížové nebo na&nbsp;hlavě. Váha doteku je asi pět gramů.</p>
+
+            <dl class="wcols">
+              <div class="wcol">
+                <dt>Co dělám já</dt>
+                <dd>Nic netlačím. Jen sleduji, kde se rytmus prodlužuje — a&nbsp;když přijde pauza, nechám ji být.</dd>
+              </div>
+              <div class="wcol">
+                <dt>Co děláte vy</dt>
+                <dd>Nemusíte nic říkat ani dělat. Můžete usnout. Kdykoli můžete říct, ať přestanu.</dd>
+              </div>
+              <div class="wcol">
+                <dt>Co může dělat tělo</dt>
+                <dd>Napětí, které drželo, začne povolovat — někdy po&nbsp;vrstvách. Může nastat still point.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- ---------- část 3 ---------- -->
+          <div class="wpan" id="kpan-3" role="tabpanel" aria-labelledby="ktab-3"
+               data-wheel-panel="2" style="--seg: var(--seg-3)">
+            <p class="wpan__range mono">65&nbsp;→&nbsp;75 min · závěr</p>
+            <h3 class="wpan__title">Doznění a&nbsp;rozloučení</h3>
+            <p class="wpan__lede">Nikdo vás nikam nežene. Vrátíte se vlastním tempem
+              a&nbsp;pak si řekneme, co se dělo a&nbsp;co dává smysl dál.</p>
+
+            <dl class="wcols">
+              <div class="wcol">
+                <dt>Co dělám já</dt>
+                <dd>Nechávám vám čas, nikdo vás nebudí. Pak si řekneme, co dává smysl dál.</dd>
+              </div>
+              <div class="wcol">
+                <dt>Co děláte vy</dt>
+                <dd>Ležíte, dokud potřebujete, a&nbsp;vstáváte pomalu. Sdílíte, co jste vnímali — nebo mlčíte.</dd>
+              </div>
+              <div class="wcol">
+                <dt>Co může dělat tělo</dt>
+                <dd>Ukládá si, co se stalo. Bývá těžké a&nbsp;teplé a&nbsp;doznívá ještě několik dní.</dd>
+              </div>
+            </dl>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---------- co platí po celou dobu ---------- -->
+      <div class="wheel__foot">
+        <ul class="wheel__assure" data-reveal>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Zůstáváte oblečení. Není to masáž.</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Nemusíte nic říkat.</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Můžete usnout — je to v&nbsp;pořádku.</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Kdykoli můžete říct, ať přestanu.</li>
+        </ul>
+        <div class="wheel__cta">
+          <p class="wheel__claim" data-reveal>Tempo určuje tělo, ne&nbsp;hodiny.</p>
+          <div class="actions" data-reveal>
+            <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Objednat se na první sezení</span></a>
+            <a class="link-arrow" href="prubeh-a-cenik.html">Celý průběh a&nbsp;ceník
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 06 KDO SE VÁS DOTÝKÁ ═══════════════════════════════════
+       Emoce: „Tomuhle člověku věřím.“
+       Jediná písková plocha na webu — tady je na něm člověk. -->
+  <section class="section sand-in" aria-labelledby="katka">
+    <div class="wrap wrap--rail">
+      <div class="grid">
+        <div class="c1-5" data-reveal>
+          <figure class="photo photo--4x5">
+            <!-- FOTOGRAFIE 01 — portrét 4:5 → assets/katka-portret.jpg. Brief v README.md. -->
+            <img src="assets/katka-portret.jpg"
+                 alt="Kateřina Jüttnerová sedí v zahradě mezi kvetoucími keři"
+                 width="1200" height="1500" loading="lazy" decoding="async">
+          </figure>
+        </div>
+
+        <div class="c6-12">
+          <p class="eyebrow mono" data-reveal>Kdo se vás dotýká</p>
+          <h2 id="katka" data-reveal>
+            <span class="line-mask"><span>Změna nemá být</span></span>
+            <span class="line-mask"><span>tlačena — má</span></span>
+            <span class="line-mask"><span><em class="em">vzniknout zevnitř</em>.</span></span>
+          </h2>
+          <p style="margin-top: var(--s-6)" data-reveal>
+            Zdravotnické zázemí, certifikované výcviky a&nbsp;čas, který během ošetření
+            nikam nespěchá. Vycházím z&nbsp;dlouholeté praxe zdravotní sestry, dvouletého
+            výcviku biodynamické kraniosakrální terapie a&nbsp;tříletého výcviku
+            Somatic Experiencing.
+          </p>
+          <p style="margin-top: var(--s-4)" data-reveal>
+            Ne technika navíc, ale jedny ruce, které vědí, co dělají.
+          </p>
+
+          <dl class="stats" style="margin-top: var(--s-8)" data-reveal>
+            <div><dt class="num">5</dt><dd>let výcviků</dd></div>
+            <div><dt class="num">75</dt><dd>minut jedno sezení</dd></div>
+            <div><dt class="num">2</dt><dd>metody, jeden přístup</dd></div>
+          </dl>
+
+          <div class="actions" style="margin-top: var(--s-7)" data-reveal>
+            <a class="btn btn--primary" href="mailto:katkajuttnerova@seznam.cz?subject=Dotaz%20z%20webu"><span>Napsat Katce</span></a>
+            <a class="link-arrow" href="o-mne.html">Celá cesta k&nbsp;této práci
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+  ══ 07 SLOVA KLIENTŮ ══════════════════════════════════════════════
+  SEKCE JE ZÁMĚRNĚ VYPNUTÁ.
+
+  PLACEHOLDER: nahradit skutečnými referencemi se souhlasem klientů.
+  Reference z předchozí verze webu byly vymyšlené ukázky a nesmí být
+  prezentovány jako pravé. Návod na zapnutí je v README.md, kapitola
+  „Reference“. Kostra sekce je připravená níže — stačí odkomentovat
+  a vyplnit skutečné citace.
+
+  <section class="section" aria-labelledby="reference" data-voices>
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono">Slova klientů</p>
+          <h2 id="reference">Nejste první.</h2>
+        </div>
+      </div>
+      <div class="voices__track" data-voices-track>
+        <figure class="voice" data-voice>
+          <blockquote class="voice__text">„…“</blockquote>
+          <figcaption class="voice__by">Jméno · téma</figcaption>
+        </figure>
+      </div>
+      <div class="voices__nav">
+        <button class="voices__btn" data-voices-prev aria-label="Předchozí reference">…</button>
+        <button class="voices__btn" data-voices-next aria-label="Další reference">…</button>
+        <span class="mono" data-voices-counter>01 / 01</span>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- ══ 08 CENÍK ═══════════════════════════════════════════════
+       Emoce: „Vím, do čeho jdu.“  Práce: transparentnost -->
+  <section class="section" aria-labelledby="cenik">
+    <div class="wrap wrap--rail">
+      <div class="grid">
+        <div class="c1-6">
+          <p class="eyebrow mono" data-reveal>Ceník</p>
+          <h2 id="cenik" data-reveal>
+            <span class="line-mask"><span>Transparentně,</span></span>
+            <span class="line-mask"><span>korunu po koruně.</span></span>
+          </h2>
+          <p style="margin-top: var(--s-6)" data-reveal>
+            Platíte osobně po sezení, hotově nebo převodem. Termín přesuneme zdarma,
+            když dáte vědět alespoň 24 hodin předem. První návštěva vás k&nbsp;ničemu nezavazuje.
+          </p>
+          <div class="actions" style="margin-top: var(--s-7)" data-reveal>
+            <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Vybrat termín</span></a>
+          </div>
+        </div>
+
+        <div class="c8-12" data-reveal>
+          <div class="prices">
+            <div class="price">
+              <div class="price__name">Jedno ošetření <span class="price__save">75 minut</span></div>
+              <div class="price__value">1&nbsp;500&nbsp;Kč</div>
+            </div>
+            <div class="price">
+              <div class="price__name">Balíček 3 ošetření <span class="price__save">ušetříte 500&nbsp;Kč</span></div>
+              <div class="price__value">4&nbsp;000&nbsp;Kč</div>
+            </div>
+            <div class="price">
+              <div class="price__name">Balíček 5 ošetření <span class="price__save">ušetříte 1&nbsp;000&nbsp;Kč</span></div>
+              <div class="price__value">6&nbsp;500&nbsp;Kč</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 09 ČASTÉ OTÁZKY ════════════════════════════════════════
+       Emoce: „Poslední pochybnost je pryč.“ -->
+  <section class="section tide-in" aria-labelledby="faq">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Časté otázky</p>
+          <h2 id="faq" data-reveal>
+            <span class="line-mask"><span>Na co se ptáte</span></span>
+            <span class="line-mask"><span>před první návštěvou.</span></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="faq" data-reveal>
+        <details class="faq__item">
+          <summary class="faq__q">Je to masáž? Musím se svlékat?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Ne. Kraniosakrální terapie není masáž — pracuje s&nbsp;velmi jemným, klidným dotekem,
+              často jen o&nbsp;váze mince. Celé ošetření probíhá v&nbsp;pohodlném oblečení, vleže na lehátku.
+              Stačí přijít v&nbsp;něčem, v&nbsp;čem se vám dobře leží.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Kolik sezení budu potřebovat?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Je to individuální. U&nbsp;akutních obtíží často stačí 1–3 sezení, u&nbsp;dlouhodobých témat
+              (chronické bolesti, následky stresu) se účinek prohlubuje postupně — proto nabízím
+              zvýhodněné balíčky. Po prvním sezení si společně řekneme, co dává smysl dál.
+              První návštěva vás k&nbsp;ničemu nezavazuje.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Kdy terapie vhodná není?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Ošetření odkládáme při akutním horečnatém onemocnění, čerstvém úrazu hlavy či páteře
+              a&nbsp;bezprostředně po operaci. Pokud si nejste jistí, napište mi předem — společně to
+              posoudíme, případně doporučím nejdřív návštěvu lékaře.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Je terapie vhodná pro děti a&nbsp;těhotné?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Ano — právě díky své jemnosti je kraniosakrální terapie vhodná pro miminka, děti
+              i&nbsp;těhotné ženy. U&nbsp;těhotenství a&nbsp;u&nbsp;miminek se vždy nejprve krátce domluvíme na vaší
+              konkrétní situaci.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="actions" style="margin-top: var(--s-6)" data-reveal>
+        <a class="link-arrow" href="prubeh-a-cenik.html#faq">Všech sedm otázek
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 10 REZERVACE ═══════════════════════════════════════════
+       Emoce: „Jdu do toho.“  Práce: konverze -->
+  <section class="section" id="rezervace" aria-labelledby="rezervace-t">
+    <div class="wrap wrap--rail">
+      <div class="cta-block" style="margin-bottom: clamp(40px, 6vh, 72px)">
+        <div>
+          <p class="eyebrow mono" data-reveal>Rezervace</p>
+          <h2 class="cta-block__title" id="rezervace-t" data-reveal>
+            <span class="line-mask"><span>Ozvěte se. Odpovím</span></span>
+            <span class="line-mask"><span>i&nbsp;na to, u&nbsp;čeho ještě</span></span>
+            <span class="line-mask"><span>nevíte, jestli se ptát.</span></span>
+          </h2>
+        </div>
+        <div data-reveal>
+          <p class="small" style="color: var(--ink-2)">
+            Nejste si jistí, jestli je to pro vás? Napište mi pár řádků o&nbsp;své situaci —
+            odpovím ještě před objednáním.
+          </p>
+        </div>
+      </div>
+
+      <div class="ways" data-reveal>
+        <div class="way way--primary">
+          <svg class="way__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h3.4l1.5 4-2.1 1.6a12 12 0 0 0 7.6 7.6L16 15l4 1.5V20a1.5 1.5 0 0 1-1.7 1.5A17 17 0 0 1 2.5 5.7 1.5 1.5 0 0 1 4 4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <h3 class="way__title">Zavolat</h3>
+          <p>Nejrychlejší cesta. Nejlépe všední den mezi 9. a&nbsp;18.&nbsp;hodinou — když se neozvu, jsem u&nbsp;klienta a&nbsp;zavolám zpět.</p>
+          <a class="way__value" href="tel:+420776021297">+420&nbsp;776&nbsp;021&nbsp;297</a>
+          <a class="btn btn--primary btn--sm" href="tel:+420776021297"><span>Zavolat</span></a>
+        </div>
+
+        <div class="way">
+          <svg class="way__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <h3 class="way__title">Napsat e-mail</h3>
+          <p>Když chcete nejdřív popsat situaci nebo se na něco zeptat. Odpovím obvykle do dvou dnů.</p>
+          <a class="way__value" href="mailto:katkajuttnerova@seznam.cz">katkajuttnerova@seznam.cz</a>
+          <a class="btn btn--ghost btn--sm" href="mailto:katkajuttnerova@seznam.cz?subject=Objedn%C3%A1n%C3%AD%20term%C3%ADnu&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1da%20bych%20se%20objednala%20na%20o%C5%A1et%C5%99en%C3%AD.%0A%0AS%20%C4%8D%C3%ADm%20p%C5%99ich%C3%A1z%C3%ADm%3A%0A%0AVyhovoval%20by%20mi%20term%C3%ADn%3A%0A%0AD%C4%9Bkuji%2C%0A"><span>Napsat e-mail</span></a>
+        </div>
+
+        <div class="way">
+          <svg class="way__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <h3 class="way__title">Online rezervace</h3>
+          <p>Vyberete si volný termín sami, bez telefonování.</p>
+          <span class="todo">PLACEHOLDER: Reservio / Calendly embed</span>
+          <p class="small" style="color: var(--ink-2)">Než bude spuštěná, použijte prosím telefon nebo e-mail.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" data-breath-mode="exhale">
+  <div class="wrap wrap--rail">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__title">Kateřina Jüttnerová</p>
+        <p class="small" style="color: var(--ink-2); max-width: 34ch">
+          Biodynamická kraniosakrální terapie a&nbsp;Somatic Experiencing.
+          Zdravotní sestra, pět let výcviků.
+        </p>
+      </div>
+
+      <div>
+        <p class="footer__title">Kontakt</p>
+        <address class="footer__list small">
+          <a href="tel:+420776021297">+420&nbsp;776&nbsp;021&nbsp;297</a>
+          <a href="mailto:katkajuttnerova@seznam.cz">katkajuttnerova@seznam.cz</a>
+          <span style="color: var(--ink-2)">Osobně, po&nbsp;domluvě</span>
+          <span>Prostor na&nbsp;čas</span>
+          <span>Seifertova 22, 638&nbsp;00 Brno-sever-Lesná</span>
+        </address>
+      </div>
+
+      <div>
+        <p class="footer__title">Stránky</p>
+        <nav class="footer__list small" aria-label="Patička">
+          <a href="index.html">Úvod</a>
+          <a href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+          <a href="s-cim-pomaham.html">S&nbsp;čím pomáhám</a>
+          <a href="o-mne.html">O&nbsp;mně</a>
+          <a href="prubeh-a-cenik.html">Průběh a&nbsp;ceník</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <p class="footer__disclaimer">
+        Kraniosakrální terapie je doplňková metoda. Podporuje regeneraci a&nbsp;seberegulaci těla,
+        ale nenahrazuje lékařskou péči ani stanovenou léčbu.
+      </p>
+      <p class="mono">© 2026 Kateřina Jüttnerová</p>
+    </div>
+  </div>
+</footer>
+
+<nav class="bottombar" aria-label="Rychlý kontakt">
+  <a class="bottombar__btn bottombar__btn--primary" href="tel:+420776021297">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h3.4l1.5 4-2.1 1.6a12 12 0 0 0 7.6 7.6L16 15l4 1.5V20a1.5 1.5 0 0 1-1.7 1.5A17 17 0 0 1 2.5 5.7 1.5 1.5 0 0 1 4 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    Zavolat
+  </a>
+  <a class="bottombar__btn" href="mailto:katkajuttnerova@seznam.cz">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    Napsat
+  </a>
+</nav>
+
+<script defer src="js/core.js"></script>
+<script defer src="vendor/lenis.min.js"></script>
+<script defer src="js/breath-line.js"></script>
+
+<script>/* POSTAVA V HERO SEKCI JDE PRVNÍ.
+   Byla dřív ve frontě níž a spouštěla se až po dvou snímcích
+   spolu se zbytkem modulů — první vteřinu tak v hero sekci
+   svítilo prázdné pole a teprve pak se objevilo tělo.
+   Teď má vlastní frontu, kterou core.js odbaví okamžitě
+   (initEagerScripts); v hlavičce na ni ukazuje preload, takže
+   soubory jsou v té chvíli většinou už stažené. Skripty se
+   přidávají dynamicky, takže pořád neblokují vykreslení textu. */
+window.KJ_EAGER = [
+  "js/webgl/anatomy-mesh.js",
+  "js/webgl/anatomy-3d.js"
+];
+
+/* Ostatní moduly stránky se načtou až po prvním vykreslení
+   (core.js → initLazyScripts). Přes <script defer> by běžely
+   ještě před DOMContentLoaded a držely hlavní vlákno — text by
+   na slabším stroji čekal na dokreslení scény. Pořadí zůstává
+   zachované. */
+window.KJ_LAZY = [
+  "js/motion.js",
+  "js/modules/help-index.js",
+  "js/modules/say.js",
+  "js/modules/wheel-core.js",
+  "js/modules/session-wheel.js",
+  "js/modules/voices.js"
+];</script>
+</body>
+</html>

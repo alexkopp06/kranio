@@ -1,0 +1,519 @@
+/* ============================================================
+   _l4 — cesta, osa výcviků, diptych (o-mne.html)
+   Dočasný pracovní soubor redesignu — na konci se vrátí
+   zpět do css/modules.css na své původní místo.
+   ============================================================ */
+
+/* ============================================================
+   CESTA K TÉTO PRÁCI — deck tří kapitol
+
+   Dřív: fotka vlevo, text vpravo, kompozice od začátku do konce
+   stejná. Teď: jedna karta, kterou návštěvník otočí, a s ní se
+   mění celý obraz — portrét vlevo, kruhy výcviků vpravo, spojené
+   nádoby přes celou šířku.
+
+   Bez skriptu (a v tisku) leží všechny tři kapitoly pod sebou.
+   Deck se zapíná teprve atributem, který dopíše deck.js.
+   ============================================================ */
+.deck { position: relative; }
+
+/* ---------- lišta kroků ------------------------------------- */
+.deck__bar {
+  display: grid;
+  gap: var(--s-5) var(--gutter);
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  margin-bottom: clamp(28px, 4vh, 48px);
+}
+.deck__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gutter);
+  padding-top: var(--s-4);
+}
+.deck__steps-rail {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--line);
+}
+.deck__steps-fill {
+  display: block;
+  height: 100%;
+  background: var(--tide);
+  transform: scaleX(.3333);
+  transform-origin: left;
+  transition: transform calc(var(--dur-long) * var(--motion)) var(--ease-out);
+}
+.deck__step {
+  display: grid;
+  gap: 2px;
+  justify-items: start;
+  text-align: left;
+  padding: var(--s-3) var(--s-3) var(--s-3) 0;
+  min-height: 44px;
+  background: none;
+  border: 0;
+  color: var(--ink-3);
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.deck__step:hover { color: var(--ink); }
+.deck__step[aria-pressed="true"] { color: var(--ink); }
+.deck__step-no { font-size: var(--fs-label); letter-spacing: var(--tr-label); color: var(--ink-meta); }
+.deck__step[aria-pressed="true"] .deck__step-no { color: var(--tide); }
+.deck__step-name { font-size: 1rem; line-height: 1.25; }
+.deck__hint { justify-self: end; padding-bottom: var(--s-3); }
+
+/* ---------- stoh karet --------------------------------------
+   Dokud deck.js nedopíše data-ready, karty prostě stojí pod
+   sebou. Teprve pak se poskládají na sebe.                     */
+.deck__stack { position: relative; display: grid; gap: var(--s-6); }
+.deck[data-ready="true"] .deck__stack {
+  display: block;
+  height: auto;
+  transition: height calc(var(--dur-long) * var(--motion)) var(--ease-out);
+}
+.deck__stack:focus-visible { outline: var(--focus-ring); outline-offset: 8px; }
+.deck__stack[data-dragging="true"] { cursor: grabbing; }
+
+.deck__card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(28px, 3.4vw, 56px);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  box-shadow: var(--shadow-float);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(28px, 3vw, 56px);
+  align-items: start;
+}
+.deck[data-ready="true"] .deck__card {
+  position: absolute;
+  inset: 0 0 auto 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(28px) scale(.985);
+  transition: opacity calc(var(--dur-ui) * var(--motion)) var(--ease-out),
+              transform calc(var(--dur-long) * var(--motion)) var(--ease-out);
+}
+.deck[data-ready="true"] .deck__card[data-side="before"] { transform: translateY(-28px) scale(.985); }
+.deck[data-ready="true"] .deck__card.is-active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+/* Duchové číslo kapitoly. Není to dekorace — je to jediné místo,
+   kde je na první pohled vidět, kolikátá karta je na řadě.      */
+.deck__ghost {
+  position: absolute;
+  z-index: -1;
+  top: clamp(-36px, -2.2vw, -14px);
+  right: clamp(-8px, 1vw, 24px);
+  font-size: clamp(120px, 17vw, 240px);
+  line-height: .8;
+  color: var(--line-strong);
+  opacity: .8;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- rozvržení tří karet ------------------------------ */
+.deck__card--a .deck__scene { grid-column: 1 / 5; }
+.deck__card--a .deck__body  { grid-column: 6 / -1; }
+
+.deck__card--b .deck__body  { grid-column: 1 / 8; }
+/* U druhé karty by velké číslo dosedlo na kruhy výcviků. */
+.deck__card--b .deck__ghost { font-size: clamp(96px, 12vw, 170px); }
+.deck__card--b .deck__scene { grid-column: 9 / -1; align-self: center; }
+
+.deck__card--c .deck__scene { grid-column: 1 / -1; }
+.deck__card--c .deck__body  { grid-column: 1 / 10; }
+/* U třetí karty leží nahoře pruh se scénou, číslo tedy dolů. */
+.deck__card--c .deck__ghost { top: auto; bottom: clamp(-34px, -2.2vw, -14px); }
+
+/* ---------- text kapitoly ------------------------------------ */
+.deck__dek {
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.deck__name {
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: var(--tr-h3);
+  color: var(--ink);
+  margin: var(--s-3) 0 var(--s-5);
+}
+.deck__perex {
+  font-size: var(--fs-lede);
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 30ch;
+  margin: 0 0 var(--s-6);
+}
+.deck__text { max-width: var(--measure); }
+.deck__text p { color: var(--ink-2); }
+.deck__text p + p { margin-top: var(--s-4); }
+.deck__text + .deck__text { margin-top: var(--s-5); }
+.deck__quote {
+  margin: var(--s-6) 0;
+  padding-left: var(--s-5);
+  border-left: 2px solid var(--tide);
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+  color: var(--ink);
+}
+.deck__quote p { margin: 0; max-width: none; }
+.deck__card .chips { margin-top: var(--s-6); }
+.deck__close {
+  margin-top: var(--s-6);
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: var(--fs-h4);
+  color: var(--ink);
+}
+
+/* ---------- 01 · portrét ------------------------------------- */
+.deck__scene--portrait {
+  position: relative;
+  perspective: 900px;
+}
+.deck__scene--portrait .photo {
+  position: relative;
+  z-index: 1;
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 420ms var(--ease-out);
+  transform-style: preserve-3d;
+}
+.deck__aura {
+  position: absolute;
+  z-index: 0;
+  inset: -14%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, var(--tide-soft), transparent 66%);
+  opacity: .8;
+  animation: deck-aura var(--breath) var(--ease-in-out) infinite;
+}
+@keyframes deck-aura {
+  0%, 100% { transform: scale(.94); opacity: .55; }
+  50%      { transform: scale(1.04); opacity: .9; }
+}
+
+/* ---------- 02 · pět let ------------------------------------- */
+.deck__scene--years { display: grid; justify-items: center; gap: var(--s-5); }
+.deck__years { width: 100%; max-width: 260px; height: auto; }
+.deck__ring-bg { fill: none; stroke: var(--line); stroke-width: 10; }
+.deck__ring {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dashoffset: 0;
+}
+/* pathLength="100" → délka oblouku se dá psát rovnou v procentech */
+.deck__ring--kst { stroke: var(--tide); stroke-dasharray: 40 100; }
+.deck__ring--se  { stroke: var(--tide); opacity: .45; stroke-dasharray: 60 100; }
+.deck__card.is-active .deck__ring--kst { animation: deck-arc-kst var(--dur-scene) var(--ease-out) both; }
+.deck__card.is-active .deck__ring--se  { animation: deck-arc-se  var(--dur-scene) var(--ease-out) 160ms both; }
+@keyframes deck-arc-kst { from { stroke-dashoffset: 40; } to { stroke-dashoffset: 0; } }
+@keyframes deck-arc-se  { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
+.deck__years-num {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 46px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+.deck__years-cap {
+  fill: var(--ink-3);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  text-anchor: middle;
+}
+.deck__legend { display: flex; flex-wrap: wrap; gap: var(--s-5); justify-content: center; }
+.deck__legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+}
+.deck__key { width: 14px; height: 3px; border-radius: 2px; flex: none; }
+.deck__key--kst { background: var(--tide); }
+.deck__key--se { background: var(--tide); opacity: .45; }
+
+/* ---------- 03 · spojené nádoby ------------------------------ */
+.deck__scene--vessels {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-4);
+  padding: clamp(20px, 3vw, 40px);
+  background: var(--surface-2);
+  border-radius: 4px;
+}
+.deck__vessels { width: 100%; max-width: 460px; height: auto; }
+.deck__scene-cap {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.deck__vessel { fill: none; stroke: var(--line-ui); stroke-width: 1.4; }
+.deck__pipe { fill: none; stroke: var(--line-ui); stroke-width: 1.4; }
+.deck__liquid { fill: var(--tide-soft); }
+/* Hladina se rozhoupe a sama se srovná — jednou za dech. */
+.deck__card.is-active .deck__liquid--a { animation: deck-lvl-a var(--breath) var(--ease-in-out) infinite; }
+.deck__card.is-active .deck__liquid--b { animation: deck-lvl-b var(--breath) var(--ease-in-out) infinite; }
+@keyframes deck-lvl-a {
+  0%   { transform: translateY(46px); }
+  16%  { transform: translateY(74px); }
+  56%  { transform: translateY(46px); }
+  100% { transform: translateY(46px); }
+}
+@keyframes deck-lvl-b {
+  0%   { transform: translateY(46px); }
+  16%  { transform: translateY(18px); }
+  56%  { transform: translateY(46px); }
+  100% { transform: translateY(46px); }
+}
+.deck__vessel-cap {
+  fill: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+/* ---------- spodní lišta ------------------------------------- */
+.deck__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: var(--s-7);
+  flex-wrap: wrap;
+}
+.deck__arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 48px;
+  padding-inline: var(--s-5);
+  border: 1px solid var(--line-ui);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--ink-2);
+  transition: border-color var(--dur-micro) var(--ease-out),
+              color var(--dur-micro) var(--ease-out);
+}
+.deck__arrow:hover { border-color: var(--tide); color: var(--tide); }
+.deck__arrow:disabled { opacity: .62; pointer-events: none; }
+.deck__arrow--next { color: var(--ink); font-weight: 500; }
+.deck__arrow svg { transition: transform var(--dur-ui) var(--ease-out); }
+.deck__arrow--next:hover svg { transform: translateX(4px); }
+.deck__count { color: var(--ink-3); font-size: var(--fs-small); margin: 0; }
+.deck__sign {
+  margin: 0 0 0 auto;
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  color: var(--ink);
+}
+
+/* ---------- užší okna ---------------------------------------- */
+@media (max-width: 980px) {
+  .deck__bar { grid-template-columns: 1fr; }
+  .deck__hint { justify-self: start; padding-bottom: 0; }
+  .deck__card--a .deck__scene,
+  .deck__card--b .deck__scene,
+  .deck__card--c .deck__scene { grid-column: 1 / -1; }
+  .deck__card--a .deck__body,
+  .deck__card--b .deck__body,
+  .deck__card--c .deck__body { grid-column: 1 / -1; }
+  .deck__card--b .deck__scene { order: 2; }
+  .deck__scene--portrait { max-width: 280px; }
+}
+@media (max-width: 620px) {
+  .deck__steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-3); }
+  .deck__step-name { font-size: .875rem; }
+  .deck__ghost { font-size: 96px; top: -14px; right: -4px; }
+  .deck__sign { margin-left: 0; width: 100%; }
+  .deck__arrow--next span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck__aura,
+  .deck__card.is-active .deck__liquid--a,
+  .deck__card.is-active .deck__liquid--b { animation: none; }
+  .deck__liquid--a, .deck__liquid--b { transform: translateY(46px); }
+  .deck__card.is-active .deck__ring--kst,
+  .deck__card.is-active .deck__ring--se { animation: none; }
+}
+
+
+/* Bez skriptu se kapitoly čtou pod sebou — kroky, šipky a počítadlo
+   by nedělaly nic, tak je ani neukazujeme. Podpis zůstává.        */
+.no-js .deck__bar,
+.no-js .deck__arrow,
+.no-js .deck__count { display: none; }
+.no-js .deck__nav { margin-top: var(--s-6); }
+
+/* ============================================================
+   DIPTYCH — dva přístupy zrcadlově kolem jedné osy
+   Symetrie je tady obsah, ne ozdoba: obě metody mají v této
+   práci stejnou váhu. Levá polovina je zarovnaná doleva,
+   pravá doprava, mezi nimi jedna svislá linka s kruhovou
+   mezerou pro „&“. Závěrečné dvě věty stojí na střed pod tím
+   — tam se obě poloviny scházejí.
+   ============================================================ */
+.diptych {
+  /* Mezera mezi diptychem a závěrem; osa jí prochází až na
+     vlasovku závěru, aby se sekce opravdu uzavřela.           */
+  --dip-gap: clamp(36px, 5vh, 60px);
+  display: grid;
+  grid-template-columns: 5fr 2fr 5fr;
+  column-gap: var(--gutter);
+  row-gap: var(--dip-gap);
+}
+
+/* Pevné pásy: glyf 56 px, jméno, mono štítek, text. Obě strany
+   mají stejné, takže účaří sedí i bez subgridu.               */
+.diptych__side {
+  display: grid;
+  grid-template-rows: 56px auto auto 1fr;
+  align-content: start;
+  grid-row: 1;
+}
+.diptych__side--mirror { grid-column: 3; text-align: right; }
+
+.diptych__glyph { display: block; color: var(--tide); line-height: 0; }
+.diptych__svg { display: inline-block; max-width: 100%; height: auto; }
+
+.diptych__name {
+  margin: 0;
+  min-height: 1.2em;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--tr-h3);
+  color: var(--ink);
+}
+.diptych__kicker { margin: var(--s-3) 0 var(--s-4); }
+.diptych__text { margin: 0; max-width: none; color: var(--ink-2); }
+
+/* ---------- svislá osa s kruhovou mezerou -------------------
+   Jedna linka, ne dvě: mezeru vyřízne maska. Dvěma kusy by se
+   nikdy netrefily na pixel a při zoomu by se rozjely. Maska
+   počítá i s přesahem dolů k závěru — proto je střed kruhu
+   posunutý o půl toho přesahu nahoru.                         */
+.diptych__axis {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  width: 44px;
+  justify-self: center;
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+}
+.diptych__axis::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: calc(var(--dip-gap) * -1);
+  width: 1px;
+  background: var(--line-strong);
+  -webkit-mask-image: radial-gradient(circle 22px at 50% calc(50% - var(--dip-gap) / 2), transparent 99%, black 100%);
+          mask-image: radial-gradient(circle 22px at 50% calc(50% - var(--dip-gap) / 2), transparent 99%, black 100%);
+}
+.diptych__amp {
+  position: relative;
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--ink-meta);
+}
+
+/* ---------- závěr na střed ----------------------------------
+   Velká věta a poznámka pod ní. Vycentrované proto, že patří
+   oběma stranám stejně — a protože tím zmizí ta díra vpravo
+   dole, kterou dělal dvousloupcový závěr.                     */
+.diptych__close {
+  grid-column: 1 / -1;
+  max-width: 62ch;
+  margin-inline: auto;
+  padding-top: var(--dip-gap);
+  border-top: 1px solid var(--line-strong);
+  text-align: center;
+}
+.diptych__claim {
+  margin: 0 auto;
+  max-width: 26ch;
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+  letter-spacing: var(--tr-h3);
+  color: var(--ink);
+}
+.diptych__note {
+  margin: var(--s-5) auto 0;
+  max-width: 46ch;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--ink-3);
+}
+
+/* ---------- pohyb: osa se kreslí shora dolů -----------------
+   clip-path, ne scaleY — scaleY by zvětšovalo i kruhovou
+   mezeru a ta by se během kresby posouvala.                   */
+.js-anim .diptych__axis::before {
+  transition: clip-path calc(var(--dur-long) * 1.3 * var(--motion)) var(--ease-out);
+}
+.js-anim [data-reveal]:not(.is-revealed) .diptych__axis::before { clip-path: inset(0 0 100% 0); }
+.js-anim .diptych__amp {
+  transition: opacity calc(var(--dur-reveal) * var(--motion)) var(--ease-out);
+  transition-delay: calc(620ms * var(--motion));
+}
+.js-anim [data-reveal]:not(.is-revealed) .diptych__amp { opacity: 0; }
+
+/* ---------- pod 900 px: zrcadlení pryč ----------------------
+   Na úzké obrazovce je zrcadlení nečitelné — obojí doleva pod
+   sebe, osa se položí a stane se z ní předěl.                 */
+@media (max-width: 899px) {
+  .diptych {
+    grid-template-columns: 1fr;
+    row-gap: clamp(36px, 6vw, 56px);
+  }
+  .diptych__side,
+  .diptych__side--mirror { grid-column: 1; grid-row: auto; text-align: left; }
+
+  .diptych__axis {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    height: 44px;
+    align-self: auto;
+  }
+  .diptych__axis::before {
+    left: 0;
+    top: 50%;
+    bottom: auto;
+    width: 100%;
+    height: 1px;
+    -webkit-mask-image: radial-gradient(circle 22px at 50% 50%, transparent 99%, black 100%);
+            mask-image: radial-gradient(circle 22px at 50% 50%, transparent 99%, black 100%);
+  }
+  .js-anim [data-reveal]:not(.is-revealed) .diptych__axis::before { clip-path: inset(0 100% 0 0); }
+
+  .diptych__close { padding-top: clamp(32px, 6vw, 48px); }
+}

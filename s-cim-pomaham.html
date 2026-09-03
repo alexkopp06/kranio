@@ -1,0 +1,1242 @@
+<!doctype html>
+<html lang="cs" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>S&nbsp;čím pomáhám — migréna, stres, záda, po porodu</title>
+<meta name="description" content="Sedm oblastí, se kterými za mnou lidé chodí nejčastěji: migréna, stres a burnout, menopauza, období po porodu, bolesti zad, úzkost. Mapa těla a sebe-test.">
+<link rel="canonical" href="https://www.example.cz/s-cim-pomaham.html">
+<meta name="theme-color" content="#F2F3EF">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="S čím pomáhám — kraniosakrální terapie">
+<meta property="og:description" content="Konkrétní obtíže místo obecných frází. Sedm oblastí, mapa těla a krátký sebe-test.">
+<meta property="og:image" content="assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="preload" href="fonts/instrumentsans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/modules.css">
+<link rel="stylesheet" href="css/_l1.css">
+<link rel="stylesheet" href="css/_l2.css">
+<link rel="stylesheet" href="css/_l3.css">
+<link rel="stylesheet" href="css/_l4.css">
+<link rel="stylesheet" href="css/_l5.css">
+
+<script>/* Skrytí pro animaci nasazujeme jen tam, kde je čím animovat.
+   Když uživatel nechce pohyb, obsah se nikdy neskryje.
+   Pojistka: kdyby se core.js nenačetl nebo cokoli spadlo,
+   po 2 s masku strhneme natvrdo. Web bez efektu je pořád web,
+   web bez textu není nic. core.js pojistku převezme. */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  document.documentElement.classList.add("js-anim");
+  window.__kjRevealGuard=setTimeout(function(){document.documentElement.classList.remove("js-anim")},2000);
+}</script>
+
+<script>/* Proklik z úvodní stránky (#oblast-04) musí přistát rovnou
+   ve své kapitole. Bez tohohle by se na okamžik ukázala oblast 01
+   a teprve pak přepnula — návštěvník by viděl záblesk cizího textu.
+   Atribut smí existovat jen do chvíle, než ho převezme atlas.js.
+   Pojistka: kdyby modul nedorazil, po 2,5 s ho strhneme a všech
+   sedm kapitol zůstane čitelných pod sebou. Text je vždycky
+   důležitější než přepínač. */
+if (/^#oblast-0[1-7]$/.test(location.hash)) {
+  document.documentElement.setAttribute("data-open", location.hash.slice(1));
+  window.__kjAtlasGuard = setTimeout(function () {
+    document.documentElement.removeAttribute("data-open");
+  }, 2500);
+}</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Úvod", "item": "https://www.example.cz/" },
+    { "@type": "ListItem", "position": 2, "name": "S čím pomáhám", "item": "https://www.example.cz/s-cim-pomaham.html" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<div class="grain" aria-hidden="true"></div>
+<canvas class="breathline" data-breathline aria-hidden="true"></canvas>
+
+<header class="nav" data-nav>
+  <div class="wrap nav__inner">
+    <a class="nav__brand" href="index.html">Katka Jüttnerová</a>
+    <nav class="nav__links" aria-label="Hlavní navigace">
+      <a class="nav__link" href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+      <a class="nav__link" href="s-cim-pomaham.html" aria-current="page">S&nbsp;čím pomáhám</a>
+      <a class="nav__link" href="o-mne.html">O&nbsp;mně</a>
+      <a class="nav__link" href="prubeh-a-cenik.html">Průběh a&nbsp;ceník</a>
+    </nav>
+    <a class="nav__tel" href="tel:+420776021297">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h2.2l1 2.6L4.8 6.4a8 8 0 0 0 4.8 4.8l1.3-1.4 2.6 1V13a1 1 0 0 1-1.1 1A11 11 0 0 1 2 3.6 1 1 0 0 1 3 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      <span class="mono mono--plain">+420&nbsp;776&nbsp;021&nbsp;297</span>
+    </a>
+    <a class="btn btn--primary btn--sm nav__cta" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+    <button class="nav__burger" data-burger aria-expanded="false" aria-controls="menu" aria-label="Otevřít menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="8" width="18" height="1.5" fill="currentColor"/>
+        <rect x="3" y="15" width="18" height="1.5" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-menu aria-hidden="true">
+  <div class="wrap">
+    <nav class="menu__list" aria-label="Hlavní navigace, mobilní">
+      <a class="menu__link" href="index.html">Úvod</a>
+      <a class="menu__link" href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+      <a class="menu__link" href="s-cim-pomaham.html" aria-current="page">S&nbsp;čím pomáhám</a>
+      <a class="menu__link" href="o-mne.html">O&nbsp;mně</a>
+      <a class="menu__link" href="prubeh-a-cenik.html">Průběh a&nbsp;ceník</a>
+    </nav>
+    <div class="menu__meta">
+      <a class="mono mono--plain" href="tel:+420776021297">+420&nbsp;776&nbsp;021&nbsp;297</a>
+      <a class="mono mono--plain" href="mailto:katkajuttnerova@seznam.cz">katkajuttnerova@seznam.cz</a>
+    </div>
+  </div>
+</div>
+
+<main id="obsah">
+
+  <!-- ══ HERO — cena a CTA hned, tohle je nejnavštěvovanější stránka ══ -->
+  <section class="section" style="padding-top: clamp(120px, 16vh, 190px); padding-bottom: clamp(48px, 7vh, 96px)">
+    <div class="wrap wrap--rail">
+      <div class="grid">
+        <div class="c1-7">
+          <p class="eyebrow mono" data-reveal>Indikace</p>
+          <h1 data-reveal>
+            <span class="line-mask"><span>S&nbsp;čím</span></span>
+            <span class="line-mask"><span>pomáhám.</span></span>
+          </h1>
+          <p class="lede" style="margin-top: var(--s-6)" data-reveal data-reveal-delay="120">
+            Konkrétní obtíže místo obecných frází. Napětí, které tělo drží — a&nbsp;jemný dotek,
+            který ho pomáhá rozvázat. Níže najdete témata, se kterými za mnou lidé chodí
+            nejčastěji.
+          </p>
+        </div>
+
+        <div class="c9-12" style="align-self: end" data-reveal data-reveal-delay="180">
+          <div class="readout" style="margin-bottom: var(--s-5)">
+            <span class="readout__value">1&nbsp;500&nbsp;Kč</span>
+            <span class="readout__unit">75&nbsp;min · v&nbsp;oblečení</span>
+          </div>
+          <a class="btn btn--primary btn--lg" href="prubeh-a-cenik.html#objednani" style="width: 100%"><span>Rezervovat termín</span></a>
+          <p class="small" style="color: var(--ink-2); margin-top: var(--s-4)">
+            Nejste si jistí? <a class="link" href="#sebetest">Projděte si sebe-test</a> —
+            trvá minutu a&nbsp;nikam se neodesílá.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SEDM OBLASTÍ ══════════════════════════════════════════ -->
+  <section class="section tide-in" id="oblasti" aria-labelledby="oblasti-t">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>S&nbsp;čím za mnou chodíte</p>
+          <h2 id="oblasti-t" data-reveal>
+            <span class="line-mask"><span>Sedm oblastí,</span></span>
+            <span class="line-mask"><span><em class="em">jeden přístup</em>.</span></span>
+          </h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="hint" data-reveal><span class="hint__dot" aria-hidden="true"></span> Vyberte oblast — otevře se vedle</p>
+        </div>
+      </div>
+
+      <div class="atlas" data-atlas style="--area: var(--tide)" data-reveal>
+
+        <!-- Geometrie postavy je v dokumentu JEDNOU. Kapitoly i velká
+             mapa těla si ji půjčují přes <use>. Do stínového stromu
+             <use> nedosáhne žádný selektor, ale vlastní vlastnosti se
+             dědí — proto si výplň, barvu tahu, jeho sílu i viditelnost
+             vodítek volá ten, kdo siluetu zrovna kreslí.
+             ViewBox 0 0 240 520 je závazný.                          -->
+        <svg class="atlas__defs" viewBox="0 0 240 520" width="0" height="0" aria-hidden="true" focusable="false">
+          <symbol id="kj-figure" viewBox="0 0 240 520">
+            <path style="fill: var(--kj-fill, var(--surface)); stroke: var(--kj-line, var(--line-strong)); stroke-width: var(--kj-weight, 1.2); vector-effect: non-scaling-stroke"
+              d="M120 17C133 17 142 29 142 45C142 60 138 70 131 76C129 80 128 85 128 90C128 96 141 100 150 104C158 107 164 107 165 116C166 128 161 138 160 150C163 166 164 184 159 203C156 219 162 238 165 256C166 266 166 274 164 282C162 308 157 340 154 368C155 388 154 400 153 416C151 446 146 474 145 492C145 502 141 507 136 507C131 507 127 502 127 492C127 470 128 448 128 428C128 404 126 378 125 356C124 328 123 300 123 280C123 276 117 276 117 280C117 300 116 328 115 356C114 378 112 404 112 428C112 448 113 470 113 492C113 502 109 507 104 507C99 507 95 502 95 492C94 474 89 446 87 416C86 400 85 388 86 368C83 340 78 308 76 282C74 274 74 266 75 256C78 238 84 219 81 203C76 184 77 166 80 150C79 138 74 128 75 116C76 107 82 107 90 104C99 100 112 96 112 90C112 85 111 80 109 76C102 70 98 60 98 45C98 29 107 17 120 17ZM173.5 126C173.5 118 178 112 184 112C190 112 194.5 118 194.5 126C195 132 195 137 195 142C194 154 193 165 192.5 175C192 186 191.5 196 191.5 205C192 214 192 222 192 230C191 244 189 256 189 265C188 278 186.5 288 186.5 295C186.5 301 184 304 181 304C178 304 175.5 301 175.5 295C175.5 288 175 278 175 265C175 256 174 244 174 230C174 222 174.5 214 174.5 205C174.5 196 174 186 173.5 175C173 165 173 154 173 142C173 137 173.5 132 173.5 126ZM66.5 126C66.5 118 62 112 56 112C50 112 45.5 118 45.5 126C45 132 45 137 45 142C46 154 47 165 47.5 175C48 186 48.5 196 48.5 205C48 214 48 222 48 230C49 244 51 256 51 265C52 278 53.5 288 53.5 295C53.5 301 56 304 59 304C62 304 64.5 301 64.5 295C64.5 288 65 278 65 265C65 256 66 244 66 230C66 222 65.5 214 65.5 205C65.5 196 66 186 66.5 175C67 165 67 154 67 142C67 137 66.5 132 66.5 126Z"/>
+            <path style="fill: none; stroke: var(--kj-line, var(--line-strong)); stroke-width: 1; opacity: var(--kj-guides, .75); vector-effect: non-scaling-stroke"
+              d="M120 106V264M102 152H138"/>
+          </symbol>
+        </svg>
+
+        <div class="atlas__rail">
+          <div class="atlas__index-wrap">
+            <span class="atlas__marker" data-atlas-marker aria-hidden="true"></span>
+            <div class="atlas__index" role="tablist" aria-label="Sedm oblastí, se kterými pomáhám">
+              <button class="atlas__tab" data-atlas-tab data-atlas-theme="migrena" role="tab" aria-selected="true" aria-controls="oblast-01" type="button">
+                <span class="atlas__tab-no">01</span>
+                <span class="atlas__tab-name">Migréna a&nbsp;bolesti hlavy</span>
+                <svg class="atlas__tab-glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true"><ellipse cx="13" cy="11" rx="7" ry="8" stroke="currentColor" stroke-width="1.3"/><path d="M13 19v5M7 9c2 2 2 4 0 6M19 9c-2 2-2 4 0 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </button>
+              <button class="atlas__tab" data-atlas-tab data-atlas-theme="stres" role="tab" aria-selected="false" aria-controls="oblast-02" type="button">
+                <span class="atlas__tab-no">02</span>
+                <span class="atlas__tab-name">Stres, vyčerpání, burnout</span>
+                <svg class="atlas__tab-glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M2 16c3 0 3-7 6-7s3 7 6 7 3-9 6-9 3 9 4 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M2 21h22" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".4"/></svg>
+              </button>
+              <button class="atlas__tab" data-atlas-tab data-atlas-theme="menopauza" role="tab" aria-selected="false" aria-controls="oblast-03" type="button">
+                <span class="atlas__tab-no">03</span>
+                <span class="atlas__tab-name">Menopauza a&nbsp;přechod</span>
+                <svg class="atlas__tab-glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.3"/><path d="M13 4a9 9 0 0 1 0 18" stroke="currentColor" stroke-width="1.3"/></svg>
+              </button>
+              <button class="atlas__tab" data-atlas-tab data-atlas-theme="poporodu" role="tab" aria-selected="false" aria-controls="oblast-04" type="button">
+                <span class="atlas__tab-no">04</span>
+                <span class="atlas__tab-name">Období po porodu</span>
+                <svg class="atlas__tab-glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M4 20c0-6 4-10 9-10s9 4 9 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="13" cy="8" r="4" stroke="currentColor" stroke-width="1.3"/></svg>
+              </button>
+              <button class="atlas__tab" data-atlas-tab data-atlas-theme="zada" role="tab" aria-selected="false" aria-controls="oblast-05" type="button">
+                <span class="atlas__tab-no">05</span>
+                <span class="atlas__tab-name">Chronické bolesti zad</span>
+                <svg class="atlas__tab-glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M13 2c-2 5 2 8 0 13s2 6 0 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8 7h10M7 13h12M8 19h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55"/></svg>
+              </button>
+              <button class="atlas__tab" data-atlas-tab data-atlas-theme="uzkost" role="tab" aria-selected="false" aria-controls="oblast-06" type="button">
+                <span class="atlas__tab-no">06</span>
+                <span class="atlas__tab-name">Úzkost a&nbsp;Somatic Experiencing</span>
+                <svg class="atlas__tab-glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M2 13h5l3-7 4 14 3-10 3 3h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="atlas__tab" data-atlas-tab data-atlas-theme="dalsi" role="tab" aria-selected="false" aria-controls="oblast-07" type="button">
+                <span class="atlas__tab-no">07</span>
+                <span class="atlas__tab-name">Další individuální potíže</span>
+                <svg class="atlas__tab-glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M10 10a3 3 0 1 1 3.6 3v2M13 19v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <p class="atlas__rail-note mono">07 oblastí · vyberte, co se vás týká</p>
+        </div>
+
+        <div class="atlas__stage" data-atlas-stage>
+
+          <!-- 01 ─────────────────────────────────────────────── -->
+          <div class="atlas__panel" id="oblast-01" data-atlas-panel role="tabpanel" aria-label="Migréna a bolesti hlavy" style="--area: var(--t-migrena)">
+            <header class="atlas__head" data-atlas-head tabindex="-1">
+              <span class="atlas__ghost" aria-hidden="true">01</span>
+              <p class="atlas__kicker mono">
+                <svg class="atlas__glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true" data-draw><ellipse cx="13" cy="11" rx="7" ry="8" stroke="currentColor" stroke-width="1.3"/><path d="M13 19v5M7 9c2 2 2 4 0 6M19 9c-2 2-2 4 0 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <span>Migréna a&nbsp;bolesti hlavy</span></p>
+              <span class="atlas__rule" aria-hidden="true"></span>
+              <p class="atlas__perex">Když hlava potřebuje „vypnout“.</p>
+            </header>
+
+            <div class="atlas__main">
+              <div class="atlas__body">
+                <div class="atlas__block">
+                  <h4>Kde se napětí drží</h4>
+                  <p>Představte si hlavu jako přetlakovaný hrnec. Stres, únava, potlačené emoce
+                    a&nbsp;stažené svaly krku vytvoří v&nbsp;těle obrovské napětí. Výsledek je
+                    pulzující bolest, citlivost na světlo a&nbsp;sevření.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Co klienti popisují</h4>
+                  <p>Pravidelná péče uvolňuje blokády kolem páteře a&nbsp;hlavy. Přináší jasnou
+                    mysl — bez pocitu těžkosti a&nbsp;více životní energie, která dříve odcházela
+                    na boj s&nbsp;bolestí.</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="atlas__side">
+              <div class="atlas__scan">
+                <svg class="atlas__fig" viewBox="0 0 240 520" aria-hidden="true" focusable="false">
+                  <use href="#kj-figure"/>
+                  <g class="atlas__spot" data-atlas-spot="head">
+                    <circle class="atlas__spot-halo" cx="120" cy="48" r="13"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="48" r="9"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="48" r="5.5"/>
+                  </g>
+                  <g class="atlas__spot" data-atlas-spot="neck">
+                    <circle class="atlas__spot-halo" cx="120" cy="101" r="11"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="101" r="8"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="101" r="5"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="atlas__side-block">
+                <h4>Projevy</h4>
+                <div class="chips">
+                  <button class="chip chip--area" type="button" data-atlas-chip="neck">šíje</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="neck">čelist</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="head">lebka</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="head">tlak za okem</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="head">světloplachost</button>
+                </div>
+                <p class="atlas__hint mono">Najeďte na projev — ukáže se místo na siluetě</p>
+              </div>
+              <div class="atlas__side-block">
+                <h4>V&nbsp;čem pomáhá</h4>
+                <ul class="checks">
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Uvolnění napětí v&nbsp;lebečních kostech a&nbsp;páteři</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Mírnější a&nbsp;méně časté záchvaty, jak je klienti popisují</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Obnova rovnováhy nervového systému</li>
+                </ul>
+              </div>
+            </aside>
+
+            <footer class="atlas__foot">
+              <div class="atlas__actions">
+                <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+                <a class="link-arrow" href="mailto:katkajuttnerova@seznam.cz?subject=Dotaz%20%E2%80%94%20migr%C3%A9na">Nebo se nejdřív zeptejte
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+              <div class="note">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <p>Pokud vás bolesti hlavy trápí dlouhodobě nebo se jejich charakter změnil,
+                  začněte prosím u&nbsp;neurologa. Terapie je doplněk, ne náhrada.</p>
+              </div>
+            </footer>
+          </div>
+
+          <!-- 02 ─────────────────────────────────────────────── -->
+          <div class="atlas__panel" id="oblast-02" data-atlas-panel role="tabpanel" aria-label="Stres, vyčerpání, burnout" hidden style="--area: var(--t-stres)">
+            <header class="atlas__head" data-atlas-head tabindex="-1">
+              <span class="atlas__ghost" aria-hidden="true">02</span>
+              <p class="atlas__kicker mono">
+                <svg class="atlas__glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true" data-draw><path d="M2 16c3 0 3-7 6-7s3 7 6 7 3-9 6-9 3 9 4 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M2 21h22" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".4"/></svg>
+                <span>Stres, vyčerpání, burnout</span></p>
+              <span class="atlas__rule" aria-hidden="true"></span>
+              <p class="atlas__perex">Tělo zůstalo v&nbsp;pohotovosti, i&nbsp;když nebezpečí dávno pominulo.</p>
+            </header>
+
+            <div class="atlas__main">
+              <div class="atlas__body">
+                <div class="atlas__block">
+                  <h4>Z&nbsp;pohotovosti do regenerace</h4>
+                  <p>Kraniosakrální terapie bývá vyhledávaná při chronickém stresu a&nbsp;vyčerpání.
+                    Tím, že působí na nervový systém, pomáhá tělu přejít z&nbsp;režimu „bojuj, nebo uteč“
+                    do stavu hlubší regenerace.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Obnova zdrojů</h4>
+                  <p>Hlavním přínosem, který klienti popisují, je regulace nervového systému a&nbsp;návrat
+                    do přirozené rovnováhy, obnova energetických zdrojů a&nbsp;podpora těla v&nbsp;regeneraci
+                    vlastních sil na fyzické i&nbsp;psychické úrovni. To bývá při pocitech vyhoření klíčové.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Spánek a&nbsp;napětí</h4>
+                  <p>Pomáhá také uvolnit hluboké napětí vzniklé v&nbsp;důsledku dlouhodobého přetížení,
+                    zlepšit kvalitu spánku, zmírnit nespavost a&nbsp;noční neklid a&nbsp;podpořit psychickou
+                    stabilizaci.</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="atlas__side">
+              <div class="atlas__scan">
+                <svg class="atlas__fig" viewBox="0 0 240 520" aria-hidden="true" focusable="false">
+                  <use href="#kj-figure"/>
+                  <g class="atlas__spot" data-atlas-spot="chest">
+                    <circle class="atlas__spot-halo" cx="120" cy="160" r="15"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="160" r="10"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="160" r="6"/>
+                  </g>
+                  <g class="atlas__spot" data-atlas-spot="belly">
+                    <circle class="atlas__spot-halo" cx="120" cy="208" r="15"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="208" r="10"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="208" r="6"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="atlas__side-block">
+                <h4>Projevy</h4>
+                <div class="chips">
+                  <button class="chip chip--area" type="button" data-atlas-chip="belly">energie</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="chest">spánek</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="chest">psychika</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="chest">mělký dech</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="belly">prázdná nádrž</button>
+                </div>
+                <p class="atlas__hint mono">Najeďte na projev — ukáže se místo na siluetě</p>
+              </div>
+              <div class="atlas__side-block">
+                <h4>V&nbsp;čem pomáhá</h4>
+                <ul class="checks">
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Přechod z&nbsp;režimu „bojuj, nebo uteč“ do regenerace</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Obnova energetických zdrojů na těle i&nbsp;na duši</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Uvolnění napětí z&nbsp;dlouhodobého přetížení</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Klidnější spánek a&nbsp;méně nočního neklidu</li>
+                </ul>
+              </div>
+            </aside>
+
+            <footer class="atlas__foot">
+              <div class="atlas__actions">
+                <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+                <a class="link-arrow" href="mailto:katkajuttnerova@seznam.cz?subject=Dotaz%20%E2%80%94%20stres">Nebo se nejdřív zeptejte
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+              <div class="note">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <p>Když je vyčerpání dlouhodobé a&nbsp;přidávají se další potíže, patří první krok
+                  k&nbsp;praktickému lékaři — terapie jde dobře vedle.</p>
+              </div>
+            </footer>
+          </div>
+
+          <!-- 03 ─────────────────────────────────────────────── -->
+          <div class="atlas__panel" id="oblast-03" data-atlas-panel role="tabpanel" aria-label="Menopauza a přechod" hidden style="--area: var(--t-menopauza)">
+            <header class="atlas__head" data-atlas-head tabindex="-1">
+              <span class="atlas__ghost" aria-hidden="true">03</span>
+              <p class="atlas__kicker mono">
+                <svg class="atlas__glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true" data-draw><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.3"/><path d="M13 4a9 9 0 0 1 0 18" stroke="currentColor" stroke-width="1.3"/></svg>
+                <span>Menopauza a&nbsp;přechod</span></p>
+              <span class="atlas__rule" aria-hidden="true"></span>
+              <p class="atlas__perex">Nový vnitřní rytmus — a&nbsp;tělo, které se v&nbsp;něm teprve hledá.</p>
+            </header>
+
+            <div class="atlas__main">
+              <div class="atlas__body">
+                <div class="atlas__block">
+                  <h4>Adaptace na nový rytmus</h4>
+                  <p>Kraniosakrální terapie může pomoci zmírnit fyzické i&nbsp;psychické projevy menopauzy.
+                    Podporuje tělo v&nbsp;adaptaci na nový vnitřní rytmus tím, že zklidňuje nervový systém
+                    a&nbsp;podporuje endokrinní systém, což může přispět k&nbsp;lepší hormonální stabilitě.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Návaly a&nbsp;nálady</h4>
+                  <p>Klientky popisují mírnější a&nbsp;méně časté návaly a&nbsp;menší výkyvy nálad, úzkosti,
+                    pocitů zahlcení a&nbsp;podrážděnosti. Terapie podporuje uzemnění a&nbsp;lepší kontakt
+                    s&nbsp;vlastními emocemi v&nbsp;tomto transformačním období.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Spánek a&nbsp;únava</h4>
+                  <p>Pomáhá také při nespavosti a&nbsp;nočním pocení a&nbsp;může přispět ke zmírnění únavy,
+                    vyčerpání a&nbsp;stavů označovaných jako „mozková mlha“.</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="atlas__side">
+              <div class="atlas__scan">
+                <svg class="atlas__fig" viewBox="0 0 240 520" aria-hidden="true" focusable="false">
+                  <use href="#kj-figure"/>
+                  <g class="atlas__spot" data-atlas-spot="head">
+                    <circle class="atlas__spot-halo" cx="120" cy="48" r="13"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="48" r="9"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="48" r="5.5"/>
+                  </g>
+                  <g class="atlas__spot" data-atlas-spot="pelvis">
+                    <circle class="atlas__spot-halo" cx="120" cy="270" r="16"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="270" r="11"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="270" r="6"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="atlas__side-block">
+                <h4>Projevy</h4>
+                <div class="chips">
+                  <button class="chip chip--area" type="button" data-atlas-chip="pelvis">návaly</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="head">spánek</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="head">nálady</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="pelvis">noční pocení</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="head">mozková mlha</button>
+                </div>
+                <p class="atlas__hint mono">Najeďte na projev — ukáže se místo na siluetě</p>
+              </div>
+              <div class="atlas__side-block">
+                <h4>V&nbsp;čem pomáhá</h4>
+                <ul class="checks">
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Podpora endokrinního systému a&nbsp;hormonální stability</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Mírnější a&nbsp;méně časté návaly</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Menší výkyvy nálad, úzkosti a&nbsp;podrážděnosti</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Úleva při nespavosti a&nbsp;nočním pocení</li>
+                </ul>
+              </div>
+            </aside>
+
+            <footer class="atlas__foot">
+              <div class="atlas__actions">
+                <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+                <a class="link-arrow" href="mailto:katkajuttnerova@seznam.cz?subject=Dotaz%20%E2%80%94%20menopauza">Nebo se nejdřív zeptejte
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+              <div class="note">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <p>Hormonální léčbu i&nbsp;vyšetření nechte na svém gynekologovi. Terapie je doplněk.</p>
+              </div>
+            </footer>
+          </div>
+
+          <!-- 04 ─────────────────────────────────────────────── -->
+          <div class="atlas__panel" id="oblast-04" data-atlas-panel role="tabpanel" aria-label="Období po porodu" hidden style="--area: var(--t-poporodu)">
+            <header class="atlas__head" data-atlas-head tabindex="-1">
+              <span class="atlas__ghost" aria-hidden="true">04</span>
+              <p class="atlas__kicker mono">
+                <svg class="atlas__glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true" data-draw><path d="M4 20c0-6 4-10 9-10s9 4 9 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="13" cy="8" r="4" stroke="currentColor" stroke-width="1.3"/></svg>
+                <span>Období po porodu</span></p>
+              <span class="atlas__rule" aria-hidden="true"></span>
+              <p class="atlas__perex">Regenerace pro maminku a&nbsp;jemné ošetření pro miminko.</p>
+            </header>
+
+            <div class="atlas__main">
+              <div class="atlas__body">
+                <div class="atlas__block">
+                  <h4>Pro maminku</h4>
+                  <p>Kraniosakrální terapie po porodu je zaměřená na fyzickou regeneraci a&nbsp;emoční
+                    integraci. Pomáhá mamince s&nbsp;vyrovnáním pánve a&nbsp;páteře po zátěži během těhotenství,
+                    ulevuje od bolesti zad, kyčlí a&nbsp;ramen, které mohou být způsobené také manipulací
+                    s&nbsp;miminkem nebo kojením.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Únava a&nbsp;emoce</h4>
+                  <p>Aktivace parasympatického nervového systému pomáhá zmírnit poporodní únavu
+                    a&nbsp;podpořit tělo při zvládání hormonálních změn. Terapie zároveň nabízí bezpečný
+                    prostor pro zpracování a&nbsp;integraci emocí po náročném porodu.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Pro miminko</h4>
+                  <p>U&nbsp;miminka pomáhá uvolnit napětí, které může vzniknout v&nbsp;důsledku náročného nebo
+                    traumatického porodu. Jemné uvolnění napětí v&nbsp;oblasti čelisti, krku a&nbsp;hlavy může
+                    podpořit schopnost správného přisátí a&nbsp;kojení. Terapie může také ulevit při
+                    novorozeneckých kolikách a&nbsp;neklidném spánku; miminka bývají po terapii často
+                    klidnější a&nbsp;spokojenější.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Kdy přijít</h4>
+                  <p>Terapii je vhodné absolvovat co nejdříve po porodu, ideálně už v&nbsp;šestinedělí.
+                    Může být vhodným doplňkem k&nbsp;fyzioterapii nebo laktačnímu poradenství. U&nbsp;miminek
+                    je terapie velmi šetrná a&nbsp;mohou být ošetřena přímo v&nbsp;náručí maminky.</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="atlas__side">
+              <div class="atlas__scan">
+                <svg class="atlas__fig" viewBox="0 0 240 520" aria-hidden="true" focusable="false">
+                  <use href="#kj-figure"/>
+                  <g class="atlas__spot" data-atlas-spot="belly">
+                    <circle class="atlas__spot-halo" cx="120" cy="208" r="15"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="208" r="10"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="208" r="6"/>
+                  </g>
+                  <g class="atlas__spot" data-atlas-spot="back">
+                    <circle class="atlas__spot-halo" cx="146" cy="182" r="13"/>
+                    <circle class="atlas__spot-ring" cx="146" cy="182" r="9"/>
+                    <circle class="atlas__spot-dot" cx="146" cy="182" r="5.5"/>
+                  </g>
+                  <g class="atlas__spot" data-atlas-spot="pelvis">
+                    <circle class="atlas__spot-halo" cx="120" cy="270" r="16"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="270" r="11"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="270" r="6"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="atlas__side-block">
+                <h4>Projevy</h4>
+                <div class="chips">
+                  <button class="chip chip--area" type="button" data-atlas-chip="pelvis">pánev</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="back">kojení</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="belly">kolika</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="back">bolavá záda</button>
+                </div>
+                <p class="atlas__hint mono">Najeďte na projev — ukáže se místo na siluetě</p>
+              </div>
+              <div class="atlas__side-block">
+                <h4>V&nbsp;čem pomáhá</h4>
+                <ul class="checks">
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Vyrovnání pánve a&nbsp;páteře po zátěži těhotenství</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Úleva od bolesti zad, kyčlí a&nbsp;ramen</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Podpora správného přisátí a&nbsp;kojení u&nbsp;miminka</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Klidnější spánek a&nbsp;úleva při kolikách</li>
+                </ul>
+              </div>
+            </aside>
+
+            <footer class="atlas__foot">
+              <div class="atlas__actions">
+                <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+                <a class="link-arrow" href="mailto:katkajuttnerova@seznam.cz?subject=Dotaz%20%E2%80%94%20po%20porodu">Nebo se nejdřív zeptejte
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+              <div class="note note--strong">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <p>U&nbsp;miminek a&nbsp;v&nbsp;těhotenství se vždy nejprve krátce domluvíme na vaší konkrétní
+                  situaci. Napište mi klidně předem.</p>
+              </div>
+            </footer>
+          </div>
+
+          <!-- 05 ─────────────────────────────────────────────── -->
+          <div class="atlas__panel" id="oblast-05" data-atlas-panel role="tabpanel" aria-label="Chronické bolesti zad" hidden style="--area: var(--t-zada)">
+            <header class="atlas__head" data-atlas-head tabindex="-1">
+              <span class="atlas__ghost" aria-hidden="true">05</span>
+              <p class="atlas__kicker mono">
+                <svg class="atlas__glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true" data-draw><path d="M13 2c-2 5 2 8 0 13s2 6 0 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8 7h10M7 13h12M8 19h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55"/></svg>
+                <span>Chronické bolesti zad</span></p>
+              <span class="atlas__rule" aria-hidden="true"></span>
+              <p class="atlas__perex">Začarovaný kruh bolesti, stresu a&nbsp;stažených svalů.</p>
+            </header>
+
+            <div class="atlas__main">
+              <div class="atlas__body">
+                <div class="atlas__block">
+                  <h4>Přerušit kruh</h4>
+                  <p>Bolesti zad často vytvářejí začarovaný kruh bolesti, stresu a&nbsp;svalového stažení.
+                    Kraniosakrální terapie dokáže navodit stav hluboké relaxace, a&nbsp;tím přispět k&nbsp;úlevě
+                    od bolesti.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Kost křížová a&nbsp;fascie</h4>
+                  <p>Pomáhá s&nbsp;uvolněním kosti křížové a&nbsp;pánve, protože napětí v&nbsp;oblasti kosti křížové
+                    se často přenáší po celé délce páteře. Pracuje také s&nbsp;hydratací fascií — bolest
+                    zad může být způsobená „slepenými“ povázkami neboli fasciemi, které obalují svaly.
+                    Kraniosakrální terapie pracuje s&nbsp;jemnými mikropohyby, které pomáhají navracet
+                    fasciím jejich pružnost.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Nervy a&nbsp;stará zranění</h4>
+                  <p>Přispívá také ke zklidnění nervového systému — například při ischiasu nebo
+                    podráždění nervů může pomoci snížit napětí v&nbsp;okolí páteřního kanálu, což může vést
+                    ke zmírnění vystřelující bolesti. Během terapie se často odhalí i&nbsp;dávná zranění,
+                    například pád na kostrč v&nbsp;mládí, která tělo doposud kompenzovalo.</p>
+                </div>
+                <div class="atlas__block">
+                  <h4>Co s&nbsp;čím kombinovat</h4>
+                  <p>U&nbsp;bolestí zad a&nbsp;pohybového aparátu je možné kombinovat kraniosakrální terapii
+                    s&nbsp;fyzioterapií.</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="atlas__side">
+              <div class="atlas__scan">
+                <svg class="atlas__fig" viewBox="0 0 240 520" aria-hidden="true" focusable="false">
+                  <use href="#kj-figure"/>
+                  <g class="atlas__spot" data-atlas-spot="back">
+                    <circle class="atlas__spot-halo" cx="146" cy="182" r="13"/>
+                    <circle class="atlas__spot-ring" cx="146" cy="182" r="9"/>
+                    <circle class="atlas__spot-dot" cx="146" cy="182" r="5.5"/>
+                  </g>
+                  <g class="atlas__spot" data-atlas-spot="sacrum">
+                    <circle class="atlas__spot-halo" cx="142" cy="254" r="13"/>
+                    <circle class="atlas__spot-ring" cx="142" cy="254" r="9"/>
+                    <circle class="atlas__spot-dot" cx="142" cy="254" r="5.5"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="atlas__side-block">
+                <h4>Projevy</h4>
+                <div class="chips">
+                  <button class="chip chip--area" type="button" data-atlas-chip="sacrum">kost křížová</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="back">fascie</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="sacrum">ischias</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="sacrum">ztuhlý kříž</button>
+                </div>
+                <p class="atlas__hint mono">Najeďte na projev — ukáže se místo na siluetě</p>
+              </div>
+              <div class="atlas__side-block">
+                <h4>V&nbsp;čem pomáhá</h4>
+                <ul class="checks">
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Uvolnění kosti křížové a&nbsp;pánve</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Návrat pružnosti „slepeným“ fasciím</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Zklidnění nervů v&nbsp;okolí páteřního kanálu</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Odhalení starých zranění, která tělo kompenzovalo</li>
+                </ul>
+              </div>
+            </aside>
+
+            <footer class="atlas__foot">
+              <div class="atlas__actions">
+                <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+                <a class="link-arrow" href="mailto:katkajuttnerova@seznam.cz?subject=Dotaz%20%E2%80%94%20bolesti%20zad">Nebo se nejdřív zeptejte
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+              <div class="note note--strong">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <p>Při dlouhotrvajících obtížích je vhodné navštívit ortopeda nebo neurologa.</p>
+              </div>
+            </footer>
+          </div>
+
+          <!-- 06 ─────────────────────────────────────────────── -->
+          <div class="atlas__panel" id="oblast-06" data-atlas-panel role="tabpanel" aria-label="Úzkost a Somatic Experiencing" hidden style="--area: var(--t-uzkost)">
+            <header class="atlas__head" data-atlas-head tabindex="-1">
+              <span class="atlas__ghost" aria-hidden="true">06</span>
+              <p class="atlas__kicker mono">
+                <svg class="atlas__glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true" data-draw><path d="M2 13h5l3-7 4 14 3-10 3 3h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Úzkost a&nbsp;Somatic Experiencing</span></p>
+              <span class="atlas__rule" aria-hidden="true"></span>
+              <p class="atlas__perex">Rozšířit kapacitu nervového systému — a&nbsp;dokončit, co v&nbsp;těle zůstalo.</p>
+            </header>
+
+            <div class="atlas__main">
+              <div class="atlas__body">
+                <div class="atlas__block">
+                  <h4>Dvě metody, jedny ruce</h4>
+                  <p>U&nbsp;úzkosti a&nbsp;následků traumatu propojuji kraniosakrální terapii s&nbsp;metodou
+                    Somatic Experiencing (SE). SE pomáhá rozšiřovat kapacitu nervového systému
+                    a&nbsp;dokončovat zadržené reakce, kraniosakrální terapie tento proces ukotvuje
+                    skrze tělo a&nbsp;jeho rytmy.</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="atlas__side">
+              <div class="atlas__scan">
+                <svg class="atlas__fig" viewBox="0 0 240 520" aria-hidden="true" focusable="false">
+                  <use href="#kj-figure"/>
+                  <g class="atlas__spot" data-atlas-spot="chest">
+                    <circle class="atlas__spot-halo" cx="120" cy="160" r="15"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="160" r="10"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="160" r="6"/>
+                  </g>
+                  <g class="atlas__spot" data-atlas-spot="belly">
+                    <circle class="atlas__spot-halo" cx="120" cy="208" r="15"/>
+                    <circle class="atlas__spot-ring" cx="120" cy="208" r="10"/>
+                    <circle class="atlas__spot-dot" cx="120" cy="208" r="6"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="atlas__side-block">
+                <h4>Projevy</h4>
+                <div class="chips">
+                  <button class="chip chip--area" type="button" data-atlas-chip="chest">nervový systém</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="belly">trauma</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="chest">bezpečí</button>
+                  <button class="chip chip--area" type="button" data-atlas-chip="chest">sevřený hrudník</button>
+                </div>
+                <p class="atlas__hint mono">Najeďte na projev — ukáže se místo na siluetě</p>
+              </div>
+              <div class="atlas__side-block">
+                <h4>V&nbsp;čem pomáhá</h4>
+                <ul class="checks">
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Dokončování zadržených stresových reakcí</li>
+                  <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Ukotvení procesu skrze tělo a&nbsp;jeho rytmy</li>
+                </ul>
+              </div>
+            </aside>
+
+            <footer class="atlas__foot">
+              <div class="atlas__actions">
+                <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Rezervovat termín</span></a>
+                <a class="link-arrow" href="mailto:katkajuttnerova@seznam.cz?subject=Dotaz%20%E2%80%94%20%C3%BAzkost">Nebo se nejdřív zeptejte
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+              <div class="note">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <p>Terapie nenahrazuje psychoterapii ani psychiatrickou péči. Dobře jde vedle nich.</p>
+              </div>
+            </footer>
+          </div>
+
+          <!-- 07 ─────────────────────────────────────────────── -->
+          <div class="atlas__panel" id="oblast-07" data-atlas-panel role="tabpanel" aria-label="Další individuální potíže" hidden style="--area: var(--t-dalsi)">
+            <header class="atlas__head" data-atlas-head tabindex="-1">
+              <span class="atlas__ghost" aria-hidden="true">07</span>
+              <p class="atlas__kicker mono">
+                <svg class="atlas__glyph" viewBox="0 0 26 26" fill="none" aria-hidden="true" data-draw><circle cx="13" cy="13" r="9.5" stroke="currentColor" stroke-width="1.3"/><path d="M10 10a3 3 0 1 1 3.6 3v2M13 19v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <span>Další individuální potíže</span></p>
+              <span class="atlas__rule" aria-hidden="true"></span>
+              <p class="atlas__perex">Nejste si jistí, jestli je terapie pro vás? Projdeme to spolu.</p>
+            </header>
+
+            <div class="atlas__main">
+              <div class="atlas__body">
+                <div class="atlas__block">
+                  <h4>Napište mi</h4>
+                  <p>Nejste si jistí, zda vám kraniosakrální terapie pomůže? Napište mi — společně
+                    se podíváme na vaši situaci a&nbsp;rozmyslíme, jestli je tento přístup pro vás vhodný.
+                    Odpovím ještě před objednáním a&nbsp;nic tím neriskujete.</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="atlas__side">
+              <div class="atlas__scan">
+                <svg class="atlas__fig" viewBox="0 0 240 520" aria-hidden="true" focusable="false">
+                  <use href="#kj-figure"/>
+                </svg>
+              </div>
+              <div class="atlas__side-block">
+                <h4>Projevy</h4>
+                <div class="chips"><span class="chip chip--area">konzultace</span></div>
+                <p class="atlas__hint mono">Zatím bez konkrétního místa — najdeme ho spolu</p>
+              </div>
+            </aside>
+
+            <footer class="atlas__foot">
+              <div class="atlas__actions">
+                <a class="btn btn--primary" href="mailto:katkajuttnerova@seznam.cz?subject=Nejsem%20si%20jist%C3%A1%2C%20jestli%20je%20terapie%20pro%20m%C4%9B&amp;body=Dobr%C3%BD%20den%2C%0A%0Apop%C3%AD%C5%A1u%20v%C3%A1m%20stru%C4%8Dn%C4%9B%20svou%20situaci%3A%0A%0A"><span>Napsat Katce</span></a>
+                <a class="link-arrow" href="#sebetest">Nebo zkuste sebe-test
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+              <div class="note">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                <p>První návštěva vás k&nbsp;ničemu nezavazuje.</p>
+              </div>
+            </footer>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CESTA K ÚLEVĚ ═════════════════════════════════════════ -->
+  <section class="section" aria-labelledby="cesta">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Cesta k&nbsp;úlevě</p>
+          <h2 id="cesta" data-reveal>
+            <span class="line-mask"><span>Co se během</span></span>
+            <span class="line-mask"><span>ošetření děje.</span></span>
+          </h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="small" style="color: var(--ink-2)" data-reveal>
+            Čtyři fáze, které se během 75 minut přelijí jedna do druhé.
+            Nic se nevynucuje — tempo určuje tělo, ne hodiny.
+          </p>
+        </div>
+      </div>
+
+      <div class="journey" data-journey data-reveal>
+        <button class="journey__step" data-journey-step type="button">
+          <span class="journey__no">01</span>
+          <span class="journey__title">Naslouchám</span>
+          <p>Ruce spočinou na těle. Nic se netlačí — jen se hledá, kde je napětí a&nbsp;kde už je klid.</p>
+        </button>
+        <button class="journey__step" data-journey-step type="button">
+          <span class="journey__no">02</span>
+          <span class="journey__title">Napětí povolí</span>
+          <p>Tělo samo pustí, co drželo. Často se prohloubí dech a&nbsp;přijde těžko popsatelné uvolnění.</p>
+        </button>
+        <button class="journey__step" data-journey-step type="button">
+          <span class="journey__no">03</span>
+          <span class="journey__title">Systém se srovná</span>
+          <p>Nervový systém se přeladí z&nbsp;pohotovosti do regenerace. Odtud se hojí všechno ostatní.</p>
+        </button>
+        <button class="journey__step" data-journey-step type="button">
+          <span class="journey__no">04</span>
+          <span class="journey__title">Klid zůstane</span>
+          <p>Úleva nekončí za dveřmi. Tělo si nový stav pamatuje a&nbsp;po dalších sezeních v&nbsp;něm zůstává déle.</p>
+        </button>
+      </div>
+
+      <p style="margin-top: var(--s-7); color: var(--ink); font-size: var(--fs-h4)" data-reveal>
+        Nic se nenutí — tělo si tempo určuje samo.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ MAPA TĚLA ═════════════════════════════════════════════ -->
+  <!-- Plocha je PÍSKOVÁ, ne přílivová. tokens.css u --sand říká
+       „POUZE tam, kde je na webu člověk“ — a tohle je jediné
+       místo webu, kde o sobě mluví návštěvník. Bylo tu
+       porcelán + ocel; teplý podklad z toho dělá rozhovor. -->
+  <section class="section sand-in" id="mapa" aria-labelledby="mapa-t">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Prozkoumejte tělo</p>
+          <h2 id="mapa-t" data-reveal>
+            <span class="line-mask"><span>Kde to</span></span>
+            <span class="line-mask"><span>působí.</span></span>
+          </h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="hint" data-reveal><span class="hint__dot" aria-hidden="true"></span> Vyberte všechna místa, kde to cítíte</p>
+        </div>
+      </div>
+
+      <div class="bodymap" data-bodymap data-reveal>
+        <div class="bodymap__figure">
+          <svg class="bodymap__svg" viewBox="0 0 240 520" role="group" aria-label="Silueta těla s body k výběru">
+            <defs>
+              <!-- Kůže: nahoře světlejší, dolů se stmívá. Odstíny
+                   sedí v CSS, tady je jen předpis přechodu.        -->
+              <linearGradient id="bm-skin" x1="0" y1="0" x2="0" y2="1">
+                <stop class="bm-skin-a" offset="0"/>
+                <stop class="bm-skin-b" offset="1"/>
+              </linearGradient>
+              <!-- Měkké pole. Teplé oblasti pod kůží se jím
+                   rozplynou do skvrn — kdo se dívá, vidí místa,
+                   ne obrys orgánu.                             -->
+              <filter id="bm-soft" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="9"/>
+              </filter>
+              <!-- Světlo, které putuje k právě popisované oblasti. -->
+              <radialGradient id="bm-glow">
+                <stop class="bm-glow-a" offset="0"/>
+                <stop class="bm-glow-b" offset=".55"/>
+                <stop class="bm-glow-c" offset="1"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Táž geometrie jako mini silueta v kapitolách (symbol
+                 #kj-figure nahoře v dokumentu). Tady má vlastní kůži,
+                 dýchá a nenese žádná vodítka — místo nich anatomii. -->
+            <use class="bodymap__body" href="#kj-figure"/>
+
+            <!-- Světlo se přesouvá tam, o čem je řeč vpravo. Není to
+                 ukazovátko: je to jediný způsob, jak na siluetě říct
+                 „tady“, aniž by se do ní muselo cokoli vpisovat.    -->
+            <g class="bodymap__glow" data-bm-glow aria-hidden="true">
+              <circle cx="120" cy="48" r="58" fill="url(#bm-glow)"/>
+            </g>
+
+            <!-- ŠEST TEPLÝCH OBLASTÍ MÍSTO KOSTRY.
+
+                 Dřív tu byla lebka, páteř, čtyřiadvacet obratlů
+                 s příčkami, oblouk žeber, kost křížová a dva
+                 tečkované sympatické kmeny. Byl to rentgen —
+                 a přesně tak to působilo: člověk, který přišel
+                 s bolestí, dostal jako první svou vlastní
+                 kostru. Diagnostický rejstřík, ne pozvání.
+
+                 Zůstal jediný anatomický prvek, protože nese
+                 hlavní myšlenku značky: PROUD PO PÁTEŘI, jedna
+                 vlna za 6,7 s, tedy devětkrát za minutu. Všechno
+                 ostatní jsou měkké skvrny v místech, kde to
+                 lidé cítí — ta, na kterou je zrovna řeč, se
+                 rozsvítí.                                      -->
+            <g class="bodymap__zones" data-bm-zones aria-hidden="true" filter="url(#bm-soft)">
+              <ellipse data-bm-zone="head"   cx="120" cy="48"  rx="25" ry="23"/>
+              <ellipse data-bm-zone="neck"   cx="120" cy="101" rx="20" ry="16"/>
+              <ellipse data-bm-zone="chest"  cx="120" cy="160" rx="30" ry="26"/>
+              <ellipse data-bm-zone="belly"  cx="120" cy="208" rx="28" ry="24"/>
+              <ellipse data-bm-zone="back"   cx="146" cy="182" rx="20" ry="30"/>
+              <ellipse data-bm-zone="pelvis" cx="120" cy="270" rx="27" ry="22"/>
+            </g>
+
+            <g class="bodymap__anatomy" data-bm-anatomy aria-hidden="true">
+              <path class="bodymap__flow" data-nodraw d="M120 100C124 116 127 132 126 148C125 168 117 182 116 202C115 218 120 228 120 238"/>
+            </g>
+
+            <g class="bodymap__point" data-bm-point="head" style="--i: 0" role="button" tabindex="0" aria-pressed="false" aria-label="Hlava — migréna a bolesti hlavy">
+              <circle class="pulse" cx="120" cy="48" r="10"/>
+              <circle class="halo" cx="120" cy="48" r="19"/>
+              <circle class="hit" cx="120" cy="48" r="26"/>
+              <circle class="ring" cx="120" cy="48" r="11"/>
+              <circle class="dot" cx="120" cy="48" r="4.6"/>
+              <text class="bodymap__label" x="86" y="52" text-anchor="end">Hlava</text>
+            </g>
+            <g class="bodymap__point" data-bm-point="neck" style="--i: 1" role="button" tabindex="0" aria-pressed="false" aria-label="Šíje a čelist — napětí v šíji a čelisti">
+              <circle class="pulse" cx="120" cy="101" r="10"/>
+              <circle class="halo" cx="120" cy="101" r="19"/>
+              <circle class="hit" cx="120" cy="101" r="26"/>
+              <circle class="ring" cx="120" cy="101" r="11"/>
+              <circle class="dot" cx="120" cy="101" r="4.6"/>
+              <text class="bodymap__label" x="154" y="105" text-anchor="start">Šíje a čelist</text>
+            </g>
+            <g class="bodymap__point" data-bm-point="chest" style="--i: 2" role="button" tabindex="0" aria-pressed="false" aria-label="Hrudník — úzkost a nervový systém">
+              <circle class="pulse" cx="120" cy="160" r="10"/>
+              <circle class="halo" cx="120" cy="160" r="19"/>
+              <circle class="hit" cx="120" cy="160" r="26"/>
+              <circle class="ring" cx="120" cy="160" r="11"/>
+              <circle class="dot" cx="120" cy="160" r="4.6"/>
+              <text class="bodymap__label" x="86" y="164" text-anchor="end">Hrudník</text>
+            </g>
+            <g class="bodymap__point" data-bm-point="belly" style="--i: 3" role="button" tabindex="0" aria-pressed="false" aria-label="Bránice a břicho — stres, vyčerpání, burnout">
+              <circle class="pulse" cx="120" cy="208" r="10"/>
+              <circle class="halo" cx="120" cy="208" r="19"/>
+              <circle class="hit" cx="120" cy="208" r="26"/>
+              <circle class="ring" cx="120" cy="208" r="11"/>
+              <circle class="dot" cx="120" cy="208" r="4.6"/>
+              <text class="bodymap__label" x="154" y="212" text-anchor="start">Bránice a břicho</text>
+            </g>
+            <g class="bodymap__point" data-bm-point="back" style="--i: 4" role="button" tabindex="0" aria-pressed="false" aria-label="Záda — chronické bolesti zad">
+              <circle class="pulse" cx="146" cy="182" r="10"/>
+              <circle class="halo" cx="146" cy="182" r="19"/>
+              <circle class="hit" cx="146" cy="182" r="26"/>
+              <circle class="ring" cx="146" cy="182" r="11"/>
+              <circle class="dot" cx="146" cy="182" r="4.6"/>
+              <text class="bodymap__label" x="188" y="177" text-anchor="start">Záda</text>
+            </g>
+            <g class="bodymap__point" data-bm-point="pelvis" style="--i: 5" role="button" tabindex="0" aria-pressed="false" aria-label="Pánev — po porodu a menopauza">
+              <circle class="pulse" cx="120" cy="270" r="10"/>
+              <circle class="halo" cx="120" cy="270" r="19"/>
+              <circle class="hit" cx="120" cy="270" r="26"/>
+              <circle class="ring" cx="120" cy="270" r="11"/>
+              <circle class="dot" cx="120" cy="270" r="4.6"/>
+              <text class="bodymap__label" x="86" y="274" text-anchor="end">Pánev</text>
+            </g>
+          </svg>
+          <!-- Vlnky po klepnutí. Plátno leželo pod obrázkem jako
+               třetí buňka mřížky a jmenovalo se data-bm-trace,
+               takže si ho skript (hledá data-bm-ripple) nikdy
+               nenašel: dvě stě pixelů prázdna a nula vlnek.  -->
+          <canvas class="bodymap__ripple" data-bm-ripple aria-hidden="true"></canvas>
+          <p class="bodymap__tip" data-bm-tip>Klepněte na kterýkoli bod</p>
+        </div>
+
+        <div class="bodymap__side">
+          <div class="bodymap__panel" aria-live="polite">
+            <p class="bodymap__no" data-bm-no>01 · Hlava</p>
+            <h3 class="bodymap__name" data-bm-name>Migréna a&nbsp;bolesti hlavy</h3>
+            <p data-bm-text>Bolesti hlavy a&nbsp;migrény bývají spojené s&nbsp;dlouhodobým napětím
+              v&nbsp;oblasti šíje, čelistí a&nbsp;lebky. Jemná práce podporuje uvolnění těchto ohnisek
+              a&nbsp;obnovuje plynulé proudění tekutin.</p>
+            <p style="margin-top: var(--s-5)">
+              <a class="link-arrow" data-bm-link href="s-cim-pomaham.html#oblast-01">Otevřít kapitolu
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </p>
+          </div>
+
+          <div class="bodymap__tags" role="group" aria-label="Alternativní ovládání mapy těla">
+            <button class="bodymap__tag" data-bm-tag="head" aria-pressed="false" type="button">Hlava</button>
+            <button class="bodymap__tag" data-bm-tag="neck" aria-pressed="false" type="button">Šíje a&nbsp;čelist</button>
+            <button class="bodymap__tag" data-bm-tag="chest" aria-pressed="false" type="button">Hrudník</button>
+            <button class="bodymap__tag" data-bm-tag="belly" aria-pressed="false" type="button">Bránice a&nbsp;břicho</button>
+            <button class="bodymap__tag" data-bm-tag="back" aria-pressed="false" type="button">Záda</button>
+            <button class="bodymap__tag" data-bm-tag="pelvis" aria-pressed="false" type="button">Pánev</button>
+          </div>
+
+          <div class="bodymap__sentence" data-bm-sentence hidden>
+            <p class="bodymap__said" data-bm-sentence-text></p>
+            <div class="actions" data-bm-cta hidden style="margin-top: var(--s-5)">
+              <a class="btn btn--primary btn--sm" href="prubeh-a-cenik.html#objednani"><span>Chci to probrat osobně</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SEBE-TEST ═════════════════════════════════════════════ -->
+  <section class="section" id="sebetest" aria-labelledby="sebetest-t">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Je to pro mě?</p>
+          <h2 id="sebetest-t" data-reveal>
+            <span class="line-mask"><span>Osm otázek.</span></span>
+            <span class="line-mask"><span>Minuta času.</span></span>
+          </h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="small" style="color: var(--ink-2)" data-reveal>
+            Odpovědi nikam neodesílám a&nbsp;nikde se neukládají. Na konci uvidíte,
+            kde bych na vašem místě začala.
+          </p>
+        </div>
+      </div>
+
+      <div class="selftest" data-selftest data-reveal>
+        <div class="selftest__progress" aria-hidden="true"><i data-st-bar></i></div>
+
+        <div class="selftest__step" data-st-step>
+          <p class="selftest__count">Otázka 01 / 08</p>
+          <p class="selftest__q" data-st-q>Špatně spím nebo se budím unavená a&nbsp;unavený.</p>
+          <div class="selftest__choices">
+            <button class="selftest__choice" data-st-choice="yes" type="button">Týká se mě</button>
+            <button class="selftest__choice" data-st-choice="no" type="button">Netýká</button>
+          </div>
+        </div>
+
+        <div class="selftest__step" data-st-step hidden>
+          <p class="selftest__count">Otázka 02 / 08</p>
+          <p class="selftest__q" data-st-q>Trápí mě opakované bolesti hlavy.</p>
+          <div class="selftest__choices">
+            <button class="selftest__choice" data-st-choice="yes" type="button">Týká se mě</button>
+            <button class="selftest__choice" data-st-choice="no" type="button">Netýká</button>
+          </div>
+          <button class="selftest__back" data-st-back type="button">Zpět</button>
+        </div>
+
+        <div class="selftest__step" data-st-step hidden>
+          <p class="selftest__count">Otázka 03 / 08</p>
+          <p class="selftest__q" data-st-q>Cítím se dlouhodobě vyčerpaně nebo ve stresu.</p>
+          <div class="selftest__choices">
+            <button class="selftest__choice" data-st-choice="yes" type="button">Týká se mě</button>
+            <button class="selftest__choice" data-st-choice="no" type="button">Netýká</button>
+          </div>
+          <button class="selftest__back" data-st-back type="button">Zpět</button>
+        </div>
+
+        <div class="selftest__step" data-st-step hidden>
+          <p class="selftest__count">Otázka 04 / 08</p>
+          <p class="selftest__q" data-st-q>Nosím v&nbsp;těle napětí, které nejde uvolnit.</p>
+          <div class="selftest__choices">
+            <button class="selftest__choice" data-st-choice="yes" type="button">Týká se mě</button>
+            <button class="selftest__choice" data-st-choice="no" type="button">Netýká</button>
+          </div>
+          <button class="selftest__back" data-st-back type="button">Zpět</button>
+        </div>
+
+        <div class="selftest__step" data-st-step hidden>
+          <p class="selftest__count">Otázka 05 / 08</p>
+          <p class="selftest__q" data-st-q>Procházím náročnou životní změnou.</p>
+          <div class="selftest__choices">
+            <button class="selftest__choice" data-st-choice="yes" type="button">Týká se mě</button>
+            <button class="selftest__choice" data-st-choice="no" type="button">Netýká</button>
+          </div>
+          <button class="selftest__back" data-st-back type="button">Zpět</button>
+        </div>
+
+        <div class="selftest__step" data-st-step hidden>
+          <p class="selftest__count">Otázka 06 / 08</p>
+          <p class="selftest__q" data-st-q>Po porodu se cítím jinak než dřív.</p>
+          <div class="selftest__choices">
+            <button class="selftest__choice" data-st-choice="yes" type="button">Týká se mě</button>
+            <button class="selftest__choice" data-st-choice="no" type="button">Netýká</button>
+          </div>
+          <button class="selftest__back" data-st-back type="button">Zpět</button>
+        </div>
+
+        <div class="selftest__step" data-st-step hidden>
+          <p class="selftest__count">Otázka 07 / 08</p>
+          <p class="selftest__q" data-st-q>Chci se jen zastavit a&nbsp;být chvíli v&nbsp;bezpečí.</p>
+          <div class="selftest__choices">
+            <button class="selftest__choice" data-st-choice="yes" type="button">Týká se mě</button>
+            <button class="selftest__choice" data-st-choice="no" type="button">Netýká</button>
+          </div>
+          <button class="selftest__back" data-st-back type="button">Zpět</button>
+        </div>
+
+        <div class="selftest__step" data-st-step hidden>
+          <p class="selftest__count">Otázka 08 / 08</p>
+          <p class="selftest__q" data-st-q>Mám čerstvý úraz hlavy či páteře, jsem krátce po operaci nebo mám horečku.</p>
+          <div class="selftest__choices">
+            <button class="selftest__choice" data-st-choice="yes" type="button">Ano, aspoň jedno</button>
+            <button class="selftest__choice" data-st-choice="no" type="button">Nic z&nbsp;toho</button>
+          </div>
+          <button class="selftest__back" data-st-back type="button">Zpět</button>
+        </div>
+
+        <!-- Výsledek -->
+        <div class="selftest__result" data-st-result hidden>
+          <div class="note note--strong" data-st-flag hidden>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 2 1.5 15.5h15L9 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 7v3.5M9 12.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <p><strong>Nejdřív prosím k&nbsp;lékaři.</strong> Při čerstvém úrazu hlavy či páteře,
+              krátce po operaci nebo při horečnatém onemocnění ošetření odkládáme. Až to bude
+              za vámi, ozvěte se — ráda vás objednám.</p>
+          </div>
+
+          <div data-st-main hidden>
+            <h3>Podle toho, co jste zaškrtli, bych začala tady:</h3>
+            <div class="selftest__areas" data-st-areas></div>
+            <p style="margin-top: var(--s-5)" data-st-scope></p>
+          </div>
+
+          <div data-st-none hidden>
+            <h3>Vypadá to, že vás teď nic konkrétního netlačí.</h3>
+            <p style="margin-top: var(--s-4)">
+              To je dobrá zpráva. Kraniosakrální terapie ale nemusí být jen reakce na potíže —
+              spousta lidí chodí prostě proto, aby se jednou za čas zastavili. Kdyby vás
+              cokoli napadlo, napište.
+            </p>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn--primary" href="prubeh-a-cenik.html#objednani"><span>Objednat se</span></a>
+            <a class="btn btn--ghost" data-st-mail href="mailto:katkajuttnerova@seznam.cz"><span>Poslat výsledek Katce</span></a>
+            <button class="selftest__back" data-st-again type="button">Projít znovu</button>
+          </div>
+
+          <p class="mono">Nic se neodesílá automaticky · nic se neukládá · žádné trackování</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="wrap wrap--rail">
+      <a class="pager" href="o-mne.html">
+        <span>
+          <span class="pager__label mono">Další</span>
+          <span class="pager__title" style="display: block; margin-top: var(--s-2)">Kdo se vás dotýká</span>
+        </span>
+        <svg class="pager__arrow" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 16h20M20 10l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" data-breath-mode="exhale">
+  <div class="wrap wrap--rail">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__title">Kateřina Jüttnerová</p>
+        <p class="small" style="color: var(--ink-2); max-width: 34ch">
+          Biodynamická kraniosakrální terapie a&nbsp;Somatic Experiencing.
+          Zdravotní sestra, pět let výcviků.
+        </p>
+      </div>
+      <div>
+        <p class="footer__title">Kontakt</p>
+        <address class="footer__list small">
+          <a href="tel:+420776021297">+420&nbsp;776&nbsp;021&nbsp;297</a>
+          <a href="mailto:katkajuttnerova@seznam.cz">katkajuttnerova@seznam.cz</a>
+          <span style="color: var(--ink-2)">Osobně, po&nbsp;domluvě</span>
+          <span>Prostor na&nbsp;čas</span>
+          <span>Seifertova 22, 638&nbsp;00 Brno-sever-Lesná</span>
+        </address>
+      </div>
+      <div>
+        <p class="footer__title">Stránky</p>
+        <nav class="footer__list small" aria-label="Patička">
+          <a href="index.html">Úvod</a>
+          <a href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+          <a href="s-cim-pomaham.html">S&nbsp;čím pomáhám</a>
+          <a href="o-mne.html">O&nbsp;mně</a>
+          <a href="prubeh-a-cenik.html">Průběh a&nbsp;ceník</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <p class="footer__disclaimer">
+        Kraniosakrální terapie je doplňková metoda. Podporuje regeneraci a&nbsp;seberegulaci těla,
+        ale nenahrazuje lékařskou péči ani stanovenou léčbu.
+      </p>
+      <p class="mono">© 2026 Kateřina Jüttnerová</p>
+    </div>
+  </div>
+</footer>
+
+<nav class="bottombar" aria-label="Rychlý kontakt">
+  <a class="bottombar__btn bottombar__btn--primary" href="tel:+420776021297">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h3.4l1.5 4-2.1 1.6a12 12 0 0 0 7.6 7.6L16 15l4 1.5V20a1.5 1.5 0 0 1-1.7 1.5A17 17 0 0 1 2.5 5.7 1.5 1.5 0 0 1 4 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    Zavolat
+  </a>
+  <a class="bottombar__btn" href="mailto:katkajuttnerova@seznam.cz">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    Napsat
+  </a>
+</nav>
+
+<script defer src="js/core.js"></script>
+<script defer src="vendor/lenis.min.js"></script>
+<script defer src="js/breath-line.js"></script>
+
+<script>/* Moduly stránky se načtou až po prvním vykreslení (core.js →
+   initLazyScripts). Přes <script defer> by běžely ještě před
+   DOMContentLoaded a držely hlavní vlákno — text by na slabším
+   stroji čekal na dokreslení scény. Pořadí zůstává zachované. */
+window.KJ_LAZY = [
+  "js/motion.js",
+  "js/modules/atlas.js",
+  "js/modules/journey.js",
+  "js/modules/bodymap.js",
+  "js/modules/selftest.js"
+];</script>
+</body>
+</html>

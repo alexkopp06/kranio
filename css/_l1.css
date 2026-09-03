@@ -1,0 +1,547 @@
+/* ============================================================
+   _l1 — hero + rejstřík obtíží (index.html)
+   Dočasný pracovní soubor redesignu — na konci se vrátí
+   zpět do css/modules.css na své původní místo.
+   ============================================================ */
+/* ============================================================
+   HERO — dýchající nervová soustava
+   ============================================================ */
+.hero {
+  position: relative;
+  padding-top: clamp(92px, 11vh, 138px);
+  padding-bottom: clamp(48px, 7vh, 96px);
+  min-height: min(94svh, 1020px);
+  display: flex;
+  align-items: center;
+  /* Postava vystupuje z mřížky do okrajového pásu. Svisle se
+     nesmí ořezávat nic (fokusový prstenec), proto jen osa x.  */
+  overflow-x: clip;
+  overflow-y: visible;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  width: 100%;
+  align-items: center;
+}
+.hero__text { grid-column: 1 / 8; grid-row: 1; position: relative; z-index: 2; }
+/* Scéna začíná o sloupec dřív a přetéká přes pravý okraj wrapu:
+   plakát, ne obrázek v boxu. Nadpis má z-index 2, takže postava
+   bezpečně podtéká pod něj.                                   */
+.hero__scene {
+  grid-column: 7 / -1;
+  grid-row: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Postava stála zaražená v pravém okraji a mezi ní a textem
+     zůstávala prázdná chodba. Vystředěním ve sloupci a zrušením
+     přetečení se přisune k nadpisu — hero drží pohromadě jako
+     jedna kompozice, ne jako dva plakáty vedle sebe.           */
+  align-items: center;
+  /* Plakát smí přetéct přes okraj sazby. Bylo 14 px — tedy
+     nic. Při 54 px se postava opře o pravou hranu výřezu
+     a kompozice přestane být „dva sloupce vedle sebe“
+     a stane se z ní jeden obraz s textem v něm.             */
+  margin-right: calc(-1 * clamp(0px, 3.4vw, 54px));
+}
+
+/* Podpis nad nadpisem. Jméno a obor, nic víc — návštěvník má
+   vědět, u koho stojí, dřív než začne číst větu o těle.
+   Vlasová linka mezi nimi dělá práci pomlčky, ale nespotřebuje
+   výšku řádku.                                                */
+.hero__sig {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: clamp(20px, 3.2vh, 34px);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  max-width: none;
+}
+.hero__sig-name { color: var(--ink); }
+.hero__sig-sep {
+  flex: none;
+  width: clamp(20px, 3vw, 42px);
+  height: 1px;
+  background: var(--line-strong);
+}
+@media (max-width: 420px) {
+  .hero__sig { flex-wrap: wrap; gap: var(--s-2) var(--s-3); }
+  .hero__sig-sep { display: none; }
+}
+
+.hero__title {
+  margin-bottom: var(--s-6);
+  /* Vlastní velikost, ne token. Nadpis teď stojí ve třech
+     krátkých řádcích v sedmi z dvanácti sloupců — v globální
+     --fs-h1 by mu zbývala třetina sloupce prázdná. Strop 8rem
+     je spočítaný: nejdelší řádek („kudy zpět“ s odsazením)
+     měří 4,83 em, v nejužším místě je k dispozici 780 px.     */
+  font-size: clamp(2.9rem, 7.4vw, 8rem);
+}
+/* Pod 820 px se mřížka sklopí do jednoho sloupce a nadpis
+   dostane celou šířku wrapu — 7,4vw by v ní plavalo. Násobek
+   je jiný, strop taky: na mobilu má nadpis zabrat plochu,
+   ale pořád se vejít na tři řádky.                           */
+@media (max-width: 820px) {
+  .hero__title { font-size: clamp(3.2rem, 11vw, 6rem); }
+}
+
+/* Serif má dotažnice pod účaří („kudy zpět“ jich má dvě).
+   Maska řádku je ořez, takže bez tohohle by se y a p uřízly.
+   Padding pustí dotažnici dovnitř, záporný margin vrátí řádkům
+   původní rozestup.                                           */
+.hero__title .line-mask {
+  padding-bottom: .16em;
+  margin-bottom: -.16em;
+}
+
+/* Odsazení tří řádků — viz komentář v index.html. */
+.hero__ln--1 { padding-left: .22em; }
+.hero__ln--2 { padding-left: .78em; }
+.hero__ln--3 { padding-left: 0; }
+@media (max-width: 560px) {
+  .hero__ln--1 { padding-left: .12em; }
+  .hero__ln--2 { padding-left: .44em; }
+}
+
+.hero__lede  { margin-bottom: var(--s-7); }
+.hero__actions { margin-bottom: var(--s-6); }
+.hero__phone {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  color: var(--ink-2); text-decoration: none; font-weight: 500;
+  min-height: 48px; padding-inline: var(--s-2);
+  font-family: var(--font-mono); font-size: 1rem;
+}
+.hero__phone:hover { color: var(--tide); }
+
+.nerve {
+  position: relative;
+  /* Výšku určuje výřez, šířku z ní odvodí poměr záběru. Poměr
+     drží pohromadě s kamerou v js/webgl/anatomy-3d.js a s
+     viewBoxem assets/nerve-figure.svg — mění se všechny tři.
+
+     67svh → 78svh. Postava stála uprostřed prázdného sloupce
+     jako figurka na polici; nad ní i pod ní zbývala čtvrtina
+     výšky vzduchu. Hero sekce má být PLAKÁT, tedy jeden obraz
+     přes celou výšku výřezu — teprve v té velikosti je vidět,
+     že žebro má hranu a lebka klenbu.                        */
+  height: min(78svh, 880px);
+  aspect-ratio: 680 / 780;
+  width: auto;
+  flex: none;
+  isolation: isolate;   /* světelné pole zůstane pod plátnem */
+}
+/* světlo pod kůží — měkké pole, ze kterého postava vystupuje */
+.nerve::before {
+  content: "";
+  position: absolute;
+  inset: -6% -22% -2%;
+  z-index: -1;
+  background:
+    radial-gradient(40% 15% at 50% 10%, var(--tide-soft), transparent 70%),
+    radial-gradient(54% 25% at 50% 38%, var(--tide-soft), transparent 74%),
+    /* Třetí, širší pole. Postava je teď o pětinu větší a dvě
+       úzká pole pod ní končila dřív než ona — dole vystupovala
+       z ničeho. Tohle je vzduch místnosti, ne svatozář, proto
+       je skoro neznatelné a sahá až za dolní hranu.          */
+    radial-gradient(78% 46% at 50% 58%, color-mix(in oklab, var(--tide-soft) 46%, transparent), transparent 76%);
+  /* Pole není konstanta: sílí s tím, jak scéna svítí. Číslo
+     --nerve-bloom (0–1) píše anatomy-3d.js — je v něm zář
+     kříže, probliknutí i vlna uvolnění. Při zastavení rytmu se
+     tedy rozsvítí celý prostor kolem postavy, ne jen model.  */
+  opacity: calc(.82 + .18 * var(--nerve-bloom, 0));
+  pointer-events: none;
+  /* Posun píše anatomy-3d.js, aby světlo šlo s postavou. */
+  transform: translateX(var(--nerve-shift, 0px))
+             scale(calc(1 + .05 * var(--nerve-bloom, 0)));
+  transition: transform 220ms linear, opacity 300ms linear;
+}
+
+/* HALÓ KOLEM KŘÍŽE.
+   Prstenec, který se rozběhne v okamžiku, kdy po vlákně dorazí
+   světlo od hrudní kosti. Polohu (--halo-x/--halo-y) dopočítává
+   anatomy-3d.js z promítnutého středu kříže, samotný běh spouští
+   Web Animations API. Ve výchozím stavu je neviditelný — nikdy
+   se nekreslí „jen tak“.                                        */
+.nerve__halo {
+  position: absolute;
+  left: var(--halo-x, 84%);
+  top: var(--halo-y, 38%);
+  width: clamp(120px, 34%, 300px);
+  aspect-ratio: 1;
+  margin: 0;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(.18);
+  background: radial-gradient(circle,
+    transparent 42%,
+    var(--tide-soft) 53%,
+    var(--tide-soft) 58%,
+    transparent 76%);
+}
+@media (prefers-reduced-motion: reduce) { .nerve__halo { display: none; } }
+/* první nádech scény: bod světla na temeni, než se kresba rozběhne */
+.nerve[data-mode="live"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 2.8%;
+  width: 26%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--tide-soft), transparent 68%);
+  pointer-events: none;
+  animation: nerve-spark 1600ms var(--ease-out) both;
+}
+@keyframes nerve-spark {
+  0%   { opacity: 0; scale: .35; }
+  22%  { opacity: 1; scale: 1; }
+  60%  { opacity: .5; scale: 1.2; }
+  100% { opacity: 0; scale: 1.5; }
+}
+.nerve canvas,
+.nerve .nerve__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* statická kresba drží poměr postavy */
+}
+/* Prolnutí je krátké: statická kresba se rozplyne do světla
+   přesně ve chvíli, kdy se scéna začne kreslit od temene.     */
+.nerve canvas { opacity: 0; transition: opacity 240ms var(--ease-out); }
+.nerve[data-mode="live"] canvas { opacity: 1; }
+.nerve[data-mode="live"] .nerve__svg { opacity: 0; }
+.nerve .nerve__svg { transition: opacity 280ms var(--ease-out); }
+
+/* ROZBĚH SCÉNY — kreslená verze se v prvních vteřinách vůbec
+   neukáže. Třídu nasazuje skript v <head> a snímá ji buď
+   anatomy-3d.js (když WebGL selže), nebo pojistka po 6 s.
+   Bez ní se návštěvníkovi na první vteřinu ukázal jednodušší
+   plochý model a teprve pak ten správný — dva různé obrazy
+   za sebou, což je horší než jedno prázdné světlo.           */
+.nerve-boot .nerve .nerve__svg { opacity: 0; }
+
+@media (max-width: 820px) {
+  .hero { min-height: 0; padding-top: 88px; }
+  .hero__grid { grid-template-columns: 1fr; gap: var(--s-6); }
+  /* Na mobilu se sloupce mění v řádky: scéna nahoru, text pod ni.
+     Bez přepsání grid-row by obojí zůstalo v jednom řádku
+     a text by ležel přes postavu.                              */
+  .hero__text, .hero__scene { grid-column: 1; }
+  .hero__scene { grid-row: 1; align-items: center; margin-right: 0; margin-inline: auto; }
+  .hero__text  { grid-row: 2; }
+  .nerve { height: min(40svh, 380px); }
+}
+
+/* ============================================================
+   POZNÁVÁTE SE? — rejstřík sedmi obtíží
+   ============================================================ */
+.hindex {
+  position: relative;
+  border-top: 1px solid var(--line);
+  /* Rozměr sdíleného podpisu. V mřížce řádku pro něj stojí
+     prázdný sloupec, canvas do něj jen absolutně padne —
+     příliv ho podteče a kresba zůstane na hladině.            */
+  --sig-w: clamp(252px, 26vw, 400px);
+  --sig-h: calc(var(--sig-w) * .70);
+  --row-pad: var(--s-7);
+  --row-arrow: 32px;
+  /* pravé odsazení canvasu = padding řádku + sloupec šipky + mezera */
+  --sig-right: calc(var(--row-pad) + var(--row-arrow) + var(--s-5));
+}
+
+/* Kolejnice ukazatele. Svislá vlasová linka u levého okraje
+   rejstříku, po které klouže tečka na právě čtený řádek —
+   drobný důkaz, že to je jeden systém, ne šest samostatných
+   odkazů. Barvu bere z tématu, stejně jako linka dechu.       */
+/* Kolejnice i podpis leží v DOM před řádky, ale musí zůstat nad
+   nimi: každý .hrow je vlastní kontext (isolation) a jeho příliv
+   je neprůhledný, takže by kresbu jinak přikryl.               */
+.hindex__rail {
+  position: absolute;
+  z-index: 1;
+  left: 13px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--line) 7%, var(--line) 93%, transparent);
+  pointer-events: none;
+}
+.hindex__dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--theme);
+  opacity: 0;
+  transform: translateY(var(--hi-y, 0px));
+  transition: transform calc(var(--dur-ui) * var(--motion)) var(--ease-out),
+              opacity calc(var(--dur-ui) * var(--motion)) var(--ease-out);
+}
+.hindex.is-on .hindex__dot { opacity: 1; }
+
+/* Sdílený podpis — jeden canvas na sedm rukopisů. Klouže
+   svisle na aktivní řádek a mezi kresbami morfuje bod po bodu. */
+.hindex__sig {
+  position: absolute;
+  z-index: 1;
+  right: var(--sig-right);
+  top: 0;
+  width: var(--sig-w);
+  height: var(--sig-h);
+  pointer-events: none;
+  transform: translateY(calc(var(--hi-y, 88px) - var(--sig-h) / 2));
+  transition: transform calc(var(--dur-tide) * var(--motion)) var(--ease-out);
+}
+/* Bez JS je canvas prázdný obdélník — pryč s ním. */
+.no-js .hindex__rail,
+.no-js .hindex__sig { display: none; }
+
+/* Sloupce: číslo · text · prázdné místo pro podpis · šipka.
+   Šipka drží pravý okraj sekce — rejstřík tak má konec, ne
+   jen bod, kde náhodou došel text.                            */
+.hrow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) var(--sig-w) var(--row-arrow);
+  align-items: center;
+  gap: var(--s-5);
+  padding-block: clamp(22px, 3vw, 34px);
+  padding-inline: var(--row-pad);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  isolation: isolate;
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+/* Řádek je široký přes celou sekci — prstenec kolem něj by
+   plaval v prázdnu, proto se kreslí dovnitř.                  */
+.hrow:focus-visible { outline: var(--focus-ring); outline-offset: -4px; }
+
+/* PŘÍLIV zleva. Místo tvrdé hrany scaleX() je to trojnásobně
+   široký přechod, který se posouvá: poslední pětina šířky se
+   vytrácí do ztracena, takže inkoust nemá řezanou hranu.      */
+.hrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(90deg,
+      color-mix(in srgb, var(--row) 14%, var(--surface)) 0 58%,
+      transparent 67%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  transition: background-position calc(var(--dur-tide) * var(--motion)) var(--ease-out);
+}
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  .hrow::before {
+    background-image: linear-gradient(90deg, var(--tide-soft) 0 58%, transparent 67%);
+  }
+}
+.hrow.is-active::before { background-position: 0 0; }
+
+/* Zrno jede s hranou přílivu jako úzký pruh — okraj se na
+   okamžik rozpadne na jednotlivá zrnka a zase scelí. Po
+   dojezdu po něm nezůstane nic.                               */
+.hrow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--grain-src);
+  background-size: 170px 170px;
+  opacity: .3;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0 47%, #000 57%, transparent 67%);
+  mask-image: linear-gradient(90deg, transparent 0 47%, #000 57%, transparent 67%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transition: -webkit-mask-position calc(var(--dur-tide) * var(--motion)) var(--ease-out),
+              mask-position calc(var(--dur-tide) * var(--motion)) var(--ease-out);
+}
+.hrow.is-active::after { -webkit-mask-position: 0 0; mask-position: 0 0; }
+
+/* Pozor na specificitu: ztlumení má tři třídy, takže aktivní řádek
+   musí mít taky tři, jinak by zůstal ztlumený i on.
+
+   USTOUPÍ, NEZHASNOU. Bylo to 35 % krytí — z černé sazby se
+   tím stala světle šedá (2,3:1) a šest ze sedmi obtíží bylo
+   při najetí myší nečitelných. Rozdíl mezi aktivním a klidným
+   řádkem má nést BARVA, PODKLAD A LINKA, ne to, že text zmizí.
+   Osmaosmdesát procent je znát jako ustoupení a přitom drží
+   nad deseti ku jedné.                                       */
+.hindex[data-active] .hrow { opacity: .88; }
+.hindex[data-active] .hrow.is-active { opacity: 1; }
+.no-js .hrow { opacity: 1; }
+/* Na dotyku vybírá aktivní řádek střed obrazovky, ne úmysl
+   uživatele — ustupovat se tam tedy nemá skoro vůbec.        */
+@media (hover: none) {
+  .hindex[data-active] .hrow { opacity: .86; }
+}
+
+/* Číslo se při aktivaci přetočí — dolní kopie je už v barvě
+   tématu. Roleta, ne přebarvení: je to znát koutkem oka.      */
+.hrow__no {
+  display: block;
+  overflow: hidden;
+  height: 1.15em;
+  margin-top: .55em;
+  align-self: start;
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+}
+.hrow__roll {
+  display: block;
+  transition: transform calc(var(--dur-micro) * var(--motion)) var(--ease-out);
+}
+.hrow__roll > span { display: block; height: 1.15em; color: var(--ink-3); }
+.hrow__roll > span + span { color: var(--row); }
+.hrow.is-active .hrow__roll { transform: translateY(-1.15em); }
+
+.hrow__title {
+  display: block;
+  font-size: clamp(1.25rem, 2.4vw, 1.85rem);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: var(--s-3);
+  transform-origin: left center;
+  transition: transform calc(var(--dur-ui) * var(--motion)) var(--ease-out),
+              letter-spacing calc(var(--dur-ui) * var(--motion)) var(--ease-out);
+}
+.hrow.is-active .hrow__title { transform: translateX(10px); letter-spacing: -.025em; }
+
+/* Projevy jsou nejsilnější slova na stránce — vidět jsou vždy,
+   při aktivaci se jen po jednom rozsvítí.                     */
+.hrow__signs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+  font-size: var(--fs-small);
+}
+.hrow__signs li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  color: var(--ink-3);
+  transition: color calc(var(--dur-ui) * var(--motion)) var(--ease-out);
+}
+/* Oddělovač visí ZA slovem, ne před ním. Na úzkém displeji se
+   seznam zalamuje a tečka před řádkem by vypadala jako odrážka
+   omylem; za slovem se chová jako typografická spojka.        */
+.hrow__signs li:not(:last-child)::after {
+  content: ""; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--ink-4); flex: none;
+  transition: background calc(var(--dur-ui) * var(--motion)) var(--ease-out);
+}
+.hrow.is-active .hrow__signs li { color: var(--row); }
+.hrow.is-active .hrow__signs li:nth-child(2) { transition-delay: calc(60ms * var(--motion)); }
+.hrow.is-active .hrow__signs li:nth-child(3) { transition-delay: calc(120ms * var(--motion)); }
+.hrow.is-active .hrow__signs li:not(:last-child)::after { background: var(--row); }
+
+/* Rozbalení přes grid-template-rows: 0fr → 1fr. Na rozdíl od
+   max-height nemá doskok, protože nehádá cílovou výšku.       */
+.hrow__desc {
+  display: grid;
+  grid-template-rows: 0fr;
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+  max-width: 56ch;
+  opacity: 0;
+  transition: grid-template-rows calc(var(--dur-ui) * var(--motion)) var(--ease-out),
+              opacity calc(var(--dur-ui) * var(--motion)) var(--ease-out);
+}
+.hrow__desc > span { overflow: hidden; min-height: 0; padding-top: var(--s-3); }
+.hrow.is-active .hrow__desc { grid-template-rows: 1fr; opacity: 1; }
+.no-js .hrow__desc { grid-template-rows: 1fr; opacity: 1; }
+
+.hrow__arrow {
+  grid-column: -2 / -1;   /* poslední sloupec, ať jich je 3 nebo 4 */
+  color: var(--ink-meta);
+  justify-self: end;
+  align-self: start;
+  margin-top: .45em;
+  transition: transform calc(320ms * var(--motion)) var(--ease-out),
+              color calc(var(--dur-ui) * var(--motion)) var(--ease-out);
+}
+/* Tam rychleji než zpátky: odchod má doznít, ne uskočit. */
+.hrow.is-active .hrow__arrow {
+  transform: translateX(6px) rotate(-45deg);
+  color: var(--row);
+  transition-duration: calc(240ms * var(--motion)), calc(var(--dur-ui) * var(--motion));
+}
+
+@media (max-width: 1000px) {
+  .hindex {
+    --sig-w: 190px;
+    --sig-h: 118px;
+    --row-pad: var(--s-5);
+    --row-arrow: 28px;
+  }
+  .hindex__rail { left: 8px; }
+  .hrow { grid-template-columns: 44px minmax(0, 1fr) var(--sig-w) var(--row-arrow); }
+}
+
+/* Pod 820 px už by podpis ukrajoval z textu. Řádek si vystačí
+   s přílivem, číslem a projevy — čitelnost je tvrdší podmínka
+   než efekt.                                                  */
+@media (max-width: 820px) {
+  .hindex__sig, .hindex__rail { display: none; }
+  .hrow {
+    grid-template-columns: 40px minmax(0, 1fr) 26px;
+    gap: var(--s-3) var(--s-4);
+    padding-block: var(--s-5);
+    padding-inline: var(--s-2);
+  }
+  .hrow__title { font-size: clamp(1.15rem, 4.4vw, 1.5rem); margin-bottom: var(--s-2); }
+  .hrow.is-active .hrow__title { transform: translateX(6px); }
+  .hrow__no { margin-top: .35em; }
+}
+
+/* ============================================================
+   CO TO VLASTNĚ JE — SMAZÁNO
+
+   Pás tří karet (.essence2 / .triad) patřil ke staré verzi
+   úvodní stránky. Značky ani skript k němu už neexistují.
+   Zůstal by z toho mrtvý kód, který nikdo netroufne smazat,
+   protože nikdo neví, jestli se někde nepoužívá — proto radši
+   hned pryč, i s vysvětlením.
+   ============================================================ */
+
+/* ============================================================
+   CIFERNÍK SEZENÍ — SMAZÁNO
+
+   Na úvodní stránce stál kotouč se sedmdesáti pěti polohami,
+   ukazatelem a tlačítkem „Přehrát sezení“. Rozjížděl se sám
+   a přepínal text pod čtenářem; a přestože jsou odpovědi tři,
+   dal se chytit kdekoli.
+
+   Nahradilo ho kolo ze stránky Průběh — týž renderer
+   (wheel-core.js), tři výseče, tři panely, nic se nehýbe samo.
+   Jeho styly leží v css/modules.css u ostatních dílů kola.
+
+   Blok .clock* je smazaný, ne osiřelý: k jeho značkám už
+   neexistuje HTML ani skript.
+   ============================================================ */

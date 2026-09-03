@@ -1,0 +1,636 @@
+/* ============================================================
+   _l3 — sedm oblastí + mapa těla (s-cim-pomaham.html)
+   Dočasný pracovní soubor redesignu — na konci se vrátí
+   zpět do css/modules.css na své původní místo.
+   ============================================================ */
+/* ============================================================
+   SEDM OBLASTÍ — rejstřík + rozevřený dvoulist
+
+   Vlevo svislý rejstřík, který se nikam neschovává (dřív byl
+   vodorovný a sedmá oblast končila za okrajem). Vpravo kapitola
+   vysázená jako dvoustrana: duchové číslo, perex, text v blocích
+   a postranní sloupec, kde silueta ukazuje, kde to v těle je.
+   ============================================================ */
+
+.atlas { --atlas-row: 64px; }
+
+/* ---------- deep-link bez záblesku ---------------------------
+   Atribut na <html> nasazuje inline skript v hlavičce stránky
+   a hned po startu ho přebírá atlas.js. Bez JS neexistuje —
+   sedm kapitol tedy nikdy nezůstane schovaných.               */
+html[data-open] .atlas .atlas__panel { display: none; }
+html[data-open="oblast-01"] .atlas #oblast-01,
+html[data-open="oblast-02"] .atlas #oblast-02,
+html[data-open="oblast-03"] .atlas #oblast-03,
+html[data-open="oblast-04"] .atlas #oblast-04,
+html[data-open="oblast-05"] .atlas #oblast-05,
+html[data-open="oblast-06"] .atlas #oblast-06,
+html[data-open="oblast-07"] .atlas #oblast-07 { display: grid; }
+
+.atlas__defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- REJSTŘÍK ---------------------------------------- */
+.atlas__index-wrap { position: relative; }
+.atlas__index { display: grid; grid-template-columns: 1fr; }
+
+.atlas__tab {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 22px;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: var(--atlas-row);
+  padding: var(--s-3) var(--s-4);
+  text-align: left;
+  background: transparent;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+  transition: color var(--dur-ui) var(--ease-out),
+              background var(--dur-ui) var(--ease-out);
+}
+.atlas__tab:first-child { border-top: 1px solid var(--line); }
+/* Bílá plocha patří jen otevřené oblasti. Najetí ukáže jen šedý
+   proužek na místě, kam by se ukazatel posunul — pozvánka, ne
+   druhý aktivní stav.                                          */
+.atlas__tab:hover { color: var(--ink); box-shadow: inset 2px 0 0 0 var(--line-strong); }
+.atlas__tab[aria-selected="true"] { color: var(--ink); background: var(--surface); box-shadow: none; }
+.atlas__tab:focus-visible { outline-offset: -3px; }
+
+.atlas__tab-no {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--ink-3);
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.atlas__tab-name { font-size: .9375rem; line-height: 1.25; font-weight: 500; }
+.atlas__tab-glyph {
+  width: 22px; height: 22px;
+  color: var(--ink-meta);
+  justify-self: end;
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.atlas__tab[aria-selected="true"] .atlas__tab-no,
+.atlas__tab[aria-selected="true"] .atlas__tab-glyph { color: var(--area); }
+
+/* Klouzavý ukazatel — jeden proužek, který se mezi řádky
+   posouvá. Právě ten posun dělá z rejstříku systém; kdyby jen
+   přeskakoval rámeček, byl by to obyčejný seznam.             */
+.atlas__marker {
+  position: absolute;
+  left: 0; top: 0;
+  width: 2px; height: var(--atlas-row);
+  background: var(--area);
+  transform: translateY(0);
+  transition: transform calc(var(--dur-ui) * var(--motion)) var(--ease-out),
+              height calc(var(--dur-ui) * var(--motion)) var(--ease-out),
+              background var(--dur-ui) var(--ease-out);
+  pointer-events: none;
+}
+
+.atlas__rail-note {
+  margin-top: var(--s-4);
+  padding-left: var(--s-4);
+  color: var(--ink-3);
+  font-size: .6875rem;
+}
+
+/* ---------- PLOCHA S KAPITOLOU ------------------------------ */
+.atlas__stage {
+  position: relative;
+  min-width: 0;
+  transition: min-height calc(320ms * var(--motion)) var(--ease-out);
+}
+
+.atlas__panel {
+  display: grid;
+  align-content: start;
+  gap: clamp(28px, 3.6vw, 46px);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "head" "main" "side" "foot";
+}
+.atlas__panel[hidden] { display: none; }
+
+.atlas__main { grid-area: main; min-width: 0; }
+.atlas__side { grid-area: side; min-width: 0; }
+.atlas__foot { grid-area: foot; min-width: 0; }
+
+/* ---------- HLAVIČKA KAPITOLY ------------------------------- */
+.atlas__head {
+  grid-area: head;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: clamp(4px, 1vw, 12px);
+}
+/* Po příletu dostane hlavička fokus, aby čtečka ohlásila, kde jsme.
+   Rámeček bereme v barvě oblasti — patří ke kapitole, ne k webu.  */
+.atlas__head:focus-visible { outline: 2px solid var(--area); outline-offset: 8px; }
+.atlas__ghost {
+  position: absolute;
+  z-index: 0;
+  right: -.05em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: clamp(6rem, 14vw, 12rem);
+  line-height: .78;
+  font-weight: 500;
+  letter-spacing: -.05em;
+  color: var(--area);
+  opacity: .07;
+  pointer-events: none;
+  user-select: none;
+}
+/* Štítek kapitoly zrcadlí řádek rejstříku: glyf, pak název.
+   Glyf se při každém přepnutí obtáhne (KRESBA) — je to jediný
+   pohyb, který kapitola sama od sebe udělá.                    */
+.atlas__kicker {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.atlas__glyph { width: 26px; height: 26px; flex: none; color: var(--area); }
+.atlas__rule {
+  display: block;
+  position: relative;
+  z-index: 1;
+  height: 2px;
+  margin: var(--s-3) 0 clamp(20px, 2.6vw, 32px);
+  background: var(--area);
+  transform-origin: left center;
+}
+.atlas__perex {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: var(--tr-h3);
+  color: var(--ink);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+
+/* Potvrzení příletu — hairline v barvě oblasti přejede zleva
+   doprava a duchové číslo krátce zesílí. Devět set milisekund,
+   aby bylo jasné: tady to je, tohle jsi hledal.               */
+@keyframes atlas-sweep { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes atlas-flare { 0% { opacity: .07; } 38% { opacity: .16; } 100% { opacity: .07; } }
+.atlas__panel.is-arrived .atlas__rule {
+  animation: atlas-sweep var(--dur-long) var(--ease-out) both;
+}
+.atlas__panel.is-arrived .atlas__ghost {
+  animation: atlas-flare var(--dur-long) var(--ease-out) both;
+}
+
+/* ---------- TEXTOVÉ BLOKY -----------------------------------
+   Nadpis bloku je štítek, ne titulek: mono, verzálky, hairline
+   pod sebou — stejné jako v postranním sloupci, aby celá
+   dvoustrana mluvila jedním hlasem.                           */
+.atlas__body { display: grid; gap: clamp(28px, 4vh, 48px); }
+.atlas__block h4 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-bottom: var(--s-2);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s-4);
+  max-width: var(--measure);
+}
+.atlas__block p { color: var(--ink-2); max-width: var(--measure); }
+.atlas__block p + p { margin-top: var(--s-4); }
+
+/* ---------- POSTRANNÍ SLOUPEC ------------------------------- */
+.atlas__side { display: grid; gap: clamp(24px, 3vw, 36px); align-content: start; }
+.atlas__side h4 {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 500;
+  padding-bottom: var(--s-2);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s-4);
+}
+.atlas__hint {
+  margin-top: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  letter-spacing: .01em;
+  text-transform: none;
+  line-height: 1.55;
+  color: var(--ink-3);
+  max-width: 34ch;
+}
+
+/* Silueta a glyf sdílejí jeden rám. Glyf je razítko oblasti
+   v rohu — za tělem by z něj byla jen šmouha, vedle něj je
+   z toho stránka z atlasu.                                    */
+.atlas__scan {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding-block: var(--s-3);
+}
+.atlas__fig {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 124px;
+  height: auto;
+  animation: atlas-fig var(--breath) var(--ease-in-out) infinite;
+}
+@keyframes atlas-fig { 0%, 100% { opacity: .9; } 50% { opacity: 1; } }
+
+.atlas__spot {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+.atlas__spot-halo {
+  fill: var(--area);
+  opacity: .12;
+  animation: atlas-spot var(--breath) var(--ease-in-out) infinite;
+}
+@keyframes atlas-spot { 0%, 100% { opacity: .10; } 50% { opacity: .2; } }
+.atlas__spot-ring {
+  fill: none;
+  stroke: var(--area);
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.atlas__spot-dot {
+  fill: var(--surface);
+  stroke: var(--area);
+  stroke-width: 3;
+  transition: fill var(--dur-ui) var(--ease-out);
+}
+
+.atlas__spot.is-lit { transform: scale(1.3); }
+.atlas__spot.is-lit .atlas__spot-dot { fill: var(--area); }
+.atlas__spot.is-lit .atlas__spot-halo { animation: none; opacity: .26; }
+.atlas__spot.is-lit .atlas__spot-ring { animation: atlas-ping var(--dur-long) var(--ease-out); }
+@keyframes atlas-ping {
+  from { opacity: .6; transform: scale(.45); }
+  to   { opacity: 0;  transform: scale(1.9); }
+}
+
+/* Chip je tlačítko — musí unést prst i klávesnici. */
+.atlas__side .chip { min-height: 44px; }
+.atlas__side button.chip { cursor: pointer; }
+.atlas__side button.chip:hover { border-color: var(--area); color: var(--ink); }
+
+/* Odškrtávátka se dokreslují při otevření kapitoly (KRESBA,
+   stagger 90 ms). Bez JS je fajfka rovnou celá — třídu is-fresh
+   nasazuje modul, ne kaskáda.                                 */
+.atlas__side .checks svg path {
+  stroke-dasharray: 24;
+  transition: stroke-dashoffset calc(var(--dur-reveal) * var(--motion)) var(--ease-out);
+}
+.atlas__panel.is-fresh .checks svg path { stroke-dashoffset: 24; transition: none; }
+.atlas__side .checks li:nth-child(2) svg path { transition-delay: calc(90ms * var(--motion)); }
+.atlas__side .checks li:nth-child(3) svg path { transition-delay: calc(180ms * var(--motion)); }
+.atlas__side .checks li:nth-child(4) svg path { transition-delay: calc(270ms * var(--motion)); }
+.atlas__side .checks li:nth-child(5) svg path { transition-delay: calc(360ms * var(--motion)); }
+
+/* ---------- KONEC KAPITOLY = AKCE --------------------------- */
+.atlas__foot {
+  display: grid;
+  gap: var(--s-5);
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid var(--line);
+}
+.atlas__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4); }
+
+/* ---------- KOMPOZICE PODLE ŠÍŘKY --------------------------- */
+/* Postranní sloupec se na středních šířkách složí vedle sebe:
+   silueta vlevo, projevy a přínosy vpravo. Pod sebou by z něj
+   byl další metr scrollování.                                 */
+@media (min-width: 560px) and (max-width: 1239px) {
+  .atlas__side {
+    grid-template-columns: 148px minmax(0, 1fr);
+    column-gap: clamp(24px, 4vw, 48px);
+    align-items: start;
+  }
+  /* span 2, ne 1 / -1: bez grid-template-rows žádná explicitní
+     poslední linka neexistuje a −1 by se scvrklo na jeden řádek */
+  .atlas__scan { grid-column: 1; grid-row: 1 / span 2; align-self: start; padding-block: 0; }
+  .atlas__side-block { grid-column: 2; }
+  /* silueta zůstává nižší než sloupec vedle ní, jinak by mezi
+     „Projevy“ a „V čem pomáhá“ vznikla díra */
+  .atlas__fig { max-width: 130px; }
+}
+
+/* Dvoustrana: text vlevo, anatomická karta vpravo přes celou
+   výšku kapitoly.                                             */
+@media (min-width: 1240px) {
+  .atlas__panel {
+    grid-template-columns: minmax(0, 1fr) minmax(258px, 330px);
+    grid-template-areas: "head side" "main side" "foot side";
+    column-gap: 0;
+  }
+  .atlas__side {
+    border-left: 1px solid var(--line);
+    padding-left: clamp(32px, 3vw, 52px);
+    margin-left: clamp(32px, 3vw, 52px);
+  }
+  .atlas__fig { max-width: 152px; }
+}
+
+/* Rejstřík vlevo, sticky. Sedm oblastí vedle sebe se nevejde
+   nikdy — tak je postavíme na výšku a necháme je stát.        */
+@media (min-width: 1100px) {
+  .atlas {
+    display: grid;
+    grid-template-columns: minmax(220px, 268px) minmax(0, 1fr);
+    gap: clamp(32px, 3.4vw, 56px);
+    align-items: start;
+  }
+  .atlas__rail {
+    position: sticky;
+    top: var(--s-9);
+  }
+  .atlas__index { border-left: 1px solid var(--line); }
+  .atlas__tab { padding-left: var(--s-5); }
+}
+
+/* Pod 1100 px stojí rejstřík nad obsahem — ale jako mřížka
+   dvou sloupců, ne vodorovný pás k rolování.                  */
+@media (max-width: 1099px) {
+  .atlas__rail { margin-bottom: clamp(32px, 4vw, 56px); }
+  .atlas__index { grid-template-columns: 1fr 1fr; }
+  .atlas__tab { border-right: 1px solid var(--line); }
+  .atlas__tab:nth-child(2n) { border-right: 0; }
+  .atlas__tab:nth-child(2) { border-top: 1px solid var(--line); }
+  .atlas__tab:last-child { grid-column: 1 / -1; border-right: 0; }
+  .atlas__tab[aria-selected="true"] { box-shadow: inset 2px 0 0 0 var(--area); }
+  .atlas__marker { display: none; }
+}
+
+@media (max-width: 720px) {
+  .atlas__index { grid-template-columns: 1fr; }
+  .atlas__tab { border-right: 0; padding-inline: var(--s-3); }
+  .atlas__tab:nth-child(2) { border-top: 0; }
+  .atlas__tab:last-child { grid-column: auto; }
+  .atlas__stage { min-height: 0 !important; }
+  .atlas__scan { justify-items: center; }
+  .atlas__fig { max-width: 132px; }
+}
+
+/* Bez pohybu: silueta ani body se nehýbou, ale pořád nesou
+   informaci. Potvrzení příletu zůstává — zesílení duchového
+   čísla je změna světla, ne pohyb.                            */
+@media (prefers-reduced-motion: reduce) {
+  .atlas__fig, .atlas__spot-halo { animation: none; }
+  .atlas__spot-halo { opacity: .16; }
+  .atlas__spot.is-lit { transform: none; }
+  .atlas__spot.is-lit .atlas__spot-ring { animation: none; }
+  .atlas__panel.is-arrived .atlas__rule { animation: none; }
+}
+
+
+/* ============================================================
+   MAPA TĚLA
+
+   TOHLE JE JEDINÉ MÍSTO WEBU, KDE MLUVÍ NÁVŠTĚVNÍK O SOBĚ.
+   A bylo z celého webu nejstudenější: bílá silueta s kostrou —
+   lebka, čtyřiadvacet obratlů s příčkami, oblouk žeber, dva
+   tečkované sympatické kmeny — na šedozelené desce, obtažená
+   ocelově modrou linkou. Kdo přišel s bolestí, dostal jako
+   první svůj vlastní rentgen.
+
+   Co se změnilo:
+
+   1 TEPLO. Deska je písková (`sand-in`), kůže má dva teplé
+     odstíny (--skin-hi/lo) a obrys je zabarvený tématem, ne
+     šedý. tokens.css u --sand říká „POUZE tam, kde je na webu
+     člověk“ — a člověk je tady.
+
+   2 MÍSTA MÍSTO KOSTÍ. Kostru nahradilo šest rozostřených polí
+     v místech, kde to lidé cítí. Zůstal jediný anatomický
+     prvek: proud po páteři, devětkrát za minutu.
+
+   3 JE VIDĚT, ŽE SE TO DÁ PROKLIKAT. Body pulzují už v klidu,
+     jeden po druhém shora dolů, a každý má vedle sebe JMÉNO.
+     Dřív se jména schovávala do řádku tlačítek pod panelem,
+     jehož vlastní aria-label je označoval za „alternativní
+     ovládání“ — hlavní ovládání bylo šest nepopsaných koleček
+     s krytím 2:1.
+   ============================================================ */
+.bodymap { display: grid; gap: clamp(24px, 4vw, 48px); grid-template-columns: 1fr; }
+@media (min-width: 860px) { .bodymap { grid-template-columns: minmax(0, .82fr) 1fr; align-items: center; } }
+.bodymap__figure { position: relative; max-width: 340px; margin-inline: auto; width: 100%; }
+.bodymap__svg {
+  width: 100%; height: auto; display: block; overflow: visible;
+  /* Silueta je sdílený symbol #kj-figure. Proměnné se dědí i do
+     jeho stínového stromu, takže se dá přebarvit jen tady, aniž
+     by se hnuly mini siluety v kapitolách.                      */
+  --kj-fill: url(#bm-skin);
+  --kj-line: color-mix(in oklab, var(--theme) 34%, var(--skin-lo));
+  --kj-weight: 1.3;
+  --kj-guides: 0;          /* vodítka byla ta „šavle“ přes hrudník */
+}
+@supports not (color: color-mix(in oklab, white, black)) {
+  .bodymap__svg { --kj-line: var(--line-strong); }
+}
+.bodymap__ripple { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* Kůže a světlo — odstíny patří do CSS, ne do atributů v SVG. */
+#bm-skin .bm-skin-a { stop-color: var(--skin-hi); }
+#bm-skin .bm-skin-b { stop-color: var(--skin-lo); }
+#bm-glow .bm-glow-a { stop-color: var(--theme); stop-opacity: .34; }
+#bm-glow .bm-glow-b { stop-color: var(--theme); stop-opacity: .12; }
+#bm-glow .bm-glow-c { stop-color: var(--theme); stop-opacity: 0; }
+
+/* Postava dýchá spolu se zbytkem webu — 11 s, ±1,2 %. Víc by
+   z klidné siluety udělalo houpačku. Měkký stín pod ní ji
+   posadí NA desku; bez něj je do desky vyseknutá.             */
+.bodymap__body {
+  transform-box: view-box;
+  transform-origin: 120px 300px;
+  animation: bm-breath var(--breath) var(--ease-in-out) infinite;
+  filter: drop-shadow(0 10px 22px rgba(120, 84, 52, .16));
+}
+@keyframes bm-breath {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.012); }
+}
+
+/* Světlo putuje k oblasti, o které je řeč vpravo. */
+.bodymap__glow {
+  transform-box: view-box;
+  transition: transform 900ms var(--ease-out), opacity var(--dur-ui) var(--ease-out);
+  pointer-events: none;
+}
+
+/* ---------- šest teplých oblastí -----------------------------
+   Rozostřené skvrny v místech, kde to lidé cítí. V klidu jsou
+   sotva znát; ta, o které je zrovna řeč, se rozsvítí. Jsou to
+   ONY, co dělá ze siluety mapu — ne obrysy kostí.             */
+.bodymap__zones ellipse {
+  fill: var(--theme);
+  opacity: .06;
+  transition: opacity 460ms var(--ease-out);
+}
+.bodymap__zones ellipse.is-lit { opacity: .28; }
+
+/* Proud v durálním tubu: jedna vlna za 6,667 s = 9 cyklů/min.
+   Jediná anatomie, která na siluetě zůstala — protože je to
+   jediná anatomie, o které mluví celý web.                    */
+.bodymap__anatomy { fill: none; }
+.bodymap__flow {
+  fill: none;
+  stroke: var(--theme);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  opacity: .5;
+  stroke-dasharray: 16 152;
+  animation: bm-flow var(--breath-slow) linear infinite;
+  vector-effect: non-scaling-stroke;
+}
+@keyframes bm-flow {
+  from { stroke-dashoffset: 168; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ---------- body výběru --------------------------------------
+   VLNKA UŽ V KLIDU. Dřív se bod rozpulzoval teprve tehdy, když
+   na něj někdo najel — tedy až potom, co si domyslel, že tam
+   něco je. Teď jde vlnka shora dolů, jeden bod po druhém;
+   pořadí drží --i v HTML. Kdo se na siluetu podívá, vidí šest
+   živých míst, která na něj čekají.                            */
+.bodymap__point { cursor: pointer; }
+.bodymap__point circle.hit { fill: transparent; }
+.bodymap__point circle.ring {
+  fill: var(--surface);
+  stroke: var(--theme);
+  stroke-width: 1.6;
+  opacity: .92;
+  filter: drop-shadow(0 1px 2px rgba(70, 52, 34, .18));
+  transition: opacity var(--dur-ui) var(--ease-out),
+              stroke-width var(--dur-ui) var(--ease-out);
+}
+.bodymap__point circle.dot {
+  fill: var(--theme);
+  opacity: .8;
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+.bodymap__point circle.halo {
+  fill: var(--theme);
+  opacity: 0;
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+.bodymap__point circle.pulse {
+  fill: none;
+  stroke: var(--theme);
+  stroke-width: 1;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bm-pulse 3.6s var(--ease-out) infinite;
+  animation-delay: calc(var(--i, 0) * 440ms);
+}
+/* Jmenovka. Obtah v barvě kůže (paint-order: stroke) drží text
+   čitelný i tam, kde přechází přes siluetu.                    */
+.bodymap__label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  fill: var(--ink-2);
+  paint-order: stroke;
+  stroke: var(--skin-hi);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+  opacity: .78;
+  pointer-events: none;
+  transition: opacity var(--dur-ui) var(--ease-out), fill var(--dur-ui) var(--ease-out);
+}
+.bodymap__point:hover circle.ring,
+.bodymap__point.is-focus circle.ring,
+.bodymap__point[aria-pressed="true"] circle.ring { opacity: 1; stroke-width: 2.4; }
+.bodymap__point:hover circle.dot,
+.bodymap__point.is-focus circle.dot,
+.bodymap__point[aria-pressed="true"] circle.dot { opacity: 1; }
+/* Vybraná jmenovka se ZTMAVÍ, nepřebarví. Barva tématu na
+   teplé kůži spadne až na 3,9:1 — vybraný popisek by byl hůř
+   čitelný než nevybraný, což je přesně naopak, než jak to má
+   být. Že je vybraný, řekne kroužek, halo a plné krytí.     */
+.bodymap__point:hover .bodymap__label,
+.bodymap__point.is-focus .bodymap__label,
+.bodymap__point[aria-pressed="true"] .bodymap__label { opacity: 1; fill: var(--ink); }
+.bodymap__point[aria-pressed="true"] circle.halo { opacity: .16; }
+.bodymap__point.is-focus circle.pulse,
+.bodymap__point[aria-pressed="true"] circle.pulse {
+  animation-duration: 2.2s;
+  animation-delay: 0s;
+}
+@keyframes bm-pulse {
+  0%        { transform: scale(.62); opacity: 0; }
+  16%       { transform: scale(.86); opacity: .5; }
+  70%, 100% { transform: scale(2.6); opacity: 0; }
+}
+.bodymap__point:focus-visible { outline: none; }
+.bodymap__point:focus-visible circle.ring { stroke-width: 3.4; opacity: 1; }
+
+/* Nápověda stojí přímo pod siluetou — tam, kde se má klepnout,
+   ne v pravém horním rohu sekce. Jakmile si někdo vybere,
+   ustoupí: instrukce, kterou už člověk splnil, je šum.        */
+.bodymap__tip {
+  margin: var(--s-4) 0 0;
+  text-align: center;
+  font-size: .9rem;
+  color: var(--ink-3);
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+.bodymap__tip[data-done] { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bodymap__body, .bodymap__flow, .bodymap__point circle.pulse { animation: none; }
+  .bodymap__flow { stroke-dasharray: none; opacity: .35; }
+  .bodymap__glow { transition: none; }
+  .bodymap__zones ellipse { transition: none; }
+}
+
+/* ---------- panel vedle siluety ------------------------------
+   Karta, ne nahé bloky na desce. Panel, řádek štítků i věta,
+   kterou si člověk poskládá, stojí na jednom podkladu, takže
+   se to čte jako rozhovor: vlevo tělo, vpravo odpověď.        */
+.bodymap__side {
+  background: var(--surface);
+  border: 1px solid var(--line-sand);
+  border-radius: var(--radius);
+  padding: clamp(20px, 3vw, 34px);
+  box-shadow: var(--shadow-float);
+}
+.bodymap__panel { min-height: 12em; }
+.bodymap__no {
+  font-family: var(--font-mono); font-size: .75rem; letter-spacing: .12em;
+  color: var(--theme); text-transform: uppercase;
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.bodymap__name { font-size: var(--fs-h3); letter-spacing: var(--tr-h3); color: var(--ink); margin: var(--s-3) 0 var(--s-4); }
+.bodymap__sentence {
+  margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--line);
+  color: var(--ink); font-size: var(--fs-h4);
+}
+.bodymap__sentence[hidden] { display: none; }
+.bodymap__said { margin: 0; }
+.bodymap__tags { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-5); }
+.bodymap__tag {
+  padding: 9px var(--s-4); border-radius: var(--radius-pill);
+  border: 1px solid var(--line-ui); background: var(--surface);
+  color: var(--ink-2); font-size: .9375rem; min-height: 44px;
+  transition: background var(--dur-micro) var(--ease-out),
+              border-color var(--dur-micro) var(--ease-out),
+              color var(--dur-micro) var(--ease-out);
+}
+.bodymap__tag:hover { border-color: var(--theme); color: var(--ink); }
+.bodymap__tag[aria-pressed="true"] { background: var(--tide); border-color: var(--tide); color: #fff; }

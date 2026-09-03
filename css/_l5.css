@@ -1,0 +1,829 @@
+/* ============================================================
+   _l5 — moduly druhé vlny
+   VYZNÁNÍ (index) · STANICE a KLID (kraniosakralni-terapie)
+   · METODY a DRÁHA (o-mne)
+   ============================================================ */
+
+/* ============================================================
+   PŘEDĚL — NAPĚTÍ A UVOLNĚNÍ  (index)
+
+   Jediná mělčina úvodní stránky. Nad ní rejstřík sedmi obtíží,
+   pod ní kolo sezení; kdyby tu stál třetí ovládací panel,
+   stránka by byla jen sled ovladačů.
+
+   Sazba je VODOROVNÁ, ne svislá. Dřív tu stál jeden odstavec
+   přes půl stránky psaný velkým serifem — na výšku zabral dvě
+   obrazovky a mezi dvěma moduly to bylo zdržení. Teď: nadpis
+   přes celou šířku, struna a pod ní tři krátké sloupce.
+   Stejný obsah, třetinová výška, a hlavně se to dá přečíst
+   jedním pohledem.
+   ============================================================ */
+.band {
+  background: var(--surface-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  /* Předěl smí být kratší než plnohodnotná kapitola — je to
+     nádech, ne zastávka.                                     */
+  padding-block: clamp(72px, 9vh, 132px);
+}
+
+/* Nadpis předělu (.creed__head / .creed__key) tu už není —
+   nahradil ho výrok přes celou šířku, viz css/_l6.css § 1.
+   Zbylo záhlaví s eyebrow a nápovědou.                         */
+.creed__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+  margin-bottom: clamp(20px, 3vh, 34px);
+}
+.creed__top .eyebrow { margin-bottom: 0; }
+
+/* Struna, tři sloupce i patka jsou pryč — sekci nahradila
+   sazba, která drží a pak povolí. Všechna její pravidla stojí
+   v css/_l6.css § 1, protože jsou to pravidla jednoho celku
+   a nemají ležet ve dvou souborech. Tady po nich zůstala jen
+   tahle poznámka, aby bylo jasné, že se nezapomněla — smazala.
+
+   Smazáno spolu s nimi: js/modules/thread.js a jeho zápis
+   v KJ_LAZY v index.html.                                     */
+
+/* ============================================================
+   ČEHO SE NEBÁT — pět obav, pět scén
+
+   Scéna je velká a vlevo, protože ona nese sdělení; seznam
+   vpravo je jen kormidlo. Aktivní položka jediná dostane text
+   a bílou plochu — ostatní zůstanou řádky, ne kartami.
+
+   Pás pod nadpisem aktivní položky je odpočet do přehození.
+   Když si někdo vybere sám, automat se vypne a pás zmizí:
+   nic se nesmí hnout pod rukama toho, kdo právě čte.
+   ============================================================ */
+.calm {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  gap: clamp(28px, 4vw, 72px);
+  align-items: start;
+}
+
+/* ---------- scéna ------------------------------------------ */
+.calm__stage {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.calm__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.calm__stamp {
+  position: absolute;
+  left: var(--s-5); bottom: var(--s-4);
+  margin: 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+
+/* ---------- seznam ----------------------------------------- */
+.calm__list { display: grid; }
+.calm__item { border-top: 1px solid var(--line); }
+.calm__item:last-child { border-bottom: 1px solid var(--line); }
+
+.calm__head {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.6em 1fr;
+  align-items: baseline;
+  gap: var(--s-4);
+  width: 100%;
+  padding: clamp(16px, 1.8vw, 24px) 0 clamp(14px, 1.6vw, 20px);
+  text-align: left;
+  color: var(--ink-3);
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.calm__head:hover { color: var(--ink); }
+.calm__head:focus-visible { outline: var(--focus-ring); outline-offset: -2px; }
+.calm__no {
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  color: var(--ink-meta);
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.calm__title {
+  font-size: clamp(1.2rem, 1.9vw, 1.72rem);
+  line-height: 1.2;
+  letter-spacing: var(--tr-h3);
+  font-weight: 500;
+  color: currentColor;
+}
+.calm__item[aria-current="true"] .calm__head { color: var(--ink); }
+.calm__item[aria-current="true"] .calm__no { color: var(--tide); }
+
+/* Odpočet do přehození. Leží na spodní hraně pásu nadpisu,
+   takže nepřidá ani pixel výšky — jen se rozsvítí.           */
+.calm__meter {
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  grid-column: 1 / -1;
+  overflow: hidden;
+}
+.calm__meter-fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: var(--tide);
+  opacity: 0;
+}
+.calm[data-auto="on"] .calm__item[aria-current="true"] .calm__meter-fill { opacity: 1; }
+
+/* Text: v klidu srolovaný, aktivní se rozvine. */
+.calm__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-ui) var(--ease-out);
+}
+.calm__panel > p {
+  margin: 0;
+  overflow: hidden;
+  padding-left: calc(2.6em + var(--s-4));
+}
+.calm__panel > p > span {
+  display: block;
+  padding-bottom: clamp(18px, 2vw, 26px);
+  max-width: 44ch;
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  opacity: 0;
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+.calm__panel[hidden] { display: grid; }   /* hidden řešíme mřížkou, ne display */
+.calm__item[aria-current="true"] .calm__panel { grid-template-rows: 1fr; }
+.calm__item[aria-current="true"] .calm__panel > p > span { opacity: 1; transition-delay: 90ms; }
+
+/* ---------- patka ------------------------------------------ */
+.calm__foot {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  margin-top: clamp(28px, 3.5vh, 48px);
+}
+.calm__auto {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  padding-inline: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  color: var(--ink-3);
+  transition: color var(--dur-micro) var(--ease-out);
+}
+.calm__auto:hover { color: var(--tide); }
+.calm__auto-icon {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--tide);
+  flex: none;
+  animation: calm-pulse var(--breath-slow) var(--ease-in-out) infinite;
+}
+.calm__auto[aria-pressed="false"] .calm__auto-icon {
+  background: none;
+  border: 1px solid var(--line-ui);
+  animation: none;
+}
+@keyframes calm-pulse {
+  0%, 100% { opacity: .35; transform: scale(.8); }
+  50%      { opacity: 1;   transform: scale(1); }
+}
+
+@media (max-width: 900px) {
+  .calm { grid-template-columns: 1fr; }
+  .calm__stage { aspect-ratio: 5 / 4; }
+  .calm__foot { margin-top: var(--s-6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .calm__auto-icon { animation: none; }
+}
+
+/* ============================================================
+   PĚT STANIC — kudy ruce jdou
+
+   Osa nahoře přes celou šířku, pod ní scéna a panel vedle sebe.
+   Osa je opravdu osa: stanice sedí na jedné lince a linka se
+   plní zleva doprava, takže je vidět, jak daleko v sezení jsme.
+   ============================================================ */
+.stops { display: grid; gap: clamp(28px, 3.5vw, 52px); }
+
+/* ---------- osa -------------------------------------------- */
+.stops__rail {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--gutter);
+  padding-top: var(--s-6);
+}
+.stops__line {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 1px;
+  background: var(--line-strong);
+}
+.stops__line-fill {
+  display: block;
+  height: 100%;
+  width: 20%;
+  background: var(--tide);
+  transform-origin: left;
+  transition: width var(--dur-long) var(--ease-out);
+}
+.stops__stop {
+  position: relative;
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-5) 0 var(--s-3);
+  text-align: left;
+  align-content: start;
+  color: var(--ink-3);
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.stops__stop:hover { color: var(--ink); }
+.stops__stop:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.stops__dot {
+  position: absolute;
+  left: 0; top: -4px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--line-ui);
+  transition: background var(--dur-ui) var(--ease-out),
+              border-color var(--dur-ui) var(--ease-out),
+              transform var(--dur-ui) var(--ease-out);
+}
+.stops__stop[aria-selected="true"] .stops__dot {
+  background: var(--tide);
+  border-color: var(--tide);
+  transform: scale(1.25);
+}
+.stops__no {
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  color: var(--ink-meta);
+}
+.stops__stop[aria-selected="true"] .stops__no { color: var(--tide); }
+.stops__name {
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: currentColor;
+}
+.stops__stop[aria-selected="true"] { color: var(--ink); }
+.stops__len {
+  font-size: .7rem;
+  letter-spacing: .08em;
+  color: var(--ink-meta);
+}
+
+/* ---------- scéna a panel ---------------------------------- */
+.stops__stage,
+.stops__panels { min-width: 0; }
+
+.stops {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 981px) {
+  .stops {
+    grid-template-columns: minmax(0, 1.22fr) minmax(0, .78fr);
+    column-gap: clamp(32px, 4vw, 68px);
+  }
+  .stops__rail { grid-column: 1 / -1; }
+}
+
+.stops__stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.stops__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stops__hint {
+  position: absolute;
+  left: var(--s-5); bottom: var(--s-4);
+  margin: 0;
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-meta);
+}
+
+.stops__panels { position: relative; }
+.stops__panel[hidden] { display: none; }
+.stops__panel { animation: stops-in var(--dur-ui) var(--ease-out) both; }
+@keyframes stops-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stops__panel { animation: none; }
+}
+
+.stops__struct {
+  margin: 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--tide);
+}
+.stops__title {
+  margin: var(--s-3) 0 0;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--tr-h3);
+}
+.stops__perex {
+  margin: var(--s-4) 0 0;
+  font-size: var(--fs-lede);
+  line-height: 1.42;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  max-width: 32ch;
+}
+.stops__facts { margin: var(--s-6) 0 0; display: grid; gap: var(--s-5); }
+.stops__facts > div { display: grid; gap: var(--s-2); }
+.stops__facts dt {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.stops__facts dd {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--ink-2);
+  max-width: 46ch;
+}
+
+/* ============================================================
+   CO SE DĚJE POTOM — čtyři okna po sezení
+   ============================================================ */
+.after {
+  margin-top: clamp(56px, 8vh, 104px);
+  padding-top: clamp(32px, 4vh, 56px);
+  border-top: 1px solid var(--line);
+}
+.after__head { margin-bottom: var(--s-7); }
+.after__title {
+  margin: var(--s-3) 0 0;
+  font-size: var(--fs-h3);
+  letter-spacing: var(--tr-h3);
+}
+.after__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+  list-style: none;
+  counter-reset: none;
+}
+.after__list li {
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line-strong);
+}
+.after__when {
+  display: block;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--tide);
+  margin-bottom: var(--s-3);
+}
+.after__list p {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--ink-2);
+}
+.after__note { margin-top: var(--s-7); }
+
+@media (max-width: 980px) {
+  .stops__rail {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 0;
+    padding-left: var(--s-6);
+  }
+  /* Na úzkém displeji je osa svislá — jinak by se z pěti
+     názvů staly pěti-písmenné sloupečky.                    */
+  .stops__line { left: 4px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .stops__line-fill { width: 100%; height: 20%; transition: height var(--dur-long) var(--ease-out); }
+  .stops__stop { padding: var(--s-4) 0; }
+  .stops__dot { left: -20px; top: calc(var(--s-4) + 4px); }
+  .stops__stage { aspect-ratio: 4 / 3; }
+  .after__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6) var(--gutter); }
+}
+@media (max-width: 620px) {
+  .after__list { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   CESTA — tři kapitoly, střídavě obraz a text
+
+   Žádné listování. Tři pásy pod sebou, které se střídají
+   stranami; obraz vždy vedle textu, ke kterému patří.
+   Číslo kapitoly je v pásu vlevo nahoře, ne přes obraz.
+   ============================================================ */
+.story { display: grid; gap: clamp(56px, 8vh, 112px); }
+
+.story__row {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: center;
+}
+.story__row--flip .story__media { order: 2; }
+.story__row--flip .story__body  { order: 1; }
+
+.story__media { min-width: 0; }
+.story__body  { min-width: 0; }
+
+.story__no {
+  margin: 0 0 var(--s-4);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  color: var(--ink-meta);
+}
+.story__dek {
+  margin: 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--tide);
+}
+.story__name {
+  margin: var(--s-3) 0 0;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--tr-h3);
+}
+.story__perex {
+  margin: var(--s-4) 0 0;
+  font-size: var(--fs-lede);
+  line-height: 1.42;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  max-width: 34ch;
+}
+.story__text {
+  margin: var(--s-5) 0 0;
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+.story__body .chips { margin-top: var(--s-6); }
+
+.story__quote {
+  margin: var(--s-6) 0 0;
+  padding-left: var(--s-5);
+  border-left: 2px solid var(--tide);
+}
+.story__quote p {
+  margin: 0;
+  font-family: var(--font-italic);
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  line-height: 1.34;
+  color: var(--ink);
+  max-width: none;
+}
+
+.story__scene { display: grid; gap: var(--s-4); justify-items: center; }
+.story__hint { margin: 0; }
+
+/* ---------- dva oblouky pěti let --------------------------- */
+.rings { width: min(100%, 280px); height: auto; display: block; }
+.rings__bg { fill: none; stroke: var(--line); stroke-width: 8; }
+.rings__arc {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+}
+.rings__arc--kst { stroke: var(--tide); stroke-dashoffset: 60; }   /* 2/5 */
+.rings__arc--se  { stroke: var(--tide-warm); opacity: .55; stroke-dashoffset: 40; } /* 3/5 */
+/* Oblouky se dokreslí, až na ně dojde scroll — rodina KRESBA. */
+.js-anim [data-reveal]:not(.is-revealed) .rings__arc { stroke-dashoffset: 100; }
+.js-anim .rings__arc {
+  transition: stroke-dashoffset calc(var(--dur-scene) * var(--motion)) var(--ease-out);
+}
+.js-anim .rings__arc--se { transition-delay: calc(180ms * var(--motion)); }
+.rings__num {
+  text-anchor: middle;
+  font-family: var(--font-sans);
+  font-size: 46px;
+  font-weight: 500;
+  fill: var(--ink);
+}
+.rings__cap {
+  text-anchor: middle;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  fill: var(--ink-3);
+}
+.rings__legend {
+  display: grid;
+  gap: var(--s-2);
+  list-style: none;
+  font-size: var(--fs-small);
+  color: var(--ink-3);
+}
+.rings__legend li { display: flex; align-items: center; gap: var(--s-3); }
+.rings__key { width: 14px; height: 3px; border-radius: 2px; flex: none; }
+.rings__key--kst { background: var(--tide); }
+.rings__key--se  { background: var(--tide-warm); opacity: .55; }
+
+/* ---------- široká fotka ----------------------------------- */
+.photo--wide { aspect-ratio: 16 / 7; }
+.photo__cap {
+  margin-top: var(--s-3);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+@media (max-width: 900px) {
+  .story__row { grid-template-columns: 1fr; gap: var(--s-6); }
+  .story__row--flip .story__media,
+  .story__row--flip .story__body { order: 0; }
+  .photo--wide { aspect-ratio: 3 / 2; }
+}
+
+/* ============================================================
+   DVA PŘÍSTUPY — dvě desky na jedné hraně
+
+   Obě poloviny mají stejnou kostru a obě se čtou zleva.
+   Zrcadlení textu vypadalo hezky a četlo se špatně; symetrii
+   proto nese jen osa uprostřed, ne odstavce.
+   ============================================================ */
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: clamp(24px, 3.5vw, 56px);
+  align-items: stretch;
+}
+.pair__side {
+  display: grid;
+  align-content: start;
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line-strong);
+}
+.pair__no {
+  margin: 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  color: var(--ink-meta);
+}
+.pair__name {
+  margin: var(--s-3) 0 0;
+  font-size: clamp(1.35rem, 2.1vw, 1.95rem);
+  line-height: 1.14;
+  letter-spacing: var(--tr-h3);
+  text-wrap: balance;
+}
+.pair__kicker {
+  margin: var(--s-3) 0 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--tide);
+}
+.pair__text {
+  margin: var(--s-5) 0 0;
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  max-width: 40ch;
+}
+.pair__points {
+  margin: var(--s-5) 0 0;
+  display: grid;
+  gap: var(--s-3);
+  list-style: none;
+}
+.pair__points li {
+  position: relative;
+  padding-left: var(--s-5);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--ink);
+}
+.pair__points li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .62em;
+  width: 10px; height: 1px;
+  background: var(--tide);
+}
+
+.pair__axis {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1px;
+  background: var(--line-strong);
+}
+.pair__amp {
+  display: grid;
+  place-items: center;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  font-family: var(--font-italic);
+  font-size: 1.6rem;
+  color: var(--ink-3);
+}
+
+.pair__close {
+  grid-column: 1 / -1;
+  margin-top: clamp(36px, 5vh, 64px);
+  padding-top: clamp(24px, 3vh, 40px);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: var(--s-3);
+  justify-items: center;
+  text-align: center;
+}
+.pair__claim {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+  letter-spacing: var(--tr-h3);
+  color: var(--ink);
+  max-width: 24ch;
+  text-wrap: balance;
+}
+.pair__note {
+  margin: 0;
+  font-family: var(--font-italic);
+  font-size: var(--fs-lede);
+  color: var(--ink-3);
+  max-width: none;
+}
+
+@media (max-width: 820px) {
+  .pair { grid-template-columns: 1fr; gap: var(--s-7); }
+  .pair__axis {
+    width: auto; height: 1px;
+    background: var(--line-strong);
+  }
+  .pair__amp { background: var(--surface-2); }
+}
+
+/* ============================================================
+   O MNĚ — přestavěná stránka
+
+   Zadaný text je souvislé vyprávění o šesti odstavcích. Jako
+   šest odstavců pod sebou by to byla kniha; kdo si vybírá
+   terapeuta, knihu nečte — projede stránku očima a hledá dvě
+   věci: komu se svěřuje a jestli tomu bude rozumět.
+
+   Proto má každý odstavec zadání SVOU sekci s vlastním
+   nadpisem a vlastním obrazem:
+
+     věta 1  → představení (jméno velké, zbytek perexem)
+     věta 2  → dvě desky vedle sebe (sestra & Somatic Experiencing)
+     věta 3  → MOST, který se dokreslí
+     věta 4  → spojené nádoby + mechanismus příčina → důsledek
+     věta 5  → mělčina „bezpečný prostor“, dvě fotky
+     věta 6  → závěr na pískové ploše, kde stránka začala
+
+   Nic se z textu neztratilo a nic se nepřidalo. Změnilo se
+   jen pořadí, ve kterém do toho oko vstupuje.
+   ============================================================ */
+
+/* ---------- 01 představení --------------------------------- */
+.me-hero__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: center;
+}
+.me-hero__text  { grid-column: 1 / 7; }
+.me-hero__media { grid-column: 8 / -1; }
+/* Jméno je jediné, co má na téhle stránce nést hlas. Vlastní
+   velikost, ne --fs-h1: nadpis stojí v šesti sloupcích, kde by
+   globální škála přetekla.                                    */
+.me-hero__title {
+  font-size: clamp(2.7rem, 6.4vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -.02em;
+}
+.me-hero__title .line-mask { padding-bottom: .15em; margin-bottom: -.15em; }
+.me-hero__lede { margin-top: var(--s-6); max-width: 38ch; }
+.me-hero__cap {
+  display: block;
+  margin-top: var(--s-3);
+  font-size: .6875rem;
+  letter-spacing: .1em;
+  color: var(--ink-2);
+}
+@media (max-width: 900px) {
+  .me-hero__grid { grid-template-columns: 1fr; gap: var(--s-7); }
+  .me-hero__text { grid-column: 1; grid-row: 2; }
+  .me-hero__media { grid-column: 1; grid-row: 1; max-width: 360px; }
+  .me-hero__lede { max-width: var(--measure); }
+}
+
+/* ---------- 05 mechanismus příčina → důsledek ---------------
+   Vlevo, co si tělo uloží; vpravo, co je z toho vidět. Mezi
+   nimi šipka. Návštěvník najde v pravém sloupci SVOJE slovo —
+   a to je ten okamžik, kvůli kterému na stránku přišel.      */
+.mech {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(24px, 3.6vw, 48px);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+}
+.mech__label {
+  margin: 0 0 var(--s-4);
+  font-size: .6875rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.mech__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+.mech__list li {
+  position: relative;
+  padding-left: var(--s-5);
+  font-size: var(--fs-body);
+  color: var(--ink);
+}
+.mech__list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .62em;
+  width: 8px; height: 1px;
+  background: var(--line-ui);
+}
+/* Pravý sloupec je důsledek, ne výčet — proto značka místo
+   pomlčky a přílivová barva.                                 */
+.mech__list--out li::before {
+  top: .48em;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--tide);
+}
+.mech__arrow { color: var(--ink-3); }
+.mech__arrow svg { display: block; width: clamp(34px, 4vw, 64px); height: auto; }
+.mech__claim {
+  margin: clamp(28px, 4vh, 48px) 0 0;
+  font-size: var(--fs-lede);
+  line-height: 1.42;
+  letter-spacing: -.012em;
+  color: var(--ink);
+  max-width: 62ch;
+}
+@media (max-width: 780px) {
+  .mech { grid-template-columns: 1fr; gap: var(--s-5); }
+  .mech__arrow { justify-self: start; transform: rotate(90deg); }
+}
+
+/* ---------- 08 závěr --------------------------------------- */
+.me-end {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: end;
+}
+.me-end__line {
+  grid-column: 1 / 8;
+  margin: 0;
+  font-size: clamp(2.2rem, 5.2vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: -.02em;
+}
+.me-end__line .line-mask { padding-bottom: .15em; margin-bottom: -.15em; }
+.me-end__side { grid-column: 8 / -1; }
+.me-end__side p { color: var(--ink-2); max-width: 38ch; }
+@media (max-width: 900px) {
+  .me-end { grid-template-columns: 1fr; gap: var(--s-7); align-items: start; }
+  .me-end__line, .me-end__side { grid-column: 1; }
+}

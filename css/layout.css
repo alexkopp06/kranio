@@ -1,0 +1,318 @@
+/* ============================================================
+   layout.css — mřížka, sekce, vodoryska, navigace, patička
+   ============================================================ */
+
+/* ---------- MŘÍŽKA ------------------------------------------ */
+.wrap {
+  width: 100%;
+  max-width: calc(var(--maxw) + 2 * var(--edge));
+  margin-inline: auto;
+  padding-inline: var(--edge);
+}
+
+/* Obsah je odsazený od levého okraje o pruh linky dechu */
+.wrap--rail { padding-left: calc(var(--edge) + var(--rail)); }
+@media (max-width: 720px) {
+  .wrap--rail { padding-left: calc(var(--edge) + 20px); }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+@media (max-width: 900px)  { .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (max-width: 560px)  { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.c1-5  { grid-column: 1 / 6; }
+.c1-6  { grid-column: 1 / 7; }
+.c1-7  { grid-column: 1 / 8; }
+.c1-8  { grid-column: 1 / 9; }
+.c1-12 { grid-column: 1 / -1; }
+.c7-12 { grid-column: 7 / -1; }
+.c8-12 { grid-column: 8 / -1; }
+.c6-12 { grid-column: 6 / -1; }
+.c9-12 { grid-column: 9 / -1; }
+@media (max-width: 900px) {
+  .c1-5, .c1-6, .c1-7, .c1-8, .c7-12, .c8-12, .c6-12, .c9-12 { grid-column: 1 / -1; }
+}
+
+/* ---------- SEKCE ------------------------------------------- */
+.section {
+  position: relative;
+  padding-block: var(--section);
+}
+.section--tight { padding-block: clamp(56px, 8vh, 112px); }
+
+/* Vodoryska: plocha se mění v mělčinu.
+   Není to linka — je to změna tónu s 1px hranou.              */
+.tide-in {
+  background: var(--surface-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.sand-in {
+  background: var(--sand);
+  border-top: 1px solid var(--line-sand);
+  border-bottom: 1px solid var(--line-sand);
+}
+
+/* Hlavička sekce — asymetrická: titul vlevo, doprovod vpravo */
+.section-head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: end;
+  margin-bottom: clamp(40px, 6vh, 80px);
+}
+.section-head__title { grid-column: 1 / 8; }
+.section-head__aside { grid-column: 9 / -1; padding-bottom: .4em; }
+@media (max-width: 900px) {
+  .section-head { grid-template-columns: 1fr; }
+  .section-head__title, .section-head__aside { grid-column: 1; }
+  .section-head__aside { padding-bottom: 0; }
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+  color: var(--ink-3);
+}
+.eyebrow::before {
+  content: "";
+  width: 22px; height: 1px;
+  background: var(--theme);
+  flex: none;
+  transition: background var(--dur-ui) var(--ease-out);
+}
+
+/* ---------- LINKA DECHU (signature) ------------------------- */
+.breathline {
+  position: fixed;
+  left: 0; top: 0;
+  width: var(--rail);
+  height: 100%;
+  z-index: var(--z-rail);
+  pointer-events: none;
+}
+@media (max-width: 720px) { .breathline { width: 20px; } }
+
+/* ---------- NAVIGACE ---------------------------------------- */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  border-bottom: 1px solid transparent;
+  transition: transform var(--dur-ui) var(--ease-out),
+              background var(--dur-ui) var(--ease-out),
+              border-color var(--dur-ui) var(--ease-out);
+}
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  .nav { background: var(--bg); }
+}
+.nav[data-stuck="true"]  { border-bottom-color: var(--line); }
+.nav[data-hidden="true"] { transform: translateY(-100%); }
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter);
+  min-height: 68px;
+  padding-block: var(--s-3);
+}
+@media (min-width: 900px) { .nav__inner { min-height: 76px; } }
+
+.nav__brand {
+  font-weight: 500;
+  font-size: 1.0625rem;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  margin-right: auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.nav__links { display: none; gap: clamp(18px, 2vw, 34px); }
+@media (min-width: 900px) { .nav__links { display: flex; } }
+
+.nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+  color: var(--ink-2);
+  font-size: .9875rem;
+  white-space: nowrap;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 8px;
+  height: 1px;
+  background: var(--tide);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform calc(var(--dur-ui) * var(--motion)) var(--ease-out);
+}
+.nav__link:hover { color: var(--ink); }
+.nav__link:hover::after,
+.nav__link[aria-current="page"]::after { transform: scaleX(1); }
+.nav__link[aria-current="page"] { color: var(--ink); }
+
+.nav__tel {
+  display: none;
+  text-decoration: none;
+  color: var(--ink-2);
+  white-space: nowrap;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+}
+@media (min-width: 1024px) { .nav__tel { display: inline-flex; } }
+.nav__tel:hover { color: var(--tide); }
+
+/* Pozor: .btn v components.css nastavuje display: inline-flex se
+   stejnou specificitou a načítá se později — proto tady dvě třídy.
+   Bez toho by na 360 px svítilo v hlavičce CTA vedle hamburgeru
+   a jméno by se ořízlo. Akce na mobilu nese spodní lišta.        */
+.nav .nav__cta { display: none; }
+@media (min-width: 620px) { .nav .nav__cta { display: inline-flex; } }
+
+.nav__burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  margin-right: -12px;
+  border-radius: var(--radius);
+  color: var(--ink);
+}
+@media (min-width: 900px) { .nav__burger { display: none; } }
+.nav__burger rect { transition: transform var(--dur-ui) var(--ease-out); transform-origin: center; }
+.nav__burger[aria-expanded="true"] rect:nth-of-type(1) { transform: translateY(5px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] rect:nth-of-type(2) { transform: translateY(-5px) rotate(-45deg); }
+
+/* Mobilní menu */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  background: var(--bg);
+  display: grid;
+  align-content: center;
+  padding: var(--edge);
+  padding-bottom: 140px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-ui) var(--ease-out), visibility var(--dur-ui);
+}
+.menu[data-open="true"] { opacity: 1; visibility: visible; }
+.menu__list { display: grid; gap: var(--s-2); }
+.menu__link {
+  display: block;
+  font-size: clamp(1.75rem, 8vw, 2.6rem);
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  color: var(--ink);
+  text-decoration: none;
+  padding-block: var(--s-3);
+  font-weight: 500;
+}
+.menu__link[aria-current="page"] { color: var(--tide); }
+.menu__meta { margin-top: var(--s-7); display: grid; gap: var(--s-3); }
+.menu__meta a { color: var(--ink-2); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+
+/* Pevná spodní lišta na mobilu — telefon konvertuje líp než formulář */
+.bottombar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: var(--z-bottombar);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line-strong);
+  border-top: 1px solid var(--line-strong);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+@media (min-width: 900px) { .bottombar { display: none; } }
+.bottombar__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 56px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.bottombar__btn--primary { background: var(--tide); color: #fff; }
+.bottombar__btn:active { background: var(--surface-2); }
+.bottombar__btn--primary:active { background: var(--tide-deep); }
+
+@media (max-width: 899px) { body { padding-bottom: 56px; } }
+
+/* ---------- PATIČKA ----------------------------------------- */
+.footer {
+  position: relative;
+  background: var(--surface-2);
+  border-top: 1px solid var(--line);
+  padding-block: clamp(56px, 8vh, 96px) var(--s-7);
+}
+.footer__grid {
+  display: grid;
+  gap: clamp(32px, 5vh, 56px);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 780px) { .footer__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+
+.footer__title { font-size: var(--fs-h4); color: var(--ink); margin-bottom: var(--s-4); }
+.footer__list { display: grid; gap: 0; }
+/* Klikací plocha alespoň 44 px — publikum má 45+ a mobil v ruce. */
+.footer__list a, .footer__list span {
+  display: flex; align-items: center; min-height: 44px;
+  color: var(--ink-2); text-decoration: none;
+}
+.footer__list a:hover { color: var(--tide); text-decoration: underline; text-underline-offset: 4px; }
+
+.footer__legal {
+  margin-top: clamp(40px, 6vh, 72px);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line-strong);
+  display: grid;
+  gap: var(--s-4);
+  color: var(--ink-3);
+  font-size: .9rem;
+}
+@media (min-width: 780px) {
+  .footer__legal { grid-template-columns: 1fr auto; align-items: start; }
+}
+.footer__disclaimer { max-width: 62ch; }
+
+address { font-style: normal; }
+
+/* ---------- PAGER ------------------------------------------- */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gutter);
+  padding-block: clamp(40px, 6vh, 72px);
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+}
+.pager:hover .pager__title { color: var(--tide); }
+.pager__label { color: var(--ink-3); }
+.pager__title { font-size: var(--fs-h3); letter-spacing: var(--tr-h3); transition: color var(--dur-micro) var(--ease-out); }
+.pager__arrow { flex: none; color: var(--tide); transition: transform var(--dur-ui) var(--ease-out); }
+.pager:hover .pager__arrow { transform: translateX(4px); }

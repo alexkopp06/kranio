@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="cs" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Průběh a&nbsp;ceník — 75 minut, od 1&nbsp;500&nbsp;Kč</title>
+<meta name="description" content="Jak sezení probíhá minutu po minutě, co si vzít s sebou, kolik to stojí a kdy terapie vhodná není. Sedm častých otázek a tři cesty, jak se objednat.">
+<link rel="canonical" href="https://www.example.cz/prubeh-a-cenik.html">
+<meta name="theme-color" content="#F2F3EF">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Průběh a ceník — kraniosakrální terapie">
+<meta property="og:description" content="75 minut, od 1 500 Kč, zůstáváte oblečení. Přesně víte, co vás čeká.">
+<meta property="og:image" content="assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="preload" href="fonts/instrumentsans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/modules.css">
+<link rel="stylesheet" href="css/_l1.css">
+<link rel="stylesheet" href="css/_l2.css">
+<link rel="stylesheet" href="css/_l3.css">
+<link rel="stylesheet" href="css/_l4.css">
+<link rel="stylesheet" href="css/_l5.css">
+
+<script>/* Skrytí pro animaci nasazujeme jen tam, kde je čím animovat.
+   Když uživatel nechce pohyb, obsah se nikdy neskryje.
+   Pojistka: kdyby se core.js nenačetl nebo cokoli spadlo,
+   po 2 s masku strhneme natvrdo. Web bez efektu je pořád web,
+   web bez textu není nic. core.js pojistku převezme. */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  document.documentElement.classList.add("js-anim");
+  window.__kjRevealGuard=setTimeout(function(){document.documentElement.classList.remove("js-anim")},2000);
+}</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Je to masáž? Musím se svlékat?", "acceptedAnswer": { "@type": "Answer", "text": "Ne. Kraniosakrální terapie není masáž — pracuje s velmi jemným, klidným dotekem, často jen o váze mince. Celé ošetření probíhá v pohodlném oblečení, vleže na lehátku. Stačí přijít v něčem, v čem se vám dobře leží." } },
+    { "@type": "Question", "name": "Jak se budu cítit po ošetření?", "acceptedAnswer": { "@type": "Answer", "text": "Nejčastěji přichází hluboké uvolnění a klid; někdy také příjemná únava — tělo pokračuje v procesu ještě několik hodin i dní. Dopřejte si po sezení klidnější zbytek dne, dostatek vody a pokud možno neplánujte hned náročný program." } },
+    { "@type": "Question", "name": "Kolik sezení budu potřebovat?", "acceptedAnswer": { "@type": "Answer", "text": "Je to individuální. U akutních obtíží často stačí 1–3 sezení, u dlouhodobých témat se účinek prohlubuje postupně — proto nabízím zvýhodněné balíčky. Po prvním sezení si společně řekneme, co dává smysl dál. První návštěva vás k ničemu nezavazuje." } },
+    { "@type": "Question", "name": "Je terapie vhodná pro děti a těhotné?", "acceptedAnswer": { "@type": "Answer", "text": "Ano — právě díky své jemnosti je kraniosakrální terapie vhodná pro miminka, děti i těhotné ženy. U těhotenství a u miminek se vždy nejprve krátce domluvíme na vaší konkrétní situaci." } },
+    { "@type": "Question", "name": "Kdy terapie vhodná není?", "acceptedAnswer": { "@type": "Answer", "text": "Ošetření odkládáme při akutním horečnatém onemocnění, čerstvém úrazu hlavy či páteře a bezprostředně po operaci. Pokud si nejste jistí, napište mi předem — společně to posoudíme, případně doporučím nejdřív návštěvu lékaře." } },
+    { "@type": "Question", "name": "Co si vzít s sebou?", "acceptedAnswer": { "@type": "Answer", "text": "Jen pohodlné oblečení a pokud možno trochu času navíc — ať nemusíte ze sezení spěchat rovnou do shonu. Vše ostatní je na místě připravené." } },
+    { "@type": "Question", "name": "Jak probíhá platba a přesun termínu?", "acceptedAnswer": { "@type": "Answer", "text": "Platba probíhá osobně po sezení, hotově nebo převodem. Pokud vám termín nevyjde, dejte mi prosím vědět alespoň 24 hodin předem — přesuneme ho zdarma na jiný den." } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<div class="grain" aria-hidden="true"></div>
+<canvas class="breathline" data-breathline aria-hidden="true"></canvas>
+
+<header class="nav" data-nav>
+  <div class="wrap nav__inner">
+    <a class="nav__brand" href="index.html">Katka Jüttnerová</a>
+    <nav class="nav__links" aria-label="Hlavní navigace">
+      <a class="nav__link" href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+      <a class="nav__link" href="s-cim-pomaham.html">S&nbsp;čím pomáhám</a>
+      <a class="nav__link" href="o-mne.html">O&nbsp;mně</a>
+      <a class="nav__link" href="prubeh-a-cenik.html" aria-current="page">Průběh a&nbsp;ceník</a>
+    </nav>
+    <a class="nav__tel" href="tel:+420776021297">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h2.2l1 2.6L4.8 6.4a8 8 0 0 0 4.8 4.8l1.3-1.4 2.6 1V13a1 1 0 0 1-1.1 1A11 11 0 0 1 2 3.6 1 1 0 0 1 3 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      <span class="mono mono--plain">+420&nbsp;776&nbsp;021&nbsp;297</span>
+    </a>
+    <a class="btn btn--primary btn--sm nav__cta" href="#objednani"><span>Rezervovat termín</span></a>
+    <button class="nav__burger" data-burger aria-expanded="false" aria-controls="menu" aria-label="Otevřít menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="8" width="18" height="1.5" fill="currentColor"/>
+        <rect x="3" y="15" width="18" height="1.5" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-menu aria-hidden="true">
+  <div class="wrap">
+    <nav class="menu__list" aria-label="Hlavní navigace, mobilní">
+      <a class="menu__link" href="index.html">Úvod</a>
+      <a class="menu__link" href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+      <a class="menu__link" href="s-cim-pomaham.html">S&nbsp;čím pomáhám</a>
+      <a class="menu__link" href="o-mne.html">O&nbsp;mně</a>
+      <a class="menu__link" href="prubeh-a-cenik.html" aria-current="page">Průběh a&nbsp;ceník</a>
+    </nav>
+    <div class="menu__meta">
+      <a class="mono mono--plain" href="tel:+420776021297">+420&nbsp;776&nbsp;021&nbsp;297</a>
+      <a class="mono mono--plain" href="mailto:katkajuttnerova@seznam.cz">katkajuttnerova@seznam.cz</a>
+    </div>
+  </div>
+</div>
+
+<main id="obsah">
+
+  <!-- ══ HERO ══════════════════════════════════════════════════ -->
+  <section class="section" style="padding-top: clamp(120px, 16vh, 190px); padding-bottom: clamp(48px, 7vh, 96px)">
+    <div class="wrap wrap--rail">
+      <div class="grid">
+        <div class="c1-7">
+          <p class="eyebrow mono" data-reveal>Průběh a&nbsp;ceník</p>
+          <h1 data-reveal>
+            <span class="line-mask"><span>75 minut.</span></span>
+            <span class="line-mask"><span>Víte přesně,</span></span>
+            <span class="line-mask"><span><em class="em">co vás čeká</em>.</span></span>
+          </h1>
+          <p class="lede" style="margin-top: var(--s-6)" data-reveal data-reveal-delay="120">
+            Minutu po minutě, korunu po koruně. Včetně toho, kdy terapie vhodná není.
+          </p>
+        </div>
+
+        <div class="c9-12" style="align-self: end" data-reveal data-reveal-delay="180">
+          <dl class="stats" style="grid-template-columns: 1fr">
+            <div><dt class="num">75&nbsp;min</dt><dd>jedno sezení, z&nbsp;toho ≈&nbsp;50 minut na lehátku</dd></div>
+            <div><dt class="num">1&nbsp;500&nbsp;Kč</dt><dd>jedno ošetření, balíčky se slevou</dd></div>
+          </dl>
+          <a class="btn btn--primary btn--lg" href="#objednani" style="width: 100%; margin-top: var(--s-6)"><span>Rezervovat termín</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ KOLO SEZENÍ — 75 MINUT VE TŘECH ČÁSTECH ═══════════════
+       Tři části sezení jako prostorový kruhový graf. Uživatel
+       kolem otáčí, vybírá části a v nich jednotlivé momenty.
+       Bez JS zůstane čitelný seznam — obsah je celý v HTML.   -->
+  <section class="section tide-in" id="prubeh" aria-labelledby="prubeh-t">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Průběh sezení</p>
+          <h2 id="prubeh-t" data-reveal>
+            <span class="line-mask"><span>Co se se mnou</span></span>
+            <span class="line-mask"><span>bude dít?</span></span>
+          </h2>
+        </div>
+        <div class="section-head__aside">
+          <p class="hint" data-reveal><span class="hint__dot" aria-hidden="true"></span> Vyberte část kola — nebo jím otočte tažením</p>
+        </div>
+      </div>
+
+      <div class="wheel" data-wheel data-reveal>
+
+        <!-- ---------- prostorový graf ---------- -->
+        <div class="wheel__stage">
+          <div class="wheel__disc" data-wheel-disc>
+            <canvas data-wheel-canvas aria-hidden="true"></canvas>
+            <div class="wheel__core" aria-hidden="true">
+              <span class="wheel__core-num" data-wheel-num>50</span>
+              <span class="wheel__core-unit mono">minut</span>
+              <span class="wheel__core-span mono" data-wheel-span>15 → 65</span>
+            </div>
+          </div>
+          <p class="wheel__scale mono" aria-hidden="true">
+            <span>0</span><span class="wheel__scale-line"></span><span>75 min</span>
+          </p>
+        </div>
+
+        <!-- ---------- ovládání a text ---------- -->
+        <div class="wheel__panel">
+
+          <div class="wheel__legend" role="tablist" aria-label="Části sezení">
+            <button class="wseg" type="button" role="tab" id="wtab-1"
+                    aria-controls="wpan-1" aria-selected="false" tabindex="-1"
+                    data-wheel-tab="0" style="--seg: var(--seg-1)">
+              <span class="wseg__mark" aria-hidden="true"></span>
+              <span class="wseg__name">Úvodní rozhovor</span>
+              <span class="wseg__min mono">15&nbsp;min</span>
+              <span class="wseg__meter" aria-hidden="true"><i style="--w: 20%"></i></span>
+            </button>
+            <button class="wseg" type="button" role="tab" id="wtab-2"
+                    aria-controls="wpan-2" aria-selected="true"
+                    data-wheel-tab="1" style="--seg: var(--seg-2)">
+              <span class="wseg__mark" aria-hidden="true"></span>
+              <span class="wseg__name">Ošetření na&nbsp;lehátku</span>
+              <span class="wseg__min mono">50&nbsp;min</span>
+              <span class="wseg__meter" aria-hidden="true"><i style="--w: 66.7%"></i></span>
+            </button>
+            <button class="wseg" type="button" role="tab" id="wtab-3"
+                    aria-controls="wpan-3" aria-selected="false" tabindex="-1"
+                    data-wheel-tab="2" style="--seg: var(--seg-3)">
+              <span class="wseg__mark" aria-hidden="true"></span>
+              <span class="wseg__name">Doznění a&nbsp;rozloučení</span>
+              <span class="wseg__min mono">10&nbsp;min</span>
+              <span class="wseg__meter" aria-hidden="true"><i style="--w: 13.3%"></i></span>
+            </button>
+          </div>
+
+          <!-- ---------- část 1 ---------- -->
+          <div class="wpan" id="wpan-1" role="tabpanel" aria-labelledby="wtab-1"
+               data-wheel-panel="0" style="--seg: var(--seg-1)">
+            <p class="wpan__range mono">0&nbsp;→&nbsp;15 min · pětina sezení</p>
+            <h3 class="wpan__title">Úvodní rozhovor</h3>
+            <p class="wpan__lede">Sedneme si. Beze spěchu si řekneme, s&nbsp;čím přicházíte
+              a&nbsp;co budu dělat. Nic se nesvléká a&nbsp;nevyplňují se žádné formuláře.</p>
+
+            <dl class="wcols">
+              <div class="wcol" data-wheel-col="me">
+                <dt>Co dělám já</dt>
+                <dd>Ptám se, s&nbsp;čím přicházíte a&nbsp;co se dělo od&nbsp;minula. Vysvětlím, co budu dělat a&nbsp;čeho se dotknu. Nevyplňujeme formuláře.</dd>
+              </div>
+              <div class="wcol" data-wheel-col="you">
+                <dt>Co děláte vy</dt>
+                <dd>Řeknete, co vás trápí — klidně i&nbsp;to, co zní hloupě. Ptáte se na&nbsp;cokoli a&nbsp;můžete říct, kam se dotýkat nechcete.</dd>
+              </div>
+              <div class="wcol" data-wheel-col="body">
+                <dt>Co může dělat tělo</dt>
+                <dd>Ještě je v&nbsp;pohotovosti. To je v&nbsp;pořádku — teprve se rozhoduje, jestli je tu bezpečno.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- ---------- část 2 ---------- -->
+          <div class="wpan" id="wpan-2" role="tabpanel" aria-labelledby="wtab-2"
+               data-wheel-panel="1" style="--seg: var(--seg-2)">
+            <p class="wpan__range mono">15&nbsp;→&nbsp;65 min · dvě třetiny sezení</p>
+            <h3 class="wpan__title">Ošetření na&nbsp;lehátku</h3>
+            <p class="wpan__lede">Ležíte oblečení a&nbsp;přikrytí. Ruce spočinou a&nbsp;čekají —
+              nejčastěji na&nbsp;kosti křížové nebo na&nbsp;hlavě. Váha doteku je asi pět gramů.</p>
+
+            <dl class="wcols">
+              <div class="wcol" data-wheel-col="me">
+                <dt>Co dělám já</dt>
+                <dd>Přikryji vás a&nbsp;položím ruce, nejčastěji na&nbsp;kost křížovou nebo na&nbsp;hlavu. Pak už jen čekám a&nbsp;sleduji, kde se rytmus prodlužuje. Ke&nbsp;konci kontakt postupně ubírám.</dd>
+              </div>
+              <div class="wcol" data-wheel-col="you">
+                <dt>Co děláte vy</dt>
+                <dd>Ležíte v&nbsp;oblečení a&nbsp;nemusíte nic říkat ani dělat. Můžete usnout. Kdykoli můžete říct, ať přestanu.</dd>
+              </div>
+              <div class="wcol" data-wheel-col="body">
+                <dt>Co může dělat tělo</dt>
+                <dd>Napětí, které drželo, začne povolovat — někdy po&nbsp;vrstvách. Může nastat still point: krátká pauza, po&nbsp;které se rytmus vrací pomalejší a&nbsp;plnější.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- ---------- část 3 ---------- -->
+          <div class="wpan" id="wpan-3" role="tabpanel" aria-labelledby="wtab-3"
+               data-wheel-panel="2" style="--seg: var(--seg-3)">
+            <p class="wpan__range mono">65&nbsp;→&nbsp;75 min · závěr</p>
+            <h3 class="wpan__title">Doznění a&nbsp;rozloučení</h3>
+            <p class="wpan__lede">Nikdo vás nikam nežene. Vrátíte se vlastním tempem
+              a&nbsp;pak si řekneme, co se dělo a&nbsp;co dává smysl dál.</p>
+
+            <dl class="wcols">
+              <div class="wcol" data-wheel-col="me">
+                <dt>Co dělám já</dt>
+                <dd>Nechávám vám čas, nikdo vás nebudí. Pak si řekneme, co se dělo a&nbsp;co dává smysl dál — někdy stačí jedno sezení, někdy jich je potřeba pět.</dd>
+              </div>
+              <div class="wcol" data-wheel-col="you">
+                <dt>Co děláte vy</dt>
+                <dd>Ležíte, dokud potřebujete, a&nbsp;vstáváte pomalu. Sdílíte, co jste vnímali — nebo mlčíte, když se vám mluvit nechce.</dd>
+              </div>
+              <div class="wcol" data-wheel-col="body">
+                <dt>Co může dělat tělo</dt>
+                <dd>Ukládá si, co se stalo. Bývá těžké a&nbsp;teplé a&nbsp;doznívá ještě několik dní.</dd>
+              </div>
+            </dl>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---------- co platí po celou dobu ---------- -->
+      <div class="wheel__foot">
+        <ul class="wheel__assure" data-reveal>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Ležíte oblečení v&nbsp;pohodlném oděvu. Není to masáž.</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Nemusíte nic říkat.</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Můžete usnout — je to v&nbsp;pořádku.</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Kdykoli můžete říct, ať přestanu.</li>
+        </ul>
+        <p class="wheel__claim" data-reveal>Tempo určuje tělo, ne&nbsp;hodiny.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PRVNÍ NÁVŠTĚVA KROK ZA KROKEM ═════════════════════════ -->
+  <section class="section tide-in" aria-labelledby="prvni">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>První návštěva</p>
+          <h2 id="prvni" data-reveal>
+            <span class="line-mask"><span>Krok za krokem,</span></span>
+            <span class="line-mask"><span>ať vás nic nepřekvapí.</span></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="steps" data-reveal>
+        <div class="steps__item">
+          <h4>V&nbsp;čem přijít</h4>
+          <p>Pohodlné oblečení, ve kterém se vám dobře leží. Nic se nesvléká. Klidně tepláky
+            a&nbsp;mikinu — na lehátku se přikryjete.</p>
+        </div>
+        <div class="steps__item">
+          <h4>Co si vzít</h4>
+          <p>Jen sebe. Případně ponožky, kdyby vám byla zima. Vše ostatní je připravené na místě.</p>
+        </div>
+        <div class="steps__item">
+          <h4>Kdy dorazit</h4>
+          <p>Pár minut před domluveným časem stačí. Nespěchejte — první minuty jsou na to,
+            abyste se usadili.</p>
+        </div>
+        <div class="steps__item">
+          <h4>Co se děje po příchodu</h4>
+          <p>Sedneme si a&nbsp;chvíli si povídáme. Zeptám se, s&nbsp;čím přicházíte a&nbsp;co byste potřebovali.
+            Vysvětlím, čeho se budu dotýkat, a&nbsp;domluvíme se, co je pro vás v&nbsp;pořádku.</p>
+        </div>
+        <div class="steps__item">
+          <h4>Během ošetření</h4>
+          <p>Ležíte na lehátku, oblečení. Ruce spočinou — nejčastěji na kosti křížové nebo na hlavě.
+            Nemusíte nic dělat ani říkat. Můžete usnout.</p>
+        </div>
+        <div class="steps__item">
+          <h4>Po sezení</h4>
+          <p>Dopřejte si vodu a&nbsp;klidnější zbytek dne. Neplánujte hned náročný program.
+            Někdy přijde příjemná únava — tělo pokračuje v&nbsp;procesu ještě několik hodin.</p>
+        </div>
+        <div class="steps__item">
+          <h4>Jak dlouho to doznívá</h4>
+          <p>Ještě několik dní. Proto se u&nbsp;dlouhodobých témat sezení opakují — tělo si nový stav
+            postupně zapamatuje.</p>
+        </div>
+        <div class="steps__item">
+          <h4>Co dál</h4>
+          <p>Po prvním sezení si řekneme, co dává smysl. Někdy stačí jedno. Někdy je potřeba pět.
+            První návštěva vás k&nbsp;ničemu nezavazuje.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CENÍK ═════════════════════════════════════════════════ -->
+  <section class="section" id="cenik" aria-labelledby="cenik-t">
+    <div class="wrap wrap--rail">
+      <div class="grid">
+        <div class="c1-6">
+          <p class="eyebrow mono" data-reveal>Ceník</p>
+          <h2 id="cenik-t" data-reveal>
+            <span class="line-mask"><span>Ceny</span></span>
+            <span class="line-mask"><span>a&nbsp;balíčky.</span></span>
+          </h2>
+          <p style="margin-top: var(--s-6)" data-reveal>
+            Balíčky lze čerpat postupně — hodí se pro dlouhodobější práci s&nbsp;tělem, kde se účinek
+            prohlubuje sezení po sezení.
+          </p>
+
+          <h3 style="font-size: var(--fs-h4); margin: var(--s-7) 0 var(--s-5)" data-reveal>Co je v&nbsp;ceně</h3>
+          <ul class="checks" data-reveal>
+            <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Celých 75 minut — rozhovor, ošetření i&nbsp;doznění</li>
+            <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Platba osobně po sezení, hotově nebo převodem</li>
+            <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Přesun termínu zdarma při ohlášení min. 24&nbsp;h předem</li>
+            <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Termíny podle vzájemné dohody</li>
+            <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> První návštěva bez závazku pokračovat</li>
+          </ul>
+
+          <div class="actions" style="margin-top: var(--s-7)" data-reveal>
+            <a class="btn btn--primary" href="#objednani"><span>Vybrat termín</span></a>
+          </div>
+        </div>
+
+        <div class="c8-12" data-reveal>
+          <div class="prices">
+            <div class="price">
+              <div class="price__name">Jedno ošetření <span class="price__save">75 minut</span></div>
+              <div class="price__value">1&nbsp;500&nbsp;Kč</div>
+            </div>
+            <div class="price">
+              <div class="price__name">Balíček 3 ošetření <span class="price__save">ušetříte 500&nbsp;Kč</span></div>
+              <div class="price__value">4&nbsp;000&nbsp;Kč</div>
+            </div>
+            <div class="price">
+              <div class="price__name">Balíček 5 ošetření <span class="price__save">ušetříte 1&nbsp;000&nbsp;Kč</span></div>
+              <div class="price__value">6&nbsp;500&nbsp;Kč</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PRO KOHO TO TEĎ NENÍ ══════════════════════════════════ -->
+  <section class="section tide-in" id="kontraindikace" aria-labelledby="kontra-t">
+    <div class="wrap wrap--rail">
+      <div class="grid">
+        <div class="c1-6">
+          <p class="eyebrow mono" data-reveal>Poctivě</p>
+          <h2 id="kontra-t" data-reveal>
+            <span class="line-mask"><span>Pro koho to</span></span>
+            <span class="line-mask"><span>teď není.</span></span>
+          </h2>
+          <p style="margin-top: var(--s-6)" data-reveal>
+            Kraniosakrální terapie je jemná, ale to neznamená, že se hodí vždycky. Tohle jsou
+            situace, kdy vás objednám raději později — nebo pošlu nejdřív jinam.
+          </p>
+        </div>
+
+        <div class="c8-12" data-reveal>
+          <ul class="checks" style="gap: var(--s-5)">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 2 1.5 15.5h15L9 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 7v3.5M9 12.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <span><strong style="color: var(--ink)">Akutní horečnaté onemocnění.</strong>
+                Počkáme, až to přejde.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 2 1.5 15.5h15L9 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 7v3.5M9 12.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <span><strong style="color: var(--ink)">Čerstvý úraz hlavy nebo páteře.</strong>
+                Nejdřív lékař, teprve pak jemná práce.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 2 1.5 15.5h15L9 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 7v3.5M9 12.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <span><strong style="color: var(--ink)">Bezprostředně po operaci.</strong>
+                Domluvíme se, kdy to bude vhodné.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M9 5.5v.5M9 8v4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <span><strong style="color: var(--ink)">Dlouhotrvající obtíže bez diagnózy.</strong>
+                U&nbsp;bolestí zad doporučuji nejdřív ortopeda nebo neurologa. Terapie jde dobře vedle.</span>
+            </li>
+          </ul>
+
+          <div class="note note--strong" style="margin-top: var(--s-6)" data-reveal>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <p>Naopak vhodná je pro miminka, děti i&nbsp;těhotné ženy. U&nbsp;těhotenství a&nbsp;u&nbsp;miminek se
+              vždy nejprve krátce domluvíme na vaší konkrétní situaci.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ČASTÉ OTÁZKY ══════════════════════════════════════════ -->
+  <section class="section" id="faq" aria-labelledby="faq-t">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Časté otázky</p>
+          <h2 id="faq-t" data-reveal>
+            <span class="line-mask"><span>Na co se ptáte</span></span>
+            <span class="line-mask"><span>před první návštěvou.</span></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="faq" data-reveal>
+        <details class="faq__item">
+          <summary class="faq__q">Je to masáž? Musím se svlékat?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Ne. Kraniosakrální terapie není masáž — pracuje s&nbsp;velmi jemným, klidným dotekem,
+              často jen o&nbsp;váze mince. Celé ošetření probíhá v&nbsp;pohodlném oblečení, vleže na lehátku.
+              Stačí přijít v&nbsp;něčem, v&nbsp;čem se vám dobře leží.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Jak se budu cítit po ošetření?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Nejčastěji přichází hluboké uvolnění a&nbsp;klid; někdy také příjemná únava — tělo
+              pokračuje v&nbsp;procesu ještě několik hodin i&nbsp;dní. Dopřejte si po sezení klidnější zbytek
+              dne, dostatek vody a&nbsp;pokud možno neplánujte hned náročný program.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Kolik sezení budu potřebovat?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Je to individuální. U&nbsp;akutních obtíží často stačí 1–3 sezení, u&nbsp;dlouhodobých témat
+              (chronické bolesti, následky stresu) se účinek prohlubuje postupně — proto nabízím
+              zvýhodněné balíčky. Po prvním sezení si společně řekneme, co dává smysl dál.
+              První návštěva vás k&nbsp;ničemu nezavazuje.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Je terapie vhodná pro děti a&nbsp;těhotné?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Ano — právě díky své jemnosti je kraniosakrální terapie vhodná pro miminka, děti
+              i&nbsp;těhotné ženy. U&nbsp;těhotenství a&nbsp;u&nbsp;miminek se vždy nejprve krátce domluvíme na vaší
+              konkrétní situaci.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Kdy terapie vhodná není?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Ošetření odkládáme při akutním horečnatém onemocnění, čerstvém úrazu hlavy či páteře
+              a&nbsp;bezprostředně po operaci. Pokud si nejste jistí, napište mi předem — společně to
+              posoudíme, případně doporučím nejdřív návštěvu lékaře.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Co si vzít s&nbsp;sebou?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Jen pohodlné oblečení a&nbsp;pokud možno trochu času navíc — ať nemusíte ze sezení spěchat
+              rovnou do shonu. Vše ostatní je na místě připravené.</p>
+          </div>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__q">Jak probíhá platba a&nbsp;přesun termínu?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="faq__a">
+            <p>Platba probíhá osobně po sezení, hotově nebo převodem. Pokud vám termín nevyjde,
+              dejte mi prosím vědět alespoň 24 hodin předem — přesuneme ho zdarma na jiný den.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="note" style="margin-top: var(--s-7)" data-reveal>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <p><strong style="color: var(--ink)">Dobré vědět:</strong> kraniosakrální terapie je
+          doplňková metoda — podporuje regeneraci a&nbsp;seberegulaci těla, nenahrazuje však lékařskou
+          péči ani stanovenou léčbu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ OBJEDNÁNÍ — tři cesty ═════════════════════════════════ -->
+  <section class="section tide-in" id="objednani" aria-labelledby="objednani-t">
+    <div class="wrap wrap--rail">
+      <div class="cta-block" style="margin-bottom: clamp(40px, 6vh, 72px)">
+        <div>
+          <p class="eyebrow mono" data-reveal>Objednání</p>
+          <h2 class="cta-block__title" id="objednani-t" data-reveal>
+            <span class="line-mask"><span>Domluvme si termín.</span></span>
+          </h2>
+        </div>
+        <div data-reveal>
+          <p class="small" style="color: var(--ink-2)">
+            Ozvěte se — společně najdeme termín, který vám sedne. Pokud si nejste jistí, zda je
+            pro vás terapie vhodná, napište mi pár řádků o&nbsp;své situaci. Ráda poradím ještě
+            před první návštěvou.
+          </p>
+        </div>
+      </div>
+
+      <div class="ways" data-reveal>
+        <div class="way way--primary">
+          <svg class="way__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h3.4l1.5 4-2.1 1.6a12 12 0 0 0 7.6 7.6L16 15l4 1.5V20a1.5 1.5 0 0 1-1.7 1.5A17 17 0 0 1 2.5 5.7 1.5 1.5 0 0 1 4 4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <h3 class="way__title">Zavolat</h3>
+          <p>Nejrychlejší cesta. Nejlépe všední den mezi 9. a&nbsp;18.&nbsp;hodinou — když se neozvu,
+            jsem u&nbsp;klienta a&nbsp;zavolám zpět.</p>
+          <a class="way__value" href="tel:+420776021297">+420&nbsp;776&nbsp;021&nbsp;297</a>
+          <a class="btn btn--primary btn--sm" href="tel:+420776021297"><span>Zavolat</span></a>
+        </div>
+
+        <div class="way">
+          <svg class="way__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <h3 class="way__title">Napsat e-mail</h3>
+          <p>Když chcete nejdřív popsat situaci nebo se na něco zeptat. Odpovím obvykle do dvou dnů.</p>
+          <a class="way__value" href="mailto:katkajuttnerova@seznam.cz">katkajuttnerova@seznam.cz</a>
+          <a class="btn btn--ghost btn--sm btn--on-surface" href="mailto:katkajuttnerova@seznam.cz?subject=Objedn%C3%A1n%C3%AD%20term%C3%ADnu&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1da%20bych%20se%20objednala%20na%20o%C5%A1et%C5%99en%C3%AD.%0A%0AS%20%C4%8D%C3%ADm%20p%C5%99ich%C3%A1z%C3%ADm%3A%0A%0AVyhovoval%20by%20mi%20term%C3%ADn%3A%0A%0AD%C4%9Bkuji%2C%0A"><span>Napsat e-mail</span></a>
+        </div>
+
+        <div class="way">
+          <svg class="way__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <h3 class="way__title">Online rezervace</h3>
+          <p>Vyberete si volný termín sami, bez telefonování.</p>
+          <span class="todo">PLACEHOLDER: Reservio / Calendly embed</span>
+          <p class="small" style="color: var(--ink-2)">Než bude spuštěná, použijte prosím telefon
+            nebo e-mail. Návod na zapnutí je v&nbsp;souboru README.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ KDE MĚ NAJDETE ════════════════════════════════════════ -->
+  <section class="section" id="kde" aria-labelledby="kde-t">
+    <div class="wrap wrap--rail">
+      <div class="section-head">
+        <div class="section-head__title">
+          <p class="eyebrow mono" data-reveal>Kde mě najdete</p>
+          <h2 id="kde-t" data-reveal>
+            <span class="line-mask"><span>Cesta k&nbsp;lehátku.</span></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="place" data-reveal>
+        <div class="place__map">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="color: var(--ink-4)">
+            <path d="M20 36s12-12 12-20A12 12 0 0 0 8 16c0 8 12 20 12 20Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            <circle cx="20" cy="16" r="4.5" stroke="currentColor" stroke-width="1.4"/>
+          </svg>
+          <a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Seifertova+22%2C+638+00+Brno-sever-Lesn%C3%A1"
+             target="_blank" rel="noopener">Otevřít v&nbsp;Google Mapách</a>
+          <p class="small" style="color: var(--ink-2); max-width: 34ch">
+            Prostor na&nbsp;čas, Seifertova 22, Brno-Lesná.
+          </p>
+        </div>
+
+        <dl class="place__list">
+          <div>
+            <dt>Adresa</dt>
+            <dd>
+              <address>
+                Prostor na&nbsp;čas<br>
+                Seifertova 22, 638&nbsp;00 Brno-sever-Lesná<br>
+                Přízemí
+              </address>
+            </dd>
+          </div>
+          <div>
+            <dt>Parkování</dt>
+            <dd>Využijte možnost parkování na parkovacích místech na hlavní ulici Seifertova.
+              Obvykle je zde dostatek volných míst a&nbsp;parkování je v&nbsp;současné době
+              bez modrých zón. K&nbsp;Prostoru na&nbsp;čas to pak máte pár kroků.</dd>
+          </div>
+          <div>
+            <dt>MHD</dt>
+            <dd>Zastávka Blažkova (linka 46 a&nbsp;81) — v&nbsp;těsné blízkosti,
+              150&nbsp;m od Prostoru na&nbsp;čas.</dd>
+          </div>
+          <div>
+            <dt>Patro a&nbsp;bezbariérovost</dt>
+            <dd>Přízemí.</dd>
+          </div>
+          <div>
+            <dt>Jak poznáte dveře</dt>
+            <dd>Při příchodu zazvoňte na zvonek <strong style="color: var(--ink)">Prostor na&nbsp;čas</strong>.</dd>
+          </div>
+          <div>
+            <dt>Když zabloudíte</dt>
+            <dd><a class="link" href="tel:+420776021297">Zavolejte mi</a> — navedu vás.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="wrap wrap--rail">
+      <a class="pager" href="index.html">
+        <span>
+          <span class="pager__label mono">Zpět na</span>
+          <span class="pager__title" style="display: block; margin-top: var(--s-2)">Úvod</span>
+        </span>
+        <svg class="pager__arrow" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 16h20M20 10l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" data-breath-mode="exhale">
+  <div class="wrap wrap--rail">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__title">Kateřina Jüttnerová</p>
+        <p class="small" style="color: var(--ink-2); max-width: 34ch">
+          Biodynamická kraniosakrální terapie a&nbsp;Somatic Experiencing.
+          Zdravotní sestra, pět let výcviků.
+        </p>
+      </div>
+      <div>
+        <p class="footer__title">Kontakt</p>
+        <address class="footer__list small">
+          <a href="tel:+420776021297">+420&nbsp;776&nbsp;021&nbsp;297</a>
+          <a href="mailto:katkajuttnerova@seznam.cz">katkajuttnerova@seznam.cz</a>
+          <span style="color: var(--ink-2)">Osobně, po&nbsp;domluvě</span>
+          <span>Prostor na&nbsp;čas</span>
+          <span>Seifertova 22, 638&nbsp;00 Brno-sever-Lesná</span>
+        </address>
+      </div>
+      <div>
+        <p class="footer__title">Stránky</p>
+        <nav class="footer__list small" aria-label="Patička">
+          <a href="index.html">Úvod</a>
+          <a href="kraniosakralni-terapie.html">O&nbsp;terapii</a>
+          <a href="s-cim-pomaham.html">S&nbsp;čím pomáhám</a>
+          <a href="o-mne.html">O&nbsp;mně</a>
+          <a href="prubeh-a-cenik.html">Průběh a&nbsp;ceník</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <p class="footer__disclaimer">
+        Kraniosakrální terapie je doplňková metoda. Podporuje regeneraci a&nbsp;seberegulaci těla,
+        ale nenahrazuje lékařskou péči ani stanovenou léčbu.
+      </p>
+      <p class="mono">© 2026 Kateřina Jüttnerová</p>
+    </div>
+  </div>
+</footer>
+
+<nav class="bottombar" aria-label="Rychlý kontakt">
+  <a class="bottombar__btn bottombar__btn--primary" href="tel:+420776021297">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h3.4l1.5 4-2.1 1.6a12 12 0 0 0 7.6 7.6L16 15l4 1.5V20a1.5 1.5 0 0 1-1.7 1.5A17 17 0 0 1 2.5 5.7 1.5 1.5 0 0 1 4 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    Zavolat
+  </a>
+  <a class="bottombar__btn" href="mailto:katkajuttnerova@seznam.cz">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    Napsat
+  </a>
+</nav>
+
+<script defer src="js/core.js"></script>
+<script defer src="vendor/lenis.min.js"></script>
+<script defer src="js/breath-line.js"></script>
+
+<script>/* Moduly stránky se načtou až po prvním vykreslení (core.js →
+   initLazyScripts). Přes <script defer> by běžely ještě před
+   DOMContentLoaded a držely hlavní vlákno — text by na slabším
+   stroji čekal na dokreslení scény. Pořadí zůstává zachované. */
+window.KJ_LAZY = [
+  "js/motion.js",
+  "js/modules/wheel-core.js",
+  "js/modules/session-wheel.js"
+];</script>
+</body>
+</html>

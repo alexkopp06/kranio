@@ -1,0 +1,504 @@
+/* ============================================================
+   _l2 — podstata + pět gramů (kraniosakralni-terapie.html)
+   Dočasný pracovní soubor redesignu — na konci se vrátí
+   zpět do css/modules.css na své původní místo.
+   ============================================================ */
+/* ============================================================
+   PODSTATA — sestup pod hladinu
+   Vlevo žebřík tří vrstev, vpravo svislý řez vodním sloupcem.
+   Scéna nemá rám ani podklad: leží přímo na ploše sekce
+   (--surface-2) a přetéká k okraji .wrap. Není to obrázek
+   vlepený do stránky, je to prostor.
+   ============================================================ */
+.essence {
+  /* Scéna přesahuje k okraji .wrap na všech šířkách — voda nemá
+     mít okraj ani na mobilu.                                    */
+  --bleed: var(--edge);
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  grid-template-columns: 1fr;
+}
+/* Na úzké obrazovce jde scéna hned pod žebřík: klepnutí na vrstvu
+   a to, co se tím na vodě změní, musí být na jedné obrazovce.
+   Text vrstvy až pod tím.                                       */
+.essence__layers { order: 1; }
+.essence__col    { order: 2; }
+.essence__panel  { order: 3; }
+
+@media (min-width: 960px) {
+  .essence {
+    /* Sloupec vody je užší než sloupec textu — je to sloupec, ne
+       obrázek. Poměr je zvolený tak, aby při poměru 3/4 seděly
+       dolní okraje obou stran zhruba na sobě.                   */
+    grid-template-columns: 1fr 0.66fr;
+    row-gap: var(--s-7);
+    align-items: start;
+  }
+  .essence__layers { grid-column: 1; grid-row: 1; }
+  .essence__panel  { grid-column: 1; grid-row: 2; }
+  /* Sloupec vody je přesně tak vysoký jako sloupec textu. Pevný
+     poměr stran by při každé šířce sedl jinak a vpravo dole by
+     zbyla díra — takhle dolní okraje lícují vždycky. Poměr sám
+     zůstane mezi 1 : 1,4 a 1 : 1,9, pořád tedy hloubka.         */
+  .essence__col {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: stretch;
+    grid-template-rows: 1fr auto;
+  }
+  .essence__stage { min-height: 380px; }
+  .surface-canvas { height: 100%; aspect-ratio: auto; }
+}
+
+/* ---------- žebřík tří vrstev ------------------------------
+   Ne tři karty se stínem — tři řádky oddělené vlasovou linkou.
+   Vybraný řádek jediný dostane plochu a svislý pruh v barvě
+   přílivu, aby bylo na první pohled jasné, kde stojím.        */
+.essence__layers {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+.layer {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: var(--s-4);
+  width: 100%;
+  text-align: left;
+  padding: var(--s-6) var(--s-5) var(--s-6) var(--s-4);
+  min-height: 64px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  transition:
+    background var(--dur-ui) var(--ease-out),
+    box-shadow var(--dur-ui) var(--ease-out);
+}
+.layer:hover { background: color-mix(in srgb, var(--surface) 55%, transparent); }
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  .layer:hover { background: var(--surface); }
+}
+.layer[aria-selected="true"] {
+  background: var(--surface);
+  box-shadow: inset 2px 0 0 var(--tide);
+}
+.layer__no {
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+  font-weight: 500;
+  padding-top: .18em;
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.layer[aria-selected="true"] .layer__no { color: var(--tide); }
+.layer__name {
+  display: block;
+  font-size: var(--fs-h4);
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: var(--tr-h3);
+}
+.layer__hint {
+  display: block;
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  margin-top: 5px;
+  max-width: 40ch;
+}
+
+.essence__panel { min-width: 0; }
+.essence__panel[hidden] { display: none; }
+/* Tři panely mají různě dlouhý text. Bez společné minimální výšky
+   by při přepnutí vrstvy poskočila citace pod modulem.           */
+@media (min-width: 960px) { .essence__panel { min-height: 17.2em; } }
+.essence__panel:focus-visible { outline-offset: 6px; }
+.essence__panel p { color: var(--ink-2); max-width: 52ch; }
+.essence__panel p + p { margin-top: var(--s-4); }
+.essence__panel .chips { margin-top: var(--s-5); }
+.essence__lead {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--tr-h3);
+  color: var(--ink);
+  margin-bottom: var(--s-5);
+  max-width: 24ch;
+}
+
+/* ---------- scéna: svislý řez sloupcem ---------------------- */
+.essence__col {
+  display: grid;
+  align-content: start;
+}
+.essence__stage {
+  position: relative;
+  margin-inline-end: calc(-1 * var(--bleed));
+}
+.surface-canvas {
+  width: 100%;
+  aspect-ratio: 3 / 4;               /* výška = hloubka, ne obrázek */
+  display: block;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  /* Svislé tažení po ploše je jen doplněk (myš, pero). Prstem se
+     musí dát stránka normálně rolovat — od toho je úchyt vpravo. */
+  touch-action: pan-y;
+}
+
+/* Živý údaj — kolik cyklů za minutu má rytmus v této hloubce. */
+.essence__rate {
+  position: absolute;
+  top: 0;
+  right: calc(var(--bleed) + 58px);
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.essence__rate-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+  font-size: clamp(1.35rem, 2.1vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -.02em;
+  word-spacing: -.24em;
+  color: var(--ink);
+}
+.essence__rate-unit {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Značky hloubky plavou se scénou: JS jim posouvá --y uvnitř
+   transformu. Procenta v `top` jsou výchozí poloha pro případ,
+   že by JS nedoběhl — nikdy se nesloží na sebe.               */
+.essence__depth {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.essence__depth span {
+  position: absolute;
+  right: calc(var(--bleed) + 58px);
+  top: 22%;
+  transform: translateY(calc(var(--y, 0px) - 50%));
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+  transition: color var(--dur-ui) var(--ease-out);
+}
+.essence__depth span:nth-child(2) { top: 50%; }
+.essence__depth span:nth-child(3) { top: 74%; }
+.essence__depth span.is-on { color: var(--tide); font-weight: 500; }
+/* vodicí čárka od štítku k pravítku — štítek a úchyt jsou jeden přístroj */
+.essence__depth span::after {
+  content: "";
+  position: absolute;
+  right: -22px;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+  opacity: .45;
+}
+
+/* Úchyt hloubky — jediné místo scény, které smí chytit prst,
+   proto je úzké: stránka se přes plátno pořád normálně roluje. */
+.essence__rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: var(--bleed);
+  width: 44px;
+  touch-action: none;
+  cursor: grab;
+}
+.essence__rail::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6%;
+  bottom: 6%;
+  width: 1px;
+  background: var(--line-strong);
+  transform: translateX(-50%);
+}
+.essence__knob {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  transform: translateY(var(--y, 0px));
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line-ui);
+  display: block;
+  cursor: grab;
+}
+.essence__knob::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--tide);
+}
+/* klikací plocha 44 × 44 i tam, kde je kolečko malé */
+.essence__knob::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+.essence__rail:active,
+.essence__knob:active { cursor: grabbing; }
+
+.essence__caption {
+  margin-top: var(--s-5);
+  max-width: 46ch;
+  color: var(--ink-2);
+  font-size: .8125rem;
+  line-height: 1.75;
+}
+
+/* Bez JS je scéna prázdná plocha — schováme ji a ukážeme
+   rovnou všechny tři vrstvy textu. Text nesmí nikdy zmizet.   */
+.no-js .essence { grid-template-columns: 1fr; }
+.no-js .essence__col { display: none; }
+.no-js .essence__layers,
+.no-js .essence__panel { grid-column: auto; grid-row: auto; }
+.no-js .essence__panel { min-height: 0; }
+.no-js .essence__panel[hidden] { display: block; }
+
+@media (max-width: 959px) {
+  .essence__rate { right: calc(var(--bleed) + 54px); }
+  .essence__depth span { right: calc(var(--bleed) + 54px); }
+}
+/* Na tabletu by scéna přes celou šířku byla při poměru 3/4 vyšší
+   než obrazovka. Necháme z ní sloupec u pravého okraje — stejná
+   kompozice jako na desktopu, jen pod textem.                   */
+@media (min-width: 560px) and (max-width: 959px) {
+  /* justify-self, ne auto margin: automatický okraj by v mřížce
+     zmenšil plátno na jeho vlastní vnitřní šířku 300 px.        */
+  .essence__stage { width: 100%; max-width: calc(520px + var(--bleed)); justify-self: end; }
+  .essence__caption { width: 100%; max-width: 520px; justify-self: end; }
+}
+@media (max-width: 419px) {
+  .layer { padding-inline: var(--s-3) var(--s-3); }
+  .essence__rate-unit,
+  .essence__depth span { font-size: .625rem; letter-spacing: .08em; }
+}
+
+/* ============================================================
+   PĚT GRAMŮ — řez tkání pod prstem
+   Vlevo přístroj: řez, HUD s hodnotou v ploše a posuvník
+   se skutečnými ryskami. Vpravo řeč a jediná akce.
+   Bílý panel zmizel — scéna leží přímo na ploše sekce
+   (--surface-2) a končí vlasovou linkou jako preparát
+   na podložce. Kontrast všech textů ověřen na #E9ECE5.
+   ============================================================ */
+.weight {
+  display: grid;
+  gap: clamp(24px, 3vw, 36px);
+  grid-template-columns: 1fr;
+}
+/* Na úzké obrazovce: řez, hned pod ním ovládání (musí být na
+   jedné obrazovce, jinak není vidět, co posuvník dělá), text až
+   pod tím.                                                     */
+.weight__stage   { order: 1; }
+.weight__control { order: 2; }
+.weight__col     { order: 3; }
+
+@media (min-width: 900px) {
+  .weight {
+    grid-template-columns: 1.14fr 0.86fr;
+    column-gap: clamp(32px, 4vw, 72px);
+    row-gap: var(--s-5);
+    align-items: start;
+  }
+  .weight__stage   { grid-column: 1; grid-row: 1; }
+  .weight__control { grid-column: 1; grid-row: 2; }
+  .weight__col     { grid-column: 2; grid-row: 1 / span 2; }
+}
+
+/* ---------- scéna ------------------------------------------
+   Žádný rám, žádné pozadí. Jediná linka dole je hrana podložky,
+   na které řez leží — a zároveň optický předěl k posuvníku.   */
+.weight__stage {
+  position: relative;
+  border-bottom: 1px solid var(--line-strong);
+}
+.weight__canvas {
+  display: block;
+  width: 100%;
+  /* Řez potřebuje výšku: nad kůží musí být vzduch pro prst a pod
+     ní čtyři vrstvy, které mají být rozeznatelné, ne proužky.   */
+  height: clamp(320px, 30vw, 452px);
+  /* Prstem se musí dát stránka normálně rolovat — plátno je
+     obraz, ovladač je posuvník pod ním.                        */
+  touch-action: pan-y;
+}
+
+/* HUD — číslo a obrázek jsou jeden objekt. Leží ve vzduchu nad
+   kůží, kde na řezu stejně nic není.                           */
+.weight__hud {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  max-width: 46%;
+}
+.weight__num {
+  font-size: var(--fs-h3);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+.weight__label {
+  margin-top: var(--s-2);
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  max-width: 21ch;
+}
+
+/* ---------- posuvník s ryskami ------------------------------
+   Rozsah 0–100 je schválně: jeden krok šipky = jedno procento
+   sestupu, PageUp deset, Home a End oba konce. Klávesnice tak
+   projde celý rozsah nativně, bez vlastního odchytávání kláves. */
+.weight__slider { position: relative; }
+.weight__input {
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  display: block;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  touch-action: pan-y;
+}
+.weight__input::-webkit-slider-runnable-track {
+  height: 2px; background: var(--line-ui); border-radius: 1px;
+}
+.weight__input::-moz-range-track {
+  height: 2px; background: var(--line-ui); border-radius: 1px;
+}
+.weight__input::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 26px; height: 26px; margin-top: -12px;
+  border-radius: 50%; background: var(--tide);
+  border: 3px solid var(--surface-2);
+  box-shadow: 0 0 0 1px var(--tide);
+  cursor: grab;
+}
+.weight__input::-moz-range-thumb {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--tide); border: 3px solid var(--surface-2);
+  box-shadow: 0 0 0 1px var(--tide);
+  cursor: grab;
+}
+.weight__input:active::-webkit-slider-thumb { cursor: grabbing; }
+.weight__input:active::-moz-range-thumb { cursor: grabbing; }
+
+/* Rysky sedí na dráze palce (26 px široký), ne na okraji prvku —
+   jinak by popisek „5 g" ukazoval o třináct pixelů vedle.       */
+.weight__ticks {
+  position: relative;
+  height: 30px;
+  margin-top: -6px;
+}
+.weight__tick {
+  position: absolute;
+  top: 0;
+  left: calc(13px + var(--at) * (100% - 26px));
+}
+.weight__tick i {
+  position: absolute; left: 0; top: 0;
+  width: 1px; height: 7px;
+  background: var(--line-ui);
+}
+.weight__tick b {
+  position: absolute; top: 13px; left: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  font-weight: 400;
+  letter-spacing: .08em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.weight__tick:first-child b { transform: none; }
+.weight__tick:last-child b { transform: translateX(-100%); }
+.weight__tick--key i { height: 13px; background: var(--tide); }
+.weight__tick--key b { color: var(--tide); font-weight: 500; }
+
+/* Návrat posuvníku vypadá bez vysvětlení jako chyba. Věta se
+   ukáže přesně na dobu návratu a zase zmizí.                   */
+.weight__return {
+  margin-top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  letter-spacing: .08em;
+  color: var(--tide);
+  opacity: 0;
+  transition: opacity calc(var(--dur-ui) * var(--motion)) var(--ease-out);
+}
+.weight__return[data-on="true"] { opacity: 1; }
+.weight__caption {
+  margin-top: var(--s-3);
+  max-width: 48ch;
+  line-height: 1.7;
+}
+
+/* ---------- pravý sloupec ----------------------------------- */
+.weight__meaning {
+  color: var(--ink-2);
+  /* Šest stupňů má různě dlouhý text. Bez rezervy by pod ním
+     poskakovala poznámka i tlačítko.                            */
+  min-height: 6em;
+  max-width: 46ch;
+}
+/* Výměna textu se nesmí stát skokem. Dvě střídavé třídy pouštějí
+   tutéž animaci bez vynuceného přepočtu rozvržení; animace doběhne
+   sama, i kdyby JS mezitím spadl — text tedy nikdy nezůstane
+   neviditelný (na rozdíl od inline opacity).                    */
+.weight__meaning.is-swap-a,
+.weight__meaning.is-swap-b {
+  animation: weight-swap calc(180ms * var(--motion)) var(--ease-out);
+}
+@keyframes weight-swap { from { opacity: 0; } to { opacity: 1; } }
+
+.weight__note { margin-top: var(--s-5); }
+.weight__actions { margin-top: var(--s-6); }
+
+/* Bez JS je plátno prázdná plocha a posuvník mrtvý ovladač.
+   Schováme obojí; text i hodnota zůstanou.                     */
+.no-js .weight { grid-template-columns: 1fr; }
+.no-js .weight__stage,
+.no-js .weight__col { grid-column: auto; grid-row: auto; }
+.no-js .weight__canvas,
+.no-js .weight__control { display: none; }
+.no-js .weight__stage { border-bottom: 0; }
+.no-js .weight__hud { position: static; max-width: none; }
+.no-js .weight__meaning { min-height: 0; }
+
+@media (max-width: 559px) {
+  /* Užší sloupec = víc řádků; rezerva musí být větší, jinak
+     poskočí poznámka.                                          */
+  .weight__meaning { min-height: 7.5em; }
+}

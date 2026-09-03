@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="cs" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Styleguide — interní, nelinkovaný z&nbsp;navigace</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/modules.css">
+<link rel="stylesheet" href="css/_l1.css">
+<link rel="stylesheet" href="css/_l2.css">
+<link rel="stylesheet" href="css/_l3.css">
+<link rel="stylesheet" href="css/_l4.css">
+<link rel="stylesheet" href="css/_l5.css">
+
+<script>/* Skrytí pro animaci nasazujeme jen tam, kde je čím animovat.
+   Když uživatel nechce pohyb, obsah se nikdy neskryje.
+   Pojistka: kdyby se core.js nenačetl nebo cokoli spadlo,
+   po 2 s masku strhneme natvrdo. Web bez efektu je pořád web,
+   web bez textu není nic. core.js pojistku převezme. */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  document.documentElement.classList.add("js-anim");
+  window.__kjRevealGuard=setTimeout(function(){document.documentElement.classList.remove("js-anim")},2000);
+}</script>
+<style>
+  .sg-section { padding-block: clamp(48px, 7vh, 88px); border-top: 1px solid var(--line); }
+  .sg-label { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .14em;
+              text-transform: uppercase; color: var(--ink-meta); margin-bottom: var(--s-5); }
+  .sg-grid { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+  .sg-swatch { border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; }
+  .sg-swatch__chip { height: 78px; }
+  .sg-swatch__meta { padding: var(--s-3) var(--s-4); background: var(--surface); }
+  .sg-swatch__meta b { display: block; color: var(--ink); font-size: .9375rem; }
+  .sg-swatch__meta span { font-family: var(--font-mono); font-size: .6875rem; color: var(--ink-3); }
+  .sg-row { display: grid; gap: var(--s-3); padding-block: var(--s-4); border-bottom: 1px solid var(--line); }
+  .sg-row > .sg-label { margin: 0; }
+  .sg-spec { color: var(--ink-3); font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .08em; }
+  .sg-box { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: var(--s-5); }
+  .sg-check { color: var(--tide); font-weight: 500; }
+  .sg-warn  { color: #9A5B2E; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<main class="wrap" style="padding-block: var(--s-9)">
+
+  <header style="margin-bottom: var(--s-8)">
+    <p class="sg-label">Interní dokument · nelinkovaný z&nbsp;navigace · noindex</p>
+    <h1 style="font-size: clamp(2.4rem, 5vw, 4rem)">Styleguide</h1>
+    <p class="lede" style="margin-top: var(--s-5)">
+      Typografická škála s&nbsp;českou diakritikou, paleta s&nbsp;kontrastními poměry,
+      tlačítka ve všech stavech, chipy a&nbsp;ukázky pohybu.
+    </p>
+  </header>
+
+  <!-- ══ 1. ČESKÁ DIAKRITIKA VE VŠECH VELIKOSTECH ═══════════════ -->
+  <section class="sg-section">
+    <p class="sg-label">01 — Povinný test české diakritiky</p>
+
+    <div class="sg-row">
+      <p class="sg-spec">h1 · clamp(2.75rem, 6.2vw, 6.6rem) · lh .93 · tracking −.03em</p>
+      <p class="h1" style="max-width: none">Příliš žluťoučký kůň úpěl ďábelské ódy</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">h1 · verzálky s&nbsp;diakritikou</p>
+      <p class="h1" style="max-width: none">ĎŤŇŘŠČŽÝÁÍÉÚŮ</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">h2 · clamp(2.2rem, 5vw, 4.4rem) · lh 1.00 · tracking −.025em</p>
+      <p class="h2" style="max-width: none">Příliš žluťoučký kůň úpěl ďábelské ódy</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">h2 · dva řádky — kontrola, že háčky nekolidují s&nbsp;dolními dotahy</p>
+      <p class="h2" style="max-width: 16ch">Ďábelské ódy<br>žluťoučkého koně</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">h3 · clamp(1.45rem, 2.4vw, 2.1rem)</p>
+      <p class="h3" style="max-width: none">Příliš žluťoučký kůň úpěl ďábelské ódy · ěščřžýáíéúůďťň</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">lede · clamp(1.15rem, 1.5vw, 1.5rem) · lh 1.5 · max 46ch</p>
+      <p class="lede">Příliš žluťoučký kůň úpěl ďábelské ódy. Průběh, úleva, můžete — kroužek u&nbsp;ů se musí krýt s&nbsp;dříkem u.</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">body · 17–18,4 px · lh 1.62 · měřítko 62–68 znaků</p>
+      <p>Příliš žluťoučký kůň úpěl ďábelské ódy. Kraniosakrální terapie pracuje s&nbsp;velmi jemným
+        dotekem — přibližně pěti gramy. Průběh sezení trvá 75 minut, z&nbsp;toho ≈&nbsp;50 minut na lehátku.
+        Řeka, ředkev, řetěz, přeřeknutí. Ůů Ňň Ťť Ďď Ěě Řř Šš Čč Žž.</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">small · .95 rem — kontrola čitelnosti háčku u&nbsp;ř</p>
+      <p class="small">Řekněte, kde vás to tlačí. Ředitelka přeřekla ředkvičku. ěščřžýáíéúůďťň</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">label / mono · .75 rem · UPPERCASE · tracking .13em — háček u&nbsp;Ř ve 12 px</p>
+      <p class="mono" style="font-size: .75rem">PŘÍLIŠ ŽLUŤOUČKÝ KŮŇ ÚPĚL ĎÁBELSKÉ ÓDY · ŘÍJEN · 75 MIN</p>
+    </div>
+
+    <div class="sg-row">
+      <p class="sg-spec">emoční kurzíva (Sentient Italic) — max 3–5 slov na stránku</p>
+      <p class="h2" style="max-width: none"><em class="em">Změna nemá být tlačena</em></p>
+    </div>
+
+    <div class="sg-box" style="margin-top: var(--s-6)">
+      <p class="sg-label" style="margin-bottom: var(--s-4)">Výsledek kontroly</p>
+      <ul class="checks">
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="sg-check">Kroužek u&nbsp;„ů“ má stejnou šířku jako dřík „u“ ve všech velikostech.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="sg-check">Háček u&nbsp;„ř“ zůstává čitelný i&nbsp;ve 12 px popisku.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="sg-check">Při lh .93 v display sazbě háčky nekolidují s&nbsp;dolními dotahy řádku nad nimi.</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="sg-check">Švihy u&nbsp;„Ď“, „Ť“ a&nbsp;„ď“, „ť“ jsou v&nbsp;subsetu přítomné a&nbsp;správné.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ 2. PALETA ═════════════════════════════════════════════ -->
+  <section class="sg-section">
+    <p class="sg-label">02 — Paleta s&nbsp;kontrastními poměry</p>
+
+    <p class="sg-spec" style="margin-bottom: var(--s-4)">Povrchy</p>
+    <div class="sg-grid" style="margin-bottom: var(--s-7)">
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--bg)"></div><div class="sg-swatch__meta"><b>--bg</b><span>#F2F3EF · porcelán</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--surface)"></div><div class="sg-swatch__meta"><b>--surface</b><span>#FFFFFF · panel</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--surface-2)"></div><div class="sg-swatch__meta"><b>--surface-2</b><span>#E9ECE5 · mělčina</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--sand)"></div><div class="sg-swatch__meta"><b>--sand</b><span>#EDE7DC · jen u&nbsp;člověka</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--line-sand)"></div><div class="sg-swatch__meta"><b>--line-sand</b><span>#DFD7C8 · hrana pískové plochy</span></div></div>
+    </div>
+
+    <p class="sg-spec" style="margin-bottom: var(--s-4)">Inkoust — poměry měřené na <b>nejtmavší</b> ploše, na které se text vyskytuje (--surface-2)</p>
+    <div class="sg-grid" style="margin-bottom: var(--s-7)">
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--ink)"></div><div class="sg-swatch__meta"><b>--ink</b><span>#070D0B · 17,6 AAA · nadpisy</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--ink-2)"></div><div class="sg-swatch__meta"><b>--ink-2</b><span>#101815 · 16,2 AAA · odstavce</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--ink-3)"></div><div class="sg-swatch__meta"><b>--ink-3</b><span>#1B2521 · 14,1 AAA · popisky</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--ink-4)"></div><div class="sg-swatch__meta"><b>--ink-4</b><span>#8B958D · 2,78 — NIKDY písmo, jen kresba</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--ink-meta)"></div><div class="sg-swatch__meta"><b>--ink-meta</b><span>#202A26 · 14,3 AAA · číslovky a štítky</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--line-ui)"></div><div class="sg-swatch__meta"><b>--line-ui</b><span>#7E877A · 3,34 · hranice prvku</span></div></div>
+    </div>
+
+    <p class="sg-spec" style="margin-bottom: var(--s-4)">Akce</p>
+    <div class="sg-grid" style="margin-bottom: var(--s-7)">
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--tide)"></div><div class="sg-swatch__meta"><b>--tide</b><span>#0E6B54 · bílá na ní 6,46 AA</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--tide-deep)"></div><div class="sg-swatch__meta"><b>--tide-deep</b><span>#0A5442 · bílá 8,90 AAA</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--tide-soft)"></div><div class="sg-swatch__meta"><b>--tide-soft</b><span>#CFE6DA · ink na ní 13,31</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--tide-warm)"></div><div class="sg-swatch__meta"><b>--tide-warm</b><span>#1E7A5B · 4,72 AA · světlo v hero scéně</span></div></div>
+    </div>
+
+    <p class="sg-spec" style="margin-bottom: var(--s-4)">Barevný klíč sedmi témat — všech sedm prochází AA jako text</p>
+    <div class="sg-grid">
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--t-migrena)"></div><div class="sg-swatch__meta"><b>migréna</b><span>#2F6E8F · 5,03 AA</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--t-stres)"></div><div class="sg-swatch__meta"><b>stres</b><span>#9A5B2E · 4,82 AA</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--t-menopauza)"></div><div class="sg-swatch__meta"><b>menopauza</b><span>#7A4B6E · 6,16 AA</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--t-poporodu)"></div><div class="sg-swatch__meta"><b>po porodu</b><span>#4E6E42 · 5,19 AA · ztmaveno</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--t-zada)"></div><div class="sg-swatch__meta"><b>záda</b><span>#1E6455 · 6,26 AA</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--t-uzkost)"></div><div class="sg-swatch__meta"><b>úzkost a&nbsp;SE</b><span>#4E5490 · 6,29 AA</span></div></div>
+      <div class="sg-swatch"><div class="sg-swatch__chip" style="background: var(--t-dalsi)"></div><div class="sg-swatch__meta"><b>individuální</b><span>#5E6A64 · 5,06 AA · záměrně nejneutrálnější ze sedmi</span></div></div>
+    </div>
+  </section>
+
+  <!-- ══ 3. TLAČÍTKA A ODKAZY ══════════════════════════════════ -->
+  <section class="sg-section">
+    <p class="sg-label">03 — Tlačítka ve všech stavech · hover je PŘÍLIV zdola, nikdy zvednutí a&nbsp;stín</p>
+
+    <div class="actions" style="margin-bottom: var(--s-6)">
+      <a class="btn btn--primary btn--lg" href="#"><span>Rezervovat termín</span></a>
+      <a class="btn btn--primary" href="#"><span>Objednat se</span></a>
+      <a class="btn btn--primary btn--sm" href="#"><span>Zavolat</span></a>
+    </div>
+
+    <div class="actions" style="margin-bottom: var(--s-6)">
+      <a class="btn btn--ghost btn--lg" href="#"><span>Chci to probrat</span></a>
+      <a class="btn btn--ghost" href="#"><span>Krok za krokem</span></a>
+      <a class="btn btn--ghost btn--sm" href="#"><span>Zvuk</span></a>
+    </div>
+
+    <div class="actions" style="margin-bottom: var(--s-6)">
+      <a class="link-arrow" href="#">Textový odkaz se šipkou
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p style="margin: 0">Odkaz <a class="link" href="#">uvnitř odstavce</a> je podtržený.</p>
+    </div>
+
+    <p class="sg-spec">Focus ring: 2px --tide, offset 3px. Projděte tuhle sekci klávesou Tab.</p>
+  </section>
+
+  <!-- ══ 4. CHIPY, POZNÁMKY, MĚŘENÉ HODNOTY ════════════════════ -->
+  <section class="sg-section">
+    <p class="sg-label">04 — Chipy, poznámky, měřené hodnoty</p>
+
+    <div class="chips" style="margin-bottom: var(--s-6)">
+      <span class="chip">tlak za okem</span>
+      <span class="chip">ztuhlá šíje</span>
+      <span class="chip chip--theme">světloplachost</span>
+      <span class="chip chip--mono">≈&nbsp;5&nbsp;g</span>
+      <span class="chip chip--mono">75&nbsp;min</span>
+      <span class="chip chip--mono">1&nbsp;500&nbsp;Kč</span>
+    </div>
+
+    <div class="readout" style="margin-bottom: var(--s-6)">
+      <span class="readout__value">≈&nbsp;9 cyklů / min</span>
+      <span class="readout__unit">primární respirace · orientačně</span>
+    </div>
+
+    <div class="note" style="margin-bottom: var(--s-4)">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <p>Běžná poznámka — kdy raději k&nbsp;lékaři.</p>
+    </div>
+
+    <div class="note note--strong">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v.5M8 7.5V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <p>Zdůrazněná poznámka — bezpečnostní větev.</p>
+    </div>
+
+    <p style="margin-top: var(--s-6)"><span class="todo">DOPLNIT: takhle je označený každý placeholder</span></p>
+  </section>
+
+  <!-- ══ 5. POHYB ══════════════════════════════════════════════ -->
+  <section class="sg-section">
+    <p class="sg-label">05 — Pět rodin pohybu · jiná animace na webu není</p>
+
+    <div class="grid" style="align-items: start">
+      <div class="c1-5">
+        <h3>1 · DECH</h3>
+        <p class="sg-spec">11&nbsp;s&nbsp;smyčka, ±2–4&nbsp;%</p>
+        <p class="hint" style="margin-top: var(--s-4)"><span class="hint__dot"></span> takhle dýchá tečka u&nbsp;instrukce</p>
+
+        <h3 style="margin-top: var(--s-7)">2 · PŘÍLIV</h3>
+        <p class="sg-spec">zaplavení zdola, 420 ms</p>
+        <p style="margin-top: var(--s-4)"><a class="btn btn--ghost btn--sm" href="#"><span>Najeďte na mě</span></a></p>
+
+        <h3 style="margin-top: var(--s-7)">3 · KRESBA</h3>
+        <p class="sg-spec">stroke-dashoffset 0,9–1,4&nbsp;s, stagger 40 ms</p>
+        <svg width="120" height="60" viewBox="0 0 120 60" fill="none" data-draw style="color: var(--tide); margin-top: var(--s-4)" aria-hidden="true">
+          <path d="M6 40c10 0 10-20 20-20s10 20 20 20 10-26 20-26 10 26 20 26 10-14 20-14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M6 52h108" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".4"/>
+        </svg>
+      </div>
+
+      <div class="c7-12">
+        <h3>4 · ODKRYTÍ</h3>
+        <p class="sg-spec">maska po řádcích, 700 ms, stagger 60 ms · nikdy fade po písmenech</p>
+        <p class="h3" style="margin-top: var(--s-4)" data-reveal>
+          <span class="line-mask"><span>Text se odkrývá</span></span>
+          <span class="line-mask"><span>maskou po řádcích.</span></span>
+        </p>
+
+        <h3 style="margin-top: var(--s-7)">5 · PROUD</h3>
+        <p class="sg-spec">částice po dráze — jen hero a&nbsp;dechová sféra</p>
+
+        <div class="sg-box" style="margin-top: var(--s-6)">
+          <p class="sg-label" style="margin-bottom: var(--s-4)">Zakázané pohyby</p>
+          <p class="small sg-warn">
+            Bounce a&nbsp;pružiny · rotace rychlejší než 1 otáčka / 20&nbsp;s · parallax silnější než 12&nbsp;% ·
+            scroll-jacking · blikání · letter-by-letter typewriter · AI shimmer ·
+            karta, která se při hoveru zvedne a&nbsp;hodí stín · cokoli, co při prefers-reduced-motion nezmizí.
+          </p>
+        </div>
+
+        <div class="sg-box" style="margin-top: var(--s-4)">
+          <p class="sg-label" style="margin-bottom: var(--s-4)">Tokeny</p>
+          <p class="small mono mono--plain" style="color: var(--ink-2); line-height: 1.9">
+            --breath: 11s · --dur-micro: 180ms · --dur-ui: 320ms · --dur-reveal: 700ms ·
+            --dur-scene: 1400ms · --stagger: 60ms<br>
+            --ease-out: cubic-bezier(.22,1,.36,1) · --ease-in-out: cubic-bezier(.7,0,.2,1)
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. ČESKÁ SAZBA ════════════════════════════════════════ -->
+  <section class="sg-section">
+    <p class="sg-label">06 — Česká sazba</p>
+    <div class="grid">
+      <div class="c1-6">
+        <ul class="checks">
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Nezlomitelné mezery po <span class="mono mono--plain">v&nbsp;s&nbsp;a&nbsp;k&nbsp;o&nbsp;u&nbsp;z&nbsp;i</span> a&nbsp;před <span class="mono mono--plain">Kč min g % h</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            České uvozovky „takhle“, ne "takhle"</li>
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Pomlčka – s&nbsp;mezerami; — jen v&nbsp;display sazbě</li>
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            hyphens: none a&nbsp;text-wrap: balance na nadpisech</li>
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5l3.6 3.6L15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            text-wrap: pretty na odstavcích</li>
+        </ul>
+      </div>
+      <div class="c8-12">
+        <div class="sg-box">
+          <p class="sg-label" style="margin-bottom: var(--s-4)">Ukázka</p>
+          <p class="small">Ošetření trvá 75&nbsp;min a&nbsp;stojí 1&nbsp;500&nbsp;Kč.
+            Dotek má váhu asi 5&nbsp;g – jako mince položená na&nbsp;kůži.
+            Přesun termínu je zdarma při ohlášení alespoň 24&nbsp;h předem.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="sg-section">
+    <p class="mono">Interní styleguide · není v&nbsp;navigaci · robots: noindex</p>
+  </footer>
+
+</main>
+
+<script defer src="js/core.js"></script>
+<script>/* Kreslení schémat je efekt — načte se až po prvním vykreslení. */
+window.KJ_LAZY = ["js/motion.js"];</script>
+</body>
+</html>
