@@ -1,0 +1,24 @@
+<meta charset="utf-8">
+<style>html,body{margin:0;background:#8b8b8b;}canvas{display:block;width:100vw;}</style>
+<canvas id="c" width="2400" height="1350"></canvas>
+<div id="fps" style="color:#fff;font:28px monospace"></div>
+<script src="akvarel.js?v=9"></script>
+<script>
+var g=document.getElementById('c').getContext('2d');
+var t1=performance.now();
+var draw=create();
+var ct=performance.now()-t1;
+var fixed=null,t0=performance.now(),fr=0,last=performance.now(),acc=0,worst=0;
+function loop(){
+  var t=fixed!==null?fixed:(performance.now()-t0)/1000;
+  var a=performance.now();
+  draw(g,2400,1350,t);
+  var d=performance.now()-a;acc+=d;if(d>worst)worst=d;
+  fr++;
+  if(performance.now()-last>1000){document.getElementById('fps').textContent='create '+ct.toFixed(0)+'ms  draw '+(acc/fr).toFixed(2)+'ms  worst '+worst.toFixed(1)+'  t='+t.toFixed(2);fr=0;acc=0;worst=0;last=performance.now();}
+  requestAnimationFrame(loop);
+}
+loop();
+window.setT=function(v){fixed=v;};
+window.play=function(){fixed=null;};
+</script>

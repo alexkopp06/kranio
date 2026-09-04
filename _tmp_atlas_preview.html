@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>atlas</title>
+<style>html,body{margin:0;background:#000;display:grid;place-items:center;height:100%;overflow:hidden}canvas{display:block}</style>
+<canvas id="c"></canvas><script>
+
+const T=5.6,CX=0,CY=0,CW=1200,CH=675;
+const off=document.createElement("canvas"); off.width=1200; off.height=675;
+const og=off.getContext("2d");
+const cv=document.getElementById("c"), g=cv.getContext("2d");
+const sc=Math.min(792/CW,330/CH); cv.width=Math.round(CW*sc); cv.height=Math.round(CH*sc);
+const draw=create(); draw(og,1200,675,T);
+g.imageSmoothingEnabled=true; g.imageSmoothingQuality="high";
+g.drawImage(off,CX,CY,CW,CH,0,0,cv.width,cv.height);
+</script>

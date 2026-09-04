@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Alabastr test</title>
+<style>body{margin:0;background:#F2F3EF;font-family:monospace}#wrap{padding:20px}canvas{width:1200px;height:675px;display:block;box-shadow:0 20px 60px rgba(0,0,0,.25)}#err{color:#b00;padding:8px;white-space:pre-wrap}</style>
+</head><body>
+<div id="wrap"><canvas id="c" width="1200" height="675"></canvas><div id="err"></div></div>
+<script src="alabastr.js"></script>
+<script>
+var c=document.getElementById('c'),g=c.getContext('2d');
+var err=document.getElementById('err');
+var draw=null;
+try{ draw=window.__create(); }catch(e){ err.textContent='CREATE ERROR: '+e.message+'\n'+e.stack; }
+var t0=performance.now();
+var frames=0,last=performance.now(),fps=0;
+function loop(){
+  if(draw){
+    var t=(performance.now()-t0)/1000;
+    try{ draw(g,1200,675,t); }catch(e){ err.textContent='DRAW ERROR: '+e.message+'\n'+e.stack; draw=null; }
+  }
+  frames++;
+  if(performance.now()-last>1000){fps=frames;frames=0;last=performance.now();window.__fps=fps;}
+  requestAnimationFrame(loop);
+}
+loop();
+window.__still=function(t){ draw(g,1200,675,t); };
+</script>
+</body></html>
