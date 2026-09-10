@@ -1,0 +1,26 @@
+# Co se NESMÍ dostat na produkci.
+# Vercel nasazuje celý obsah repozitáře — bez tohoto souboru
+# skončí veřejně na webu i interní podklady a pracovní prototypy.
+
+# Interní podklady a zadání
+_podklady/
+
+# Pracovní prototypy a experimenty
+_tmp_alab/
+_tmpprev/
+_tmp_atlas_preview.html
+_tmp_engrave_preview.html
+
+# Interní styleguide (není určený veřejnosti)
+styleguide.html
+
+# Vývojářské nástroje a dokumentace
+tools/
+.claude/
+DESIGN.md
+OBSAH.md
+ZMENY-3D.md
+README.md
+
+# Nezařazená fotka ležící v kořeni projektu
+Andrea_Barvirova_foto_-33 (1).jpg

@@ -1,0 +1,11 @@
+# Pracovní soubory, které nepatří do repozitáře
+_tmp_*.html
+_tmp_alab/
+_tmpprev/
+
+# Systémové
+Thumbs.db
+desktop.ini
+.DS_Store
+node_modules/
+.vercel/

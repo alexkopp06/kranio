@@ -1,0 +1,7 @@
+# Kontakt pro hlášení bezpečnostních problémů na tomto webu.
+# Formát: RFC 9116 (https://securitytxt.org)
+
+Contact: mailto:katkajuttnerova@seznam.cz
+Expires: 2027-09-07T00:00:00.000Z
+Preferred-Languages: cs, en
+Canonical: https://www.katkajuttnerova.cz/.well-known/security.txt

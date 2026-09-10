@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
-Disallow: /styleguide.html
 
-Sitemap: https://www.example.cz/sitemap.xml
+# Interní soubory se na produkci vůbec nenasazují (.vercelignore),
+# tohle je jen druhá pojistka pro případ, že by se tam něco dostalo.
+Disallow: /_podklady/
+Disallow: /styleguide.html
+Disallow: /.well-known/
+
+Sitemap: https://www.katkajuttnerova.cz/sitemap.xml

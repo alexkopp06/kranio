@@ -1,6 +1,12 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "static", "port": 8792, "url": "http://localhost:8792" }
+    {
+      "name": "static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "-l", "8792", "."],
+      "port": 8792,
+      "url": "http://localhost:8792"
+    }
   ]
 }

@@ -288,7 +288,9 @@ a začínají slovem `DOPLNIT` nebo `PLACEHOLDER`. Najdete je i ve VS Code:
 | **IČO a sídlo** | patička všech stránek | Zákonná povinnost podnikatele. |
 | **Věta „Nejsem poskytovatel zdravotních služeb…“** | patička | Právní ochrana. Text si nechte schválit. |
 | **Potvrzení cen a otevírací doby** | viz kapitola 3 | Ceny jsou převzaté z předchozího webu — prosím ověřte, že platí. |
-| **Skutečná doména** | ve všech `.html` v řádcích `canonical`, `og:url` a v `sitemap.xml` | Teď je tam `www.example.cz`. Až budete mít doménu, přepište. |
+
+~~Skutečná doména~~ — **hotovo.** Všude je doplněná `www.katkajuttnerova.cz`
+(`canonical`, `og:url`, `sitemap.xml`, `robots.txt`).
 
 ---
 
@@ -435,6 +437,43 @@ neodesílá a nic se neukládá — ani výsledek sebe-testu. Když budete chtí
 přidat návštěvnost, řekněte si o řešení, které respektuje soukromí
 (např. Plausible nebo Simple Analytics); Google Analytics by znamenala
 povinnou cookie lištu.
+
+---
+
+## Zabezpečení
+
+Web je statický — nemá databázi, přihlašování ani formuláře, které by
+někam odesílaly data. Většina útoků na weby proto nemá kam zaútočit.
+Zbytek řeší nastavení, které si Vercel načte ze souboru `vercel.json`:
+
+| Co | Proti čemu to chrání |
+|---|---|
+| `Content-Security-Policy` | Prohlížeč smí spustit **jen** skripty z tohoto webu. Kdyby se do stránky dostal cizí kód, neproběhne. |
+| `Strict-Transport-Security` | Web jde otevřít výhradně přes šifrované HTTPS. |
+| `X-Frame-Options`, `frame-ancestors` | Nikdo nesmí web vložit do rámu na cizí stránce a předstírat, že je váš. |
+| `X-Content-Type-Options` | Prohlížeč si nesmí domýšlet typ souboru. |
+| `Referrer-Policy` | Cizí weby se nedozvědí, z které vaší stránky návštěvník odešel. |
+| `Permissions-Policy` | Web nemá přístup ke kameře, mikrofonu, poloze ani platbám. |
+| `sandbox` u mapy | Vložená Google mapa je v ohradě a nesmí sahat na zbytek stránky. |
+
+Soubory `.vercelignore` a `robots.txt` navíc hlídají, aby se na internet
+nedostaly interní věci — podklady, zadání, pracovní verze, styleguide.
+
+### ⚠️ Důležité: po úpravě `<script>` v HTML
+
+Politika CSP povoluje skripty přímo v HTML podle jejich **otisku** — něco
+jako kontrolní součet. Když v `.html` souboru změníte cokoliv uvnitř
+značek `<script>` (i jedinou mezeru nebo čárku ve strukturovaných datech),
+otisk přestane sedět a prohlížeč ten skript zablokuje.
+
+Po každé takové úpravě spusťte v terminálu v adresáři webu:
+
+```
+node tools/csp-hashes.mjs
+```
+
+Přepíše `vercel.json` novými otisky. **Běžné psaní textu, výměna fotek
+ani změna cen se tohoto netýkají** — jen zásahy do `<script>`.
 
 ---
 
